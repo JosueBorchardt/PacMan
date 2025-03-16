@@ -1,0 +1,36 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity video_controller is
+    Port (
+        CLK       : in  STD_LOGIC;
+        RESET     : in  STD_LOGIC;
+        VGA_HS    : out STD_LOGIC;
+        VGA_VS    : out STD_LOGIC;
+        PIXEL_X   : out INTEGER;
+        PIXEL_Y   : out INTEGER;
+        PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
+    );
+end video_controller;
+
+architecture Behavioral of video_controller is
+   -- Definição do tabuleiro
+   type pacman_board_type is array (0 to 30, 0 to 27) of integer;
+   
+   constant pacman_board : pacman_board_type := (
+      (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),
+      (1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1),
+      
+      (1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+   );
+
+   signal pixel_x, pixel_y : INTEGER range 0 to 1066;
+   signal cell_x, cell_y   : INTEGER range 0 to 27;
+   signal cell_type        : INTEGER;
+	
+begin
+
+
+end Behavioral;
