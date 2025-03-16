@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\Git_repositories\pac-man\projeto_vhdl\simulation\qsim
+vvideo_controller
+Z1 !s100 :f`1Oc^;Lc:j=cCbJaWaa2
+Z2 IJS3ZX^Ml5eUW8kHl_e>2b2
+Z3 VdXHleBz10Dhf^Xjnoc@^K1
+Z4 dC:\Git_repositories\pac-man\projeto_vhdl\simulation\qsim
+Z5 w1742140525
+Z6 8pacman.vo
+Z7 Fpacman.vo
+L0 31
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -work|work|pacman.vo|
+Z10 o-work work -O0
+!i10b 1
+!s85 0
+Z11 !s108 1742140525.891000
+Z12 !s107 pacman.vo|
+!s101 -O0
+vvideo_controller_vlg_check_tst
+!i10b 1
+Z13 !s100 R[ZO:>O2EI8<3kkO^`IJC3
+Z14 I<akO]5XHzc@dk<CoL=2;I2
+Z15 VoD=[67I?7MN1KMHb=C8Gg1
+R4
+Z16 w1742140524
+Z17 8pacman.vt
+Z18 Fpacman.vt
+L0 59
+R8
+r1
+!s85 0
+31
+Z19 !s108 1742140526.123000
+Z20 !s107 pacman.vt|
+Z21 !s90 -work|work|pacman.vt|
+!s101 -O0
+R10
+vvideo_controller_vlg_sample_tst
+!i10b 1
+Z22 !s100 `0OP2M1zIeJN=6=hA^i=P3
+Z23 IH3:IOUz;f;HFn>bPkDU3F1
+Z24 VTzRZNJ=<:TJOTWDDY2A5:3
+R4
+R16
+R17
+R18
+L0 29
+R8
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R10
+vvideo_controller_vlg_vec_tst
+!i10b 1
+!s100 Si>DEzEZ:cH=cIZIzW5Z@1
+ICOL[7]SQ7^dR>:YadCKh02
+Z25 VKz]7TVfGo:lOGzOQhEBP62
+R4
+R16
+R17
+R18
+Z26 L0 575
+R8
+r1
+!s85 0
+31
+R19
+R20
+R21
+!s101 -O0
+R10

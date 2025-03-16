@@ -44,7 +44,7 @@ ENTITY pll_108MHz IS
 	(
 		areset		: IN STD_LOGIC  := '0'; -- Reset assíncrono
 		inclk0		: IN STD_LOGIC  := '0'; -- Clock de entrada
-		c0		: OUT STD_LOGIC ;					-- Clock de saída gerado pelo PLL	
+		c0				: OUT STD_LOGIC ;					-- Clock de saída gerado pelo PLL	
 		locked		: OUT STD_LOGIC         -- Indica se o PLL está estável
 	);
 END pll_108MHz;
