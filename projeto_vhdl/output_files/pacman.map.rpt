@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pacman
-Sun Mar 16 12:50:27 2025
+Sun Mar 23 17:40:22 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,9 +14,8 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. General Register Statistics
-  9. Inverted Register Statistics
- 10. Elapsed Time Per Partition
- 11. Analysis & Synthesis Messages
+  9. Elapsed Time Per Partition
+ 10. Analysis & Synthesis Messages
 
 
 
@@ -42,16 +41,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 16 12:50:27 2025           ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar 23 17:40:22 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; pacman                                          ;
-; Top-level Entity Name              ; video_controller                                ;
+; Top-level Entity Name              ; board                                           ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 64                                              ;
-;     Total combinational functions  ; 64                                              ;
-;     Dedicated logic registers      ; 45                                              ;
-; Total registers                    ; 45                                              ;
-; Total pins                         ; 25                                              ;
+; Total logic elements               ; 0                                               ;
+;     Total combinational functions  ; 0                                               ;
+;     Dedicated logic registers      ; 0                                               ;
+; Total registers                    ; 0                                               ;
+; Total pins                         ; 26                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -65,7 +64,7 @@ applicable agreement for further details.
 ; Option                                                                     ; Setting            ; Default Value      ;
 +----------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                     ; EP2C35F672C6       ;                    ;
-; Top-level entity name                                                      ; video_controller   ; pacman             ;
+; Top-level entity name                                                      ; board              ; pacman             ;
 ; Family name                                                                ; Cyclone II         ; Cyclone IV GX      ;
 ; Use smart compilation                                                      ; Off                ; Off                ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
@@ -155,13 +154,13 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                         ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                  ; Library ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
-; video_controller.vhd             ; yes             ; User VHDL File  ; C:/Git_repositories/pac-man/projeto_vhdl/video_controller.vhd ;         ;
-+----------------------------------+-----------------+-----------------+---------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                              ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                       ; Library ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------+---------+
+; board.vhd                        ; yes             ; User VHDL File  ; C:/Git_repositories/pac-man/projeto_vhdl/board.vhd ;         ;
++----------------------------------+-----------------+-----------------+----------------------------------------------------+---------+
 
 
 +-----------------------------------------------------+
@@ -169,28 +168,23 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 64    ;
 ;                                             ;       ;
-; Total combinational functions               ; 64    ;
+; Total combinational functions               ; 0     ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 14    ;
-;     -- 3 input functions                    ; 5     ;
-;     -- <=2 input functions                  ; 45    ;
+;     -- 4 input functions                    ; 0     ;
+;     -- 3 input functions                    ; 0     ;
+;     -- <=2 input functions                  ; 0     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 25    ;
-;     -- arithmetic mode                      ; 39    ;
+;     -- normal mode                          ; 0     ;
+;     -- arithmetic mode                      ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 45    ;
-;     -- Dedicated logic registers            ; 45    ;
+; Total registers                             ; 0     ;
+;     -- Dedicated logic registers            ; 0     ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 25    ;
+; I/O pins                                    ; 26    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
-; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 45    ;
-; Total fan-out                               ; 369   ;
-; Average fan-out                             ; 2.75  ;
 +---------------------------------------------+-------+
 
 
@@ -199,7 +193,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |video_controller          ; 64 (64)           ; 45 (45)      ; 0           ; 0            ; 0       ; 0         ; 25   ; 0            ; |video_controller   ; work         ;
+; |board                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 26   ; 0            ; |board              ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -209,25 +203,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 45    ;
-; Number of registers using Synchronous Clear  ; 43    ;
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 24    ;
+; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 32    ;
+; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
-
-
-+--------------------------------------------------+
-; Inverted Register Statistics                     ;
-+----------------------------------------+---------+
-; Inverted Register                      ; Fan out ;
-+----------------------------------------+---------+
-; vga_hsync                              ; 1       ;
-; vga_vsync                              ; 1       ;
-; Total number of inverted registers = 2 ;         ;
-+----------------------------------------+---------+
 
 
 +-------------------------------+
@@ -245,7 +228,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Mar 16 12:50:25 2025
+    Info: Processing started: Sun Mar 23 17:40:20 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pacman -c pacman
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file video_controller.vhd
@@ -254,18 +237,53 @@ Info (12021): Found 2 design units, including 1 entities, in source file video_c
 Info (12021): Found 2 design units, including 1 entities, in source file pll_108mhz.vhd
     Info (12022): Found design unit 1: pll_108mhz-SYN
     Info (12023): Found entity 1: pll_108MHz
-Info (12127): Elaborating entity "video_controller" for the top level hierarchy
-Info (13000): Registers with preset signals will power-up high
-Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (12021): Found 2 design units, including 1 entities, in source file board.vhd
+    Info (12022): Found design unit 1: board-Behavioral
+    Info (12023): Found entity 1: board
+Info (12021): Found 2 design units, including 1 entities, in source file pacman_game.vhd
+    Info (12022): Found design unit 1: pacman_game-Behavioral
+    Info (12023): Found entity 1: pacman_game
+Info (12127): Elaborating entity "board" for the top level hierarchy
+Warning (10541): VHDL Signal Declaration warning at board.vhd(14): used implicit default value for signal "pixel_color" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10036): Verilog HDL or VHDL warning at board.vhd(104): object "out_board_x" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at board.vhd(104): object "out_board_y" assigned a value but never read
+Warning (10492): VHDL Process Statement warning at board.vhd(139): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "pixel_color[0]" is stuck at GND
+    Warning (13410): Pin "pixel_color[1]" is stuck at GND
+    Warning (13410): Pin "pixel_color[2]" is stuck at GND
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 89 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 23 output pins
-    Info (21061): Implemented 64 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4643 megabytes
-    Info: Processing ended: Sun Mar 16 12:50:27 2025
+Warning (21074): Design contains 23 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "clk"
+    Warning (15610): No output dependent on input pin "reset"
+    Warning (15610): No output dependent on input pin "pixel_x[0]"
+    Warning (15610): No output dependent on input pin "pixel_x[1]"
+    Warning (15610): No output dependent on input pin "pixel_x[2]"
+    Warning (15610): No output dependent on input pin "pixel_x[3]"
+    Warning (15610): No output dependent on input pin "pixel_x[4]"
+    Warning (15610): No output dependent on input pin "pixel_x[5]"
+    Warning (15610): No output dependent on input pin "pixel_x[6]"
+    Warning (15610): No output dependent on input pin "pixel_x[7]"
+    Warning (15610): No output dependent on input pin "pixel_x[8]"
+    Warning (15610): No output dependent on input pin "pixel_x[9]"
+    Warning (15610): No output dependent on input pin "pixel_x[10]"
+    Warning (15610): No output dependent on input pin "pixel_y[0]"
+    Warning (15610): No output dependent on input pin "pixel_y[1]"
+    Warning (15610): No output dependent on input pin "pixel_y[2]"
+    Warning (15610): No output dependent on input pin "pixel_y[3]"
+    Warning (15610): No output dependent on input pin "pixel_y[4]"
+    Warning (15610): No output dependent on input pin "pixel_y[5]"
+    Warning (15610): No output dependent on input pin "pixel_y[6]"
+    Warning (15610): No output dependent on input pin "pixel_y[7]"
+    Warning (15610): No output dependent on input pin "pixel_y[8]"
+    Warning (15610): No output dependent on input pin "pixel_y[9]"
+Info (21057): Implemented 26 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 23 input pins
+    Info (21059): Implemented 3 output pins
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 33 warnings
+    Info: Peak virtual memory: 4625 megabytes
+    Info: Processing ended: Sun Mar 23 17:40:22 2025
     Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 

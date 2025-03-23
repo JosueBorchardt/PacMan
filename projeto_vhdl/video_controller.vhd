@@ -30,8 +30,8 @@ architecture Behavioral of video_controller is
 	-------------------------
 	-- Parametros de video --
 	-------------------------
-	constant H_TOTAL 			    : integer := 1681;	
-	constant H_SYNC 			    : integer := 108;	
+	constant H_TOTAL 			    : integer := 1681;
+	constant H_SYNC 			    : integer := 108;
 	constant H_BACK_PORCH	    : integer := 249;	
 	constant H_DISPLAY_INTERVAL : integer := 1280;	-- Porção horizontal usada da tela
 	constant H_FRONT_PORCH 	    : integer := 44;		
