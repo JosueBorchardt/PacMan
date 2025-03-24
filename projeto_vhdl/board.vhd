@@ -10,6 +10,8 @@ entity board is
 		pixel_x   : in INTEGER range 0 to 1279;
       pixel_y   : in INTEGER range 0 to 1023;
 		
+		
+		
 		--vga_R, vga_G, vga_B: out STD_LOGIC_VECTOR(9 downto 0)
 		pixel_color: out INTEGER range 0 to 6
       

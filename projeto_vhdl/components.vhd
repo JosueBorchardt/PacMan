@@ -17,15 +17,18 @@ package components is
 		end component;
 		
 		component video_controller
-			Port (
-				clk     	   : in  STD_LOGIC;
-				reset   	   : in  STD_LOGIC;
-				vga_HS  		: out STD_LOGIC;
-				vga_VS  	   : out STD_LOGIC;
-				pixel_x 		: out INTEGER range 0 to 1279;
-				pixel_y   	: out INTEGER range 0 to 1023;
-				pixel_color	: out INTEGER range 0 to 6
-			);
+		Port (
+			clk      	: in  STD_LOGIC;
+			reset     	: in  STD_LOGIC;
+			vga_HS    	: out STD_LOGIC;
+			vga_VS    	: out STD_LOGIC;
+			pixel_x   	: out INTEGER range 0 to 1279;
+			pixel_y   	: out INTEGER range 0 to 1023;
+			vga_R         : out std_LOGIC_VECTOR(9 downto 0);
+			vga_G			  : out std_LOGIC_VECTOR(9 downto 0);
+			vga_B			  : out std_LOGIC_VECTOR(9 downto 0);
+			pixel_color	: out INTEGER range 0 to 6
+		);
 		end component;
 
 		component board

@@ -46,7 +46,7 @@ begin
 	);
 	
 	clk_out <= sig_c0; -- clock de saida (c0)
-	
+	vga_clk<= sig_c0;
 	
 	---------------------------------
 	------- VIDEO CONTROLLER --------
@@ -59,6 +59,9 @@ begin
 			vga_VS => vga_VS,
 			pixel_x => pixel_x, -- ?????
 			pixel_y => pixel_y,  -- ?????
+			vga_R => vga_R,
+			vga_G => vga_G,
+			vga_B => vga_B,
 			pixel_color => pixel_color
 	);	
 	

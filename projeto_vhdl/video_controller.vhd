@@ -13,6 +13,9 @@ entity video_controller is
       vga_VS    	: out STD_LOGIC;
       pixel_x   	: out INTEGER range 0 to 1279;
       pixel_y   	: out INTEGER range 0 to 1023;
+		vga_R         : out std_LOGIC_VECTOR(9 downto 0);
+		vga_G			  : out std_LOGIC_VECTOR(9 downto 0);
+		vga_B			  : out std_LOGIC_VECTOR(9 downto 0);
       pixel_color	: out INTEGER range 0 to 6
    );
 end video_controller;
@@ -57,6 +60,8 @@ architecture Behavioral of video_controller is
 	
 --	signal cell_x, cell_y   : INTEGER range 0 to 27;
 --	signal cell_type        : INTEGER;
+
+	signal signal_pixel_color : INTEGER range 0 to 6;
 	
 begin
 
@@ -69,7 +74,7 @@ begin
 			reset => reset,
 			pixel_x => signal_pixel_x,
 			pixel_y => signal_pixel_y,
-			pixel_color => pixel_color
+			pixel_color => signal_pixel_color
 			--vga_R, vga_G, vga_B: out STD_LOGIC_VECTOR(9 downto 0) 
 			--vga_HS    : out STD_LOGIC;
 			--vga_VS    : out STD_LOGIC;
@@ -116,6 +121,25 @@ begin
 				vga_vsync <= '1';
 			else
 				vga_vsync <= '0';
+			end if;
+		end if;
+	end process;
+	
+	process(clk)
+	begin
+		if reset = '1' then
+			vga_R <= "0000000000";
+			vga_G <= "0000000000";
+			vga_B <= "0000000000";
+		elsif rising_edge(clk) then
+			if signal_pixel_color = 0 then
+				vga_R <= "0000000000";
+				vga_G <= "0000000000";
+				vga_B <= "0000000000";
+			elsif signal_pixel_color = 1 then
+				vga_R <= "0000000000";
+				vga_G <= "0000000000";
+				vga_B <= "1111111111";
 			end if;
 		end if;
 	end process;

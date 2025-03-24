@@ -1,14 +1,14 @@
-Fitter Status : Successful - Mon Mar 24 00:42:23 2025
+Fitter Status : Successful - Mon Mar 24 10:30:00 2025
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : pacman
 Top-level Entity Name : pacman_game
 Family : Cyclone II
 Device : EP2C35F672C6
 Timing Models : Final
-Total logic elements : 110 / 33,216 ( < 1 % )
+Total logic elements : 111 / 33,216 ( < 1 % )
     Total combinational functions : 110 / 33,216 ( < 1 % )
-    Dedicated logic registers : 60 / 33,216 ( < 1 % )
-Total registers : 60
+    Dedicated logic registers : 61 / 33,216 ( < 1 % )
+Total registers : 61
 Total pins : 61 / 475 ( 13 % )
 Total virtual pins : 0
 Total memory bits : 0 / 483,840 ( 0 % )

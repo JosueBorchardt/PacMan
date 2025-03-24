@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pacman
-Mon Mar 24 00:42:19 2025
+Mon Mar 24 10:29:49 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -49,15 +49,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Mar 24 00:42:19 2025           ;
+; Analysis & Synthesis Status        ; Successful - Mon Mar 24 10:29:49 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; pacman                                          ;
 ; Top-level Entity Name              ; pacman_game                                     ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 111                                             ;
+; Total logic elements               ; 112                                             ;
 ;     Total combinational functions  ; 110                                             ;
-;     Dedicated logic registers      ; 60                                              ;
-; Total registers                    ; 60                                              ;
+;     Dedicated logic registers      ; 61                                              ;
+; Total registers                    ; 61                                              ;
 ; Total pins                         ; 61                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -157,7 +157,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 16     ;
+; Number detected on machine ; 4      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -167,11 +167,11 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------+-----------------+-----------------------------+---------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                   ; File Name with Absolute Path                                        ; Library ;
 +----------------------------------+-----------------+-----------------------------+---------------------------------------------------------------------+---------+
-; video_controller.vhd             ; yes             ; User VHDL File              ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/video_controller.vhd   ;         ;
-; pll_108MHz.vhd                   ; yes             ; User Wizard-Generated File  ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/pll_108MHz.vhd         ;         ;
-; board.vhd                        ; yes             ; User VHDL File              ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/board.vhd              ;         ;
-; pacman_game.vhd                  ; yes             ; User VHDL File              ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/pacman_game.vhd        ;         ;
-; components.vhd                   ; yes             ; User VHDL File              ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/components.vhd         ;         ;
+; video_controller.vhd             ; yes             ; User VHDL File              ; C:/Git_repositories/pac-man/projeto_vhdl/video_controller.vhd       ;         ;
+; pll_108MHz.vhd                   ; yes             ; User Wizard-Generated File  ; C:/Git_repositories/pac-man/projeto_vhdl/pll_108MHz.vhd             ;         ;
+; board.vhd                        ; yes             ; User VHDL File              ; C:/Git_repositories/pac-man/projeto_vhdl/board.vhd                  ;         ;
+; pacman_game.vhd                  ; yes             ; User VHDL File              ; C:/Git_repositories/pac-man/projeto_vhdl/pacman_game.vhd            ;         ;
+; components.vhd                   ; yes             ; User VHDL File              ; C:/Git_repositories/pac-man/projeto_vhdl/components.vhd             ;         ;
 ; altpll.tdf                       ; yes             ; Megafunction                ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altpll.tdf        ;         ;
 ; aglobal130.inc                   ; yes             ; Megafunction                ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc    ;         ;
 ; stratix_pll.inc                  ; yes             ; Megafunction                ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_pll.inc   ;         ;
@@ -185,7 +185,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------------------------------------------------+
 ; Resource                                    ; Usage                                               ;
 +---------------------------------------------+-----------------------------------------------------+
-; Estimated Total logic elements              ; 111                                                 ;
+; Estimated Total logic elements              ; 112                                                 ;
 ;                                             ;                                                     ;
 ; Total combinational functions               ; 110                                                 ;
 ; Logic element usage by number of LUT inputs ;                                                     ;
@@ -197,8 +197,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- normal mode                          ; 63                                                  ;
 ;     -- arithmetic mode                      ; 47                                                  ;
 ;                                             ;                                                     ;
-; Total registers                             ; 60                                                  ;
-;     -- Dedicated logic registers            ; 60                                                  ;
+; Total registers                             ; 61                                                  ;
+;     -- Dedicated logic registers            ; 61                                                  ;
 ;     -- I/O registers                        ; 0                                                   ;
 ;                                             ;                                                     ;
 ; I/O pins                                    ; 61                                                  ;
@@ -207,9 +207,9 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- PLLs                                 ; 1                                                   ;
 ;                                             ;                                                     ;
 ; Maximum fan-out node                        ; pll_108MHz:clk_108MHz|altpll:altpll_component|_clk0 ;
-; Maximum fan-out                             ; 61                                                  ;
-; Total fan-out                               ; 580                                                 ;
-; Average fan-out                             ; 2.50                                                ;
+; Maximum fan-out                             ; 63                                                  ;
+; Total fan-out                               ; 593                                                 ;
+; Average fan-out                             ; 2.55                                                ;
 +---------------------------------------------+-----------------------------------------------------+
 
 
@@ -218,22 +218,22 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                        ; Library Name ;
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
-; |pacman_game                          ; 110 (0)           ; 60 (0)       ; 0           ; 0            ; 0       ; 0         ; 61   ; 0            ; |pacman_game                                               ; work         ;
+; |pacman_game                          ; 110 (0)           ; 61 (0)       ; 0           ; 0            ; 0       ; 0         ; 61   ; 0            ; |pacman_game                                               ; work         ;
 ;    |pll_108MHz:clk_108MHz|            ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|pll_108MHz:clk_108MHz                         ; work         ;
 ;       |altpll:altpll_component|       ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|pll_108MHz:clk_108MHz|altpll:altpll_component ; work         ;
-;    |video_controller:videocontroller| ; 110 (60)          ; 60 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller              ; work         ;
+;    |video_controller:videocontroller| ; 110 (60)          ; 61 (46)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller              ; work         ;
 ;       |board:boardd|                  ; 50 (50)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller|board:boardd ; work         ;
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                                                                            ;
-+--------+--------------+---------+--------------+--------------+------------------------------------+-------------------------------------------------------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                    ; IP Include File                                             ;
-+--------+--------------+---------+--------------+--------------+------------------------------------+-------------------------------------------------------------+
-; Altera ; ALTPLL       ; N/A     ; N/A          ; N/A          ; |pacman_game|pll_108MHz:clk_108MHz ; C:/Users/Pedro/Downloads/PacMan/projeto_vhdl/pll_108MHz.vhd ;
-+--------+--------------+---------+--------------+--------------+------------------------------------+-------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                        ;
++--------+--------------+---------+--------------+--------------+------------------------------------+---------------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                    ; IP Include File                                         ;
++--------+--------------+---------+--------------+--------------+------------------------------------+---------------------------------------------------------+
+; Altera ; ALTPLL       ; N/A     ; N/A          ; N/A          ; |pacman_game|pll_108MHz:clk_108MHz ; C:/Git_repositories/pac-man/projeto_vhdl/pll_108MHz.vhd ;
++--------+--------------+---------+--------------+--------------+------------------------------------+---------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -243,6 +243,21 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------+---------------------------------------------------------------------------------+
 ; video_controller:videocontroller|board:boardd|pixel_color[2]            ; Stuck at GND due to stuck port data_in                                          ;
 ; video_controller:videocontroller|board:boardd|x_position[0,2]           ; Stuck at GND due to stuck port data_in                                          ;
+; video_controller:videocontroller|vga_B[1..9]                            ; Merged with video_controller:videocontroller|vga_B[0]                           ;
+; video_controller:videocontroller|vga_R[0]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[2]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[6]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[4,8]                             ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[2]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[0,9]                             ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[5]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[5,7]                             ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[3]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[3]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[7]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[1]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_R[1,4,8]                           ; Merged with video_controller:videocontroller|vga_R[9]                           ;
+; video_controller:videocontroller|vga_G[6]                               ; Merged with video_controller:videocontroller|vga_R[9]                           ;
 ; video_controller:videocontroller|board:boardd|x_position[1,3]           ; Merged with video_controller:videocontroller|board:boardd|x_position[4]         ;
 ; video_controller:videocontroller|board:boardd|y_position[1..3]          ; Merged with video_controller:videocontroller|board:boardd|y_position[4]         ;
 ; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[4] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[4] ;
@@ -266,19 +281,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[0] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[0] ;
 ; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[0]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[0] ;
 ; video_controller:videocontroller|board:boardd|y_position[4]             ; Merged with video_controller:videocontroller|board:boardd|y_position[0]         ;
+; video_controller:videocontroller|vga_R[9]                               ; Stuck at GND due to stuck port data_in                                          ;
 ; video_controller:videocontroller|board:boardd|pixel_color[1]            ; Stuck at GND due to stuck port data_in                                          ;
-; Total Number of Removed Registers = 30                                  ;                                                                                 ;
+; Total Number of Removed Registers = 59                                  ;                                                                                 ;
 +-------------------------------------------------------------------------+---------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                            ;
-+-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
-; Register name                                               ; Reason for Removal        ; Registers Removed due to This Register                       ;
-+-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
-; video_controller:videocontroller|board:boardd|x_position[2] ; Stuck at GND              ; video_controller:videocontroller|board:boardd|pixel_color[1] ;
-;                                                             ; due to stuck port data_in ;                                                              ;
-+-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                             ;
++--------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
+; Register name                                                ; Reason for Removal        ; Registers Removed due to This Register                       ;
++--------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
+; video_controller:videocontroller|board:boardd|pixel_color[2] ; Stuck at GND              ; video_controller:videocontroller|vga_R[9]                    ;
+;                                                              ; due to stuck port data_in ;                                                              ;
+; video_controller:videocontroller|board:boardd|x_position[2]  ; Stuck at GND              ; video_controller:videocontroller|board:boardd|pixel_color[1] ;
+;                                                              ; due to stuck port data_in ;                                                              ;
++--------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -286,10 +304,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 60    ;
+; Total registers                              ; 61    ;
 ; Number of registers using Synchronous Clear  ; 53    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 37    ;
+; Number of registers using Asynchronous Clear ; 38    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 39    ;
 ; Number of registers using Preset             ; 0     ;
@@ -723,7 +741,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:02     ;
 +----------------+--------------+
 
 
@@ -733,7 +751,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Mar 24 00:42:17 2025
+    Info: Processing started: Mon Mar 24 10:29:41 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pacman -c pacman
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file video_controller.vhd
@@ -751,10 +769,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file pacman_
 Info (12021): Found 1 design units, including 0 entities, in source file components.vhd
     Info (12022): Found design unit 1: components
 Info (12127): Elaborating entity "pacman_game" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(16): used implicit default value for signal "vga_R" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(17): used implicit default value for signal "vga_G" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(18): used implicit default value for signal "vga_B" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(19): used implicit default value for signal "vga_clk" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(20): used implicit default value for signal "vga_sync" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10036): Verilog HDL or VHDL warning at pacman_game.vhd(34): object "sig_locked" assigned a value but never read
 Info (12128): Elaborating entity "pll_108MHz" for hierarchy "pll_108MHz:clk_108MHz"
@@ -816,11 +830,13 @@ Info (12133): Instantiated megafunction "pll_108MHz:clk_108MHz|altpll:altpll_com
     Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
     Info (12134): Parameter "valid_lock_multiplier" = "1"
 Info (12128): Elaborating entity "video_controller" for hierarchy "video_controller:videocontroller"
+Warning (10541): VHDL Signal Declaration warning at video_controller.vhd(19): used implicit default value for signal "pixel_color" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
+Warning (10492): VHDL Process Statement warning at video_controller.vhd(130): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (12128): Elaborating entity "board" for hierarchy "video_controller:videocontroller|board:boardd"
-Warning (10540): VHDL Signal Declaration warning at board.vhd(28): used explicit default value for signal "pacman_board" because signal was never assigned a value
-Warning (10492): VHDL Process Statement warning at board.vhd(187): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at board.vhd(213): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10492): VHDL Process Statement warning at board.vhd(248): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10540): VHDL Signal Declaration warning at board.vhd(30): used explicit default value for signal "pacman_board" because signal was never assigned a value
+Warning (10492): VHDL Process Statement warning at board.vhd(189): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at board.vhd(215): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at board.vhd(250): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
@@ -844,31 +860,21 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "vga_G[7]" is stuck at GND
     Warning (13410): Pin "vga_G[8]" is stuck at GND
     Warning (13410): Pin "vga_G[9]" is stuck at GND
-    Warning (13410): Pin "vga_B[0]" is stuck at GND
-    Warning (13410): Pin "vga_B[1]" is stuck at GND
-    Warning (13410): Pin "vga_B[2]" is stuck at GND
-    Warning (13410): Pin "vga_B[3]" is stuck at GND
-    Warning (13410): Pin "vga_B[4]" is stuck at GND
-    Warning (13410): Pin "vga_B[5]" is stuck at GND
-    Warning (13410): Pin "vga_B[6]" is stuck at GND
-    Warning (13410): Pin "vga_B[7]" is stuck at GND
-    Warning (13410): Pin "vga_B[8]" is stuck at GND
-    Warning (13410): Pin "vga_B[9]" is stuck at GND
-    Warning (13410): Pin "vga_clk" is stuck at GND
     Warning (13410): Pin "vga_sync" is stuck at GND
+    Warning (13410): Pin "pixel_color[0]" is stuck at GND
     Warning (13410): Pin "pixel_color[1]" is stuck at GND
     Warning (13410): Pin "pixel_color[2]" is stuck at GND
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 175 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 176 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 59 output pins
-    Info (21061): Implemented 113 logic cells
+    Info (21061): Implemented 114 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 46 warnings
-    Info: Peak virtual memory: 4655 megabytes
-    Info: Processing ended: Mon Mar 24 00:42:19 2025
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 34 warnings
+    Info: Peak virtual memory: 4641 megabytes
+    Info: Processing ended: Mon Mar 24 10:29:49 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:03
 
 
