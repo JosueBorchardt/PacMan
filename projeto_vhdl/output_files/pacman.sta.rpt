@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for pacman
-Sun Mar 23 17:40:33 2025
+Sun Mar 23 22:29:50 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -16,19 +16,36 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   8. Slow Model Recovery Summary
   9. Slow Model Removal Summary
  10. Slow Model Minimum Pulse Width Summary
- 11. Slow Model Datasheet Report
- 12. Fast Model Setup Summary
- 13. Fast Model Hold Summary
- 14. Fast Model Recovery Summary
- 15. Fast Model Removal Summary
- 16. Fast Model Minimum Pulse Width Summary
- 17. Fast Model Datasheet Report
- 18. Multicorner Timing Analysis Summary
- 19. Clock Transfers
- 20. Report TCCS
- 21. Report RSKM
- 22. Unconstrained Paths
- 23. TimeQuest Timing Analyzer Messages
+ 11. Slow Model Setup: 'clk'
+ 12. Slow Model Hold: 'clk'
+ 13. Slow Model Minimum Pulse Width: 'clk'
+ 14. Setup Times
+ 15. Hold Times
+ 16. Clock to Output Times
+ 17. Minimum Clock to Output Times
+ 18. Fast Model Setup Summary
+ 19. Fast Model Hold Summary
+ 20. Fast Model Recovery Summary
+ 21. Fast Model Removal Summary
+ 22. Fast Model Minimum Pulse Width Summary
+ 23. Fast Model Setup: 'clk'
+ 24. Fast Model Hold: 'clk'
+ 25. Fast Model Minimum Pulse Width: 'clk'
+ 26. Setup Times
+ 27. Hold Times
+ 28. Clock to Output Times
+ 29. Minimum Clock to Output Times
+ 30. Multicorner Timing Analysis Summary
+ 31. Setup Times
+ 32. Hold Times
+ 33. Clock to Output Times
+ 34. Minimum Clock to Output Times
+ 35. Setup Transfers
+ 36. Hold Transfers
+ 37. Report TCCS
+ 38. Report RSKM
+ 39. Unconstrained Paths
+ 40. TimeQuest Timing Analyzer Messages
 
 
 
@@ -75,28 +92,41 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-----------
-; Clocks ;
-----------
-No clocks to report.
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                          ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
+; clk        ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clk } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+---------+
 
 
----------------------------
-; Slow Model Fmax Summary ;
----------------------------
-No paths to report.
++-------------------------------------------------+
+; Slow Model Fmax Summary                         ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 263.5 MHz ; 263.5 MHz       ; clk        ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
 
 
-----------------------------
-; Slow Model Setup Summary ;
-----------------------------
-No paths to report.
++--------------------------------+
+; Slow Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -2.795 ; -11.024       ;
++-------+--------+---------------+
 
 
----------------------------
-; Slow Model Hold Summary ;
----------------------------
-No paths to report.
++-------------------------------+
+; Slow Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.391 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -111,28 +141,296 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Slow Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clk   ; -1.380 ; -16.380               ;
++-------+--------+-----------------------+
 
 
--------------------------------
-; Slow Model Datasheet Report ;
--------------------------------
-Nothing to report.
++------------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Setup: 'clk'                                                                                                      ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node             ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; -2.795 ; cout_pixel_x_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.001      ; 3.832      ;
+; -2.788 ; cout_pixel_x_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.001      ; 3.825      ;
+; -2.752 ; cout_pixel_x_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.001      ; 3.789      ;
+; -2.694 ; cout_pixel_x_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.001      ; 3.731      ;
+; -2.639 ; cout_pixel_y_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 3.675      ;
+; -2.456 ; cout_pixel_y_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 3.492      ;
+; -2.378 ; cout_pixel_x_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.001      ; 3.415      ;
+; -1.620 ; cout_pixel_y_block[0] ; cout_pixel_y_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 2.656      ;
+; -1.290 ; cout_pixel_y_block[1] ; cout_pixel_y_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 2.326      ;
+; -1.253 ; cout_pixel_y_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.289      ;
+; -1.246 ; out_board_y           ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.282      ;
+; -1.207 ; cout_pixel_y_block[0] ; cout_pixel_y_block[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 2.243      ;
+; -1.176 ; cout_pixel_y_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 2.212      ;
+; -0.979 ; x_position[4]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.029      ; 2.044      ;
+; -0.920 ; cout_pixel_y_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.956      ;
+; -0.834 ; cout_pixel_y_block[0] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.870      ;
+; -0.827 ; cout_pixel_x_block[0] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.863      ;
+; -0.819 ; cout_pixel_y_block[1] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.855      ;
+; -0.785 ; cout_pixel_x_block[1] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.821      ;
+; -0.763 ; cout_pixel_y_block[0] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.799      ;
+; -0.756 ; cout_pixel_x_block[0] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.792      ;
+; -0.748 ; cout_pixel_y_block[1] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.784      ;
+; -0.714 ; cout_pixel_x_block[1] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.750      ;
+; -0.704 ; y_position[0]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.029      ; 1.769      ;
+; -0.701 ; cout_pixel_x_block[2] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.737      ;
+; -0.692 ; cout_pixel_y_block[0] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.728      ;
+; -0.685 ; cout_pixel_x_block[0] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.721      ;
+; -0.677 ; cout_pixel_y_block[1] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.713      ;
+; -0.655 ; cout_pixel_x_block[3] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.691      ;
+; -0.643 ; cout_pixel_x_block[1] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.679      ;
+; -0.630 ; cout_pixel_x_block[2] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.666      ;
+; -0.614 ; cout_pixel_x_block[0] ; cout_pixel_x_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.650      ;
+; -0.575 ; out_board_x           ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.029      ; 1.640      ;
+; -0.529 ; cout_pixel_y_block[2] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.565      ;
+; -0.458 ; cout_pixel_y_block[2] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.494      ;
+; -0.415 ; cout_pixel_y_block[3] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.451      ;
+; -0.269 ; cout_pixel_x_block[3] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.305      ;
+; -0.257 ; cout_pixel_x_block[1] ; cout_pixel_x_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.293      ;
+; -0.247 ; cout_pixel_x_block[2] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.283      ;
+; -0.231 ; cout_pixel_x_block[0] ; cout_pixel_x_block[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.267      ;
+; -0.072 ; cout_pixel_y_block[2] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.108      ;
+; -0.032 ; cout_pixel_y_block[3] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.068      ;
+; 0.047  ; cout_pixel_x_block[4] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.989      ;
+; 0.243  ; cout_pixel_y_block[4] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.793      ;
+; 0.379  ; y_position[0]         ; y_position[0]         ; clk          ; clk         ; 1.000        ; 0.000      ; 0.657      ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
 
 
-----------------------------
-; Fast Model Setup Summary ;
-----------------------------
-No paths to report.
++-----------------------------------------------------------------------------------------------------------------------------+
+; Slow Model Hold: 'clk'                                                                                                      ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node             ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; 0.391 ; y_position[0]         ; y_position[0]         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.657      ;
+; 0.527 ; cout_pixel_y_block[4] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.793      ;
+; 0.723 ; cout_pixel_x_block[4] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.989      ;
+; 0.802 ; cout_pixel_y_block[3] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.068      ;
+; 0.842 ; cout_pixel_y_block[2] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.108      ;
+; 1.001 ; cout_pixel_x_block[0] ; cout_pixel_x_block[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.267      ;
+; 1.017 ; cout_pixel_x_block[2] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.283      ;
+; 1.027 ; cout_pixel_x_block[1] ; cout_pixel_x_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.293      ;
+; 1.039 ; cout_pixel_x_block[3] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.305      ;
+; 1.185 ; cout_pixel_y_block[3] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.451      ;
+; 1.228 ; cout_pixel_y_block[2] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.494      ;
+; 1.299 ; cout_pixel_y_block[2] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.565      ;
+; 1.345 ; out_board_x           ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.029      ; 1.640      ;
+; 1.384 ; cout_pixel_x_block[0] ; cout_pixel_x_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.650      ;
+; 1.400 ; cout_pixel_x_block[2] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.666      ;
+; 1.413 ; cout_pixel_x_block[1] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.679      ;
+; 1.425 ; cout_pixel_x_block[3] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.691      ;
+; 1.447 ; cout_pixel_y_block[1] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.713      ;
+; 1.455 ; cout_pixel_x_block[0] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.721      ;
+; 1.462 ; cout_pixel_y_block[0] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.728      ;
+; 1.471 ; cout_pixel_x_block[2] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.737      ;
+; 1.474 ; y_position[0]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.029      ; 1.769      ;
+; 1.484 ; cout_pixel_x_block[1] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.750      ;
+; 1.518 ; cout_pixel_y_block[1] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.784      ;
+; 1.526 ; cout_pixel_x_block[0] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.792      ;
+; 1.533 ; cout_pixel_y_block[0] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.799      ;
+; 1.555 ; cout_pixel_x_block[1] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.821      ;
+; 1.589 ; cout_pixel_y_block[1] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.855      ;
+; 1.597 ; cout_pixel_x_block[0] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.863      ;
+; 1.604 ; cout_pixel_y_block[0] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.870      ;
+; 1.637 ; cout_pixel_y_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.903      ;
+; 1.682 ; cout_pixel_y_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.948      ;
+; 1.690 ; cout_pixel_y_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.956      ;
+; 1.749 ; x_position[4]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.029      ; 2.044      ;
+; 1.946 ; cout_pixel_y_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.212      ;
+; 1.977 ; cout_pixel_y_block[0] ; cout_pixel_y_block[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.243      ;
+; 2.016 ; out_board_y           ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.282      ;
+; 2.060 ; cout_pixel_y_block[1] ; cout_pixel_y_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.326      ;
+; 2.151 ; cout_pixel_x_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.001      ; 2.418      ;
+; 2.164 ; cout_pixel_x_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.001      ; 2.431      ;
+; 2.255 ; cout_pixel_x_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.001      ; 2.522      ;
+; 2.390 ; cout_pixel_y_block[0] ; cout_pixel_y_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 2.656      ;
+; 2.392 ; cout_pixel_x_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.001      ; 2.659      ;
+; 2.401 ; cout_pixel_x_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.001      ; 2.668      ;
+; 2.412 ; cout_pixel_y_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 2.678      ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
 
 
----------------------------
-; Fast Model Hold Summary ;
----------------------------
-No paths to report.
++------------------------------------------------------------------------------------------------------------+
+; Slow Model Minimum Pulse Width: 'clk'                                                                      ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                    ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; out_board_x               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_x               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; out_board_y               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_y               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; pixel_color[0]~reg0       ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; pixel_color[0]~reg0       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; x_position[4]             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; x_position[4]             ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; y_position[0]             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; y_position[0]             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; out_board_x|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_x|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; out_board_y|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_y|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pixel_color[0]~reg0|clk   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pixel_color[0]~reg0|clk   ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; x_position[4]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; x_position[4]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; y_position[0]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; y_position[0]|clk         ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+
+
++--------------------------------------------------------------------------+
+; Setup Times                                                              ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 6.026 ; 6.026 ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; 5.974 ; 5.974 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; 5.882 ; 5.882 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; 6.026 ; 6.026 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; 5.733 ; 5.733 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; 5.068 ; 5.068 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; 5.168 ; 5.168 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; 5.456 ; 5.456 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; 5.292 ; 5.292 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; 1.194 ; 1.194 ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; 5.603 ; 5.603 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 1.481 ; 1.481 ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; 5.989 ; 5.989 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; 5.887 ; 5.887 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; 5.989 ; 5.989 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; 5.706 ; 5.706 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; 5.961 ; 5.961 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; 5.241 ; 5.241 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; 5.838 ; 5.838 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; 5.689 ; 5.689 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; 5.482 ; 5.482 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; 5.754 ; 5.754 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; 5.234 ; 5.234 ; Rise       ; clk             ;
+; reset        ; clk        ; 1.005 ; 1.005 ; Rise       ; clk             ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++----------------------------------------------------------------------------+
+; Hold Times                                                                 ;
++--------------+------------+--------+--------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++--------------+------------+--------+--------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 0.141  ; 0.141  ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; -5.399 ; -5.399 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; -5.307 ; -5.307 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; -5.451 ; -5.451 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; -5.158 ; -5.158 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; -4.493 ; -4.493 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; -4.593 ; -4.593 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; -4.333 ; -4.333 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; -4.323 ; -4.323 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; -0.618 ; -0.618 ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; -4.777 ; -4.777 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 0.141  ; 0.141  ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; -3.238 ; -3.238 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; -4.774 ; -4.774 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; -4.876 ; -4.876 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; -4.593 ; -4.593 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; -4.848 ; -4.848 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; -3.238 ; -3.238 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; -4.257 ; -4.257 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; -4.108 ; -4.108 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; -3.901 ; -3.901 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; -3.965 ; -3.965 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; -3.343 ; -3.343 ; Rise       ; clk             ;
+; reset        ; clk        ; -0.775 ; -0.775 ; Rise       ; clk             ;
++--------------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Clock to Output Times                                                       ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                               ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++--------------------------------+
+; Fast Model Setup Summary       ;
++-------+--------+---------------+
+; Clock ; Slack  ; End Point TNS ;
++-------+--------+---------------+
+; clk   ; -0.652 ; -0.849        ;
++-------+--------+---------------+
+
+
++-------------------------------+
+; Fast Model Hold Summary       ;
++-------+-------+---------------+
+; Clock ; Slack ; End Point TNS ;
++-------+-------+---------------+
+; clk   ; 0.215 ; 0.000         ;
++-------+-------+---------------+
 
 
 -------------------------------
@@ -147,32 +445,394 @@ No paths to report.
 No paths to report.
 
 
-------------------------------------------
++----------------------------------------+
 ; Fast Model Minimum Pulse Width Summary ;
-------------------------------------------
-No paths to report.
++-------+--------+-----------------------+
+; Clock ; Slack  ; End Point TNS         ;
++-------+--------+-----------------------+
+; clk   ; -1.380 ; -16.380               ;
++-------+--------+-----------------------+
 
 
--------------------------------
-; Fast Model Datasheet Report ;
--------------------------------
-Nothing to report.
++------------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Setup: 'clk'                                                                                                      ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node             ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; -0.652 ; cout_pixel_x_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.684      ;
+; -0.648 ; cout_pixel_x_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.680      ;
+; -0.636 ; cout_pixel_x_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.668      ;
+; -0.605 ; cout_pixel_x_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.637      ;
+; -0.582 ; cout_pixel_y_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.614      ;
+; -0.496 ; cout_pixel_y_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.528      ;
+; -0.468 ; cout_pixel_x_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.500      ;
+; -0.177 ; cout_pixel_y_block[0] ; cout_pixel_y_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.209      ;
+; -0.062 ; cout_pixel_y_block[1] ; cout_pixel_y_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.094      ;
+; -0.039 ; out_board_y           ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.071      ;
+; -0.020 ; cout_pixel_y_block[0] ; cout_pixel_y_block[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 1.052      ;
+; -0.014 ; cout_pixel_y_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.046      ;
+; 0.013  ; cout_pixel_y_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 1.019      ;
+; 0.094  ; x_position[4]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.024      ; 0.962      ;
+; 0.133  ; cout_pixel_y_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.000      ; 0.899      ;
+; 0.183  ; cout_pixel_y_block[0] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.849      ;
+; 0.188  ; cout_pixel_x_block[0] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.844      ;
+; 0.193  ; cout_pixel_y_block[1] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.839      ;
+; 0.215  ; y_position[0]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.024      ; 0.841      ;
+; 0.215  ; cout_pixel_x_block[1] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.817      ;
+; 0.218  ; cout_pixel_y_block[0] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.814      ;
+; 0.223  ; cout_pixel_x_block[0] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.809      ;
+; 0.228  ; cout_pixel_y_block[1] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.804      ;
+; 0.239  ; out_board_x           ; pixel_color[0]~reg0   ; clk          ; clk         ; 1.000        ; 0.024      ; 0.817      ;
+; 0.250  ; cout_pixel_x_block[2] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.782      ;
+; 0.250  ; cout_pixel_x_block[1] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.782      ;
+; 0.253  ; cout_pixel_y_block[0] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.779      ;
+; 0.258  ; cout_pixel_x_block[0] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.774      ;
+; 0.263  ; cout_pixel_y_block[1] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.769      ;
+; 0.276  ; cout_pixel_x_block[3] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.756      ;
+; 0.285  ; cout_pixel_x_block[2] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.747      ;
+; 0.285  ; cout_pixel_x_block[1] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.747      ;
+; 0.293  ; cout_pixel_x_block[0] ; cout_pixel_x_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.739      ;
+; 0.331  ; cout_pixel_y_block[2] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.701      ;
+; 0.366  ; cout_pixel_y_block[2] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.666      ;
+; 0.384  ; cout_pixel_y_block[3] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.648      ;
+; 0.416  ; cout_pixel_x_block[3] ; cout_pixel_x_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.616      ;
+; 0.423  ; cout_pixel_x_block[2] ; cout_pixel_x_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.609      ;
+; 0.425  ; cout_pixel_x_block[1] ; cout_pixel_x_block[1] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.607      ;
+; 0.431  ; cout_pixel_x_block[0] ; cout_pixel_x_block[0] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.601      ;
+; 0.506  ; cout_pixel_y_block[2] ; cout_pixel_y_block[2] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.526      ;
+; 0.522  ; cout_pixel_y_block[3] ; cout_pixel_y_block[3] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.510      ;
+; 0.551  ; cout_pixel_x_block[4] ; cout_pixel_x_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.481      ;
+; 0.639  ; cout_pixel_y_block[4] ; cout_pixel_y_block[4] ; clk          ; clk         ; 1.000        ; 0.000      ; 0.393      ;
+; 0.665  ; y_position[0]         ; y_position[0]         ; clk          ; clk         ; 1.000        ; 0.000      ; 0.367      ;
++--------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Fast Model Hold: 'clk'                                                                                                      ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack ; From Node             ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; 0.215 ; y_position[0]         ; y_position[0]         ; clk          ; clk         ; 0.000        ; 0.000      ; 0.367      ;
+; 0.241 ; cout_pixel_y_block[4] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.393      ;
+; 0.329 ; cout_pixel_x_block[4] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.481      ;
+; 0.358 ; cout_pixel_y_block[3] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.510      ;
+; 0.374 ; cout_pixel_y_block[2] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.526      ;
+; 0.449 ; cout_pixel_x_block[0] ; cout_pixel_x_block[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.601      ;
+; 0.455 ; cout_pixel_x_block[1] ; cout_pixel_x_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.607      ;
+; 0.457 ; cout_pixel_x_block[2] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.609      ;
+; 0.464 ; cout_pixel_x_block[3] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.616      ;
+; 0.496 ; cout_pixel_y_block[3] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.648      ;
+; 0.514 ; cout_pixel_y_block[2] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.666      ;
+; 0.549 ; cout_pixel_y_block[2] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.701      ;
+; 0.587 ; cout_pixel_x_block[0] ; cout_pixel_x_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.739      ;
+; 0.595 ; cout_pixel_x_block[1] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.747      ;
+; 0.595 ; cout_pixel_x_block[2] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.747      ;
+; 0.604 ; cout_pixel_x_block[3] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.756      ;
+; 0.617 ; cout_pixel_y_block[1] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.769      ;
+; 0.622 ; cout_pixel_x_block[0] ; cout_pixel_x_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.774      ;
+; 0.627 ; cout_pixel_y_block[0] ; cout_pixel_y_block[2] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.779      ;
+; 0.630 ; cout_pixel_x_block[1] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.782      ;
+; 0.630 ; cout_pixel_x_block[2] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.782      ;
+; 0.641 ; out_board_x           ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.024      ; 0.817      ;
+; 0.652 ; cout_pixel_y_block[1] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.804      ;
+; 0.657 ; cout_pixel_x_block[0] ; cout_pixel_x_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.809      ;
+; 0.662 ; cout_pixel_y_block[0] ; cout_pixel_y_block[3] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.814      ;
+; 0.665 ; cout_pixel_x_block[1] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.817      ;
+; 0.665 ; y_position[0]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.024      ; 0.841      ;
+; 0.687 ; cout_pixel_y_block[1] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.839      ;
+; 0.692 ; cout_pixel_x_block[0] ; cout_pixel_x_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.844      ;
+; 0.697 ; cout_pixel_y_block[0] ; cout_pixel_y_block[4] ; clk          ; clk         ; 0.000        ; 0.000      ; 0.849      ;
+; 0.728 ; cout_pixel_y_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.880      ;
+; 0.746 ; cout_pixel_y_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.898      ;
+; 0.747 ; cout_pixel_y_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 0.899      ;
+; 0.786 ; x_position[4]         ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.024      ; 0.962      ;
+; 0.867 ; cout_pixel_y_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.019      ;
+; 0.900 ; cout_pixel_y_block[0] ; cout_pixel_y_block[0] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.052      ;
+; 0.919 ; out_board_y           ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.071      ;
+; 0.942 ; cout_pixel_y_block[1] ; cout_pixel_y_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.094      ;
+; 0.952 ; cout_pixel_x_block[1] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.952 ; cout_pixel_x_block[2] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.104      ;
+; 0.983 ; cout_pixel_x_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.135      ;
+; 1.036 ; cout_pixel_x_block[3] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.188      ;
+; 1.043 ; cout_pixel_x_block[4] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.195      ;
+; 1.044 ; cout_pixel_y_block[0] ; pixel_color[0]~reg0   ; clk          ; clk         ; 0.000        ; 0.000      ; 1.196      ;
+; 1.057 ; cout_pixel_y_block[0] ; cout_pixel_y_block[1] ; clk          ; clk         ; 0.000        ; 0.000      ; 1.209      ;
++-------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Fast Model Minimum Pulse Width: 'clk'                                                                      ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+; Slack  ; Actual Width ; Required Width ; Type             ; Clock ; Clock Edge ; Target                    ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+; -1.380 ; 1.000        ; 2.380          ; Port Rate        ; clk   ; Rise       ; clk                       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[0]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[1]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[2]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[3]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[4]     ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; out_board_x               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_x               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; out_board_y               ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_y               ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; pixel_color[0]~reg0       ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; pixel_color[0]~reg0       ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; x_position[4]             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; x_position[4]             ;
+; -0.500 ; 0.500        ; 1.000          ; High Pulse Width ; clk   ; Rise       ; y_position[0]             ;
+; -0.500 ; 0.500        ; 1.000          ; Low Pulse Width  ; clk   ; Rise       ; y_position[0]             ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk|combout               ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|inclk[0]      ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; clk~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; clk~clkctrl|outclk        ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_x_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_x_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[0]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[1]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[2]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[3]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; cout_pixel_y_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; cout_pixel_y_block[4]|clk ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; out_board_x|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_x|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; out_board_y|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; out_board_y|clk           ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; pixel_color[0]~reg0|clk   ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; pixel_color[0]~reg0|clk   ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; x_position[4]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; x_position[4]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; High Pulse Width ; clk   ; Rise       ; y_position[0]|clk         ;
+; 0.500  ; 0.500        ; 0.000          ; Low Pulse Width  ; clk   ; Rise       ; y_position[0]|clk         ;
++--------+--------------+----------------+------------------+-------+------------+---------------------------+
+
+
++--------------------------------------------------------------------------+
+; Setup Times                                                              ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 3.059 ; 3.059 ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; 3.039 ; 3.039 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; 2.971 ; 2.971 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; 3.059 ; 3.059 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; 2.902 ; 2.902 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; 2.619 ; 2.619 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; 2.688 ; 2.688 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; 2.765 ; 2.765 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; 2.739 ; 2.739 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; 0.215 ; 0.215 ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; 2.848 ; 2.848 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 0.364 ; 0.364 ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; 3.066 ; 3.066 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; 2.990 ; 2.990 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; 3.066 ; 3.066 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; 2.885 ; 2.885 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; 3.022 ; 3.022 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; 2.742 ; 2.742 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; 2.983 ; 2.983 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; 2.937 ; 2.937 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; 2.822 ; 2.822 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; 2.960 ; 2.960 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; 2.742 ; 2.742 ; Rise       ; clk             ;
+; reset        ; clk        ; 0.339 ; 0.339 ; Rise       ; clk             ;
++--------------+------------+-------+-------+------------+-----------------+
 
 
 +----------------------------------------------------------------------------+
-; Multicorner Timing Analysis Summary                                        ;
-+------------------+-------+------+----------+---------+---------------------+
-; Clock            ; Setup ; Hold ; Recovery ; Removal ; Minimum Pulse Width ;
-+------------------+-------+------+----------+---------+---------------------+
-; Worst-case Slack ; N/A   ; N/A  ; N/A      ; N/A     ; N/A                 ;
-; Design-wide TNS  ; 0.0   ; 0.0  ; 0.0      ; 0.0     ; 0.0                 ;
-+------------------+-------+------+----------+---------+---------------------+
+; Hold Times                                                                 ;
++--------------+------------+--------+--------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++--------------+------------+--------+--------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 0.412  ; 0.412  ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; -2.768 ; -2.768 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; -2.700 ; -2.700 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; -2.788 ; -2.788 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; -2.631 ; -2.631 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; -2.348 ; -2.348 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; -2.417 ; -2.417 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; -2.295 ; -2.295 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; -2.321 ; -2.321 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; 0.061  ; 0.061  ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; -2.451 ; -2.451 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 0.412  ; 0.412  ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; -1.752 ; -1.752 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; -2.412 ; -2.412 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; -2.488 ; -2.488 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; -2.307 ; -2.307 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; -2.444 ; -2.444 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; -1.752 ; -1.752 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; -2.170 ; -2.170 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; -2.124 ; -2.124 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; -2.009 ; -2.009 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; -2.078 ; -2.078 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; -1.795 ; -1.795 ; Rise       ; clk             ;
+; reset        ; clk        ; -0.219 ; -0.219 ; Rise       ; clk             ;
++--------------+------------+--------+--------+------------+-----------------+
 
 
--------------------
-; Clock Transfers ;
--------------------
-Nothing to report.
++-----------------------------------------------------------------------------+
+; Clock to Output Times                                                       ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                               ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------------------+
+; Multicorner Timing Analysis Summary                                           ;
++------------------+---------+-------+----------+---------+---------------------+
+; Clock            ; Setup   ; Hold  ; Recovery ; Removal ; Minimum Pulse Width ;
++------------------+---------+-------+----------+---------+---------------------+
+; Worst-case Slack ; -2.795  ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+;  clk             ; -2.795  ; 0.215 ; N/A      ; N/A     ; -1.380              ;
+; Design-wide TNS  ; -11.024 ; 0.0   ; 0.0      ; 0.0     ; -16.38              ;
+;  clk             ; -11.024 ; 0.000 ; N/A      ; N/A     ; -16.380             ;
++------------------+---------+-------+----------+---------+---------------------+
+
+
++--------------------------------------------------------------------------+
+; Setup Times                                                              ;
++--------------+------------+-------+-------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++--------------+------------+-------+-------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 6.026 ; 6.026 ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; 5.974 ; 5.974 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; 5.882 ; 5.882 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; 6.026 ; 6.026 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; 5.733 ; 5.733 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; 5.068 ; 5.068 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; 5.168 ; 5.168 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; 5.456 ; 5.456 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; 5.292 ; 5.292 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; 1.194 ; 1.194 ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; 5.603 ; 5.603 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 1.481 ; 1.481 ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; 5.989 ; 5.989 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; 5.887 ; 5.887 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; 5.989 ; 5.989 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; 5.706 ; 5.706 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; 5.961 ; 5.961 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; 5.241 ; 5.241 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; 5.838 ; 5.838 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; 5.689 ; 5.689 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; 5.482 ; 5.482 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; 5.754 ; 5.754 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; 5.234 ; 5.234 ; Rise       ; clk             ;
+; reset        ; clk        ; 1.005 ; 1.005 ; Rise       ; clk             ;
++--------------+------------+-------+-------+------------+-----------------+
+
+
++----------------------------------------------------------------------------+
+; Hold Times                                                                 ;
++--------------+------------+--------+--------+------------+-----------------+
+; Data Port    ; Clock Port ; Rise   ; Fall   ; Clock Edge ; Clock Reference ;
++--------------+------------+--------+--------+------------+-----------------+
+; pixel_x[*]   ; clk        ; 0.412  ; 0.412  ; Rise       ; clk             ;
+;  pixel_x[0]  ; clk        ; -2.768 ; -2.768 ; Rise       ; clk             ;
+;  pixel_x[1]  ; clk        ; -2.700 ; -2.700 ; Rise       ; clk             ;
+;  pixel_x[2]  ; clk        ; -2.788 ; -2.788 ; Rise       ; clk             ;
+;  pixel_x[3]  ; clk        ; -2.631 ; -2.631 ; Rise       ; clk             ;
+;  pixel_x[4]  ; clk        ; -2.348 ; -2.348 ; Rise       ; clk             ;
+;  pixel_x[5]  ; clk        ; -2.417 ; -2.417 ; Rise       ; clk             ;
+;  pixel_x[6]  ; clk        ; -2.295 ; -2.295 ; Rise       ; clk             ;
+;  pixel_x[7]  ; clk        ; -2.321 ; -2.321 ; Rise       ; clk             ;
+;  pixel_x[8]  ; clk        ; 0.061  ; 0.061  ; Rise       ; clk             ;
+;  pixel_x[9]  ; clk        ; -2.451 ; -2.451 ; Rise       ; clk             ;
+;  pixel_x[10] ; clk        ; 0.412  ; 0.412  ; Rise       ; clk             ;
+; pixel_y[*]   ; clk        ; -1.752 ; -1.752 ; Rise       ; clk             ;
+;  pixel_y[0]  ; clk        ; -2.412 ; -2.412 ; Rise       ; clk             ;
+;  pixel_y[1]  ; clk        ; -2.488 ; -2.488 ; Rise       ; clk             ;
+;  pixel_y[2]  ; clk        ; -2.307 ; -2.307 ; Rise       ; clk             ;
+;  pixel_y[3]  ; clk        ; -2.444 ; -2.444 ; Rise       ; clk             ;
+;  pixel_y[4]  ; clk        ; -1.752 ; -1.752 ; Rise       ; clk             ;
+;  pixel_y[5]  ; clk        ; -2.170 ; -2.170 ; Rise       ; clk             ;
+;  pixel_y[6]  ; clk        ; -2.124 ; -2.124 ; Rise       ; clk             ;
+;  pixel_y[7]  ; clk        ; -2.009 ; -2.009 ; Rise       ; clk             ;
+;  pixel_y[8]  ; clk        ; -2.078 ; -2.078 ; Rise       ; clk             ;
+;  pixel_y[9]  ; clk        ; -1.795 ; -1.795 ; Rise       ; clk             ;
+; reset        ; clk        ; -0.219 ; -0.219 ; Rise       ; clk             ;
++--------------+------------+--------+--------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Clock to Output Times                                                       ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 6.410 ; 6.410 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++-----------------------------------------------------------------------------+
+; Minimum Clock to Output Times                                               ;
++-----------------+------------+-------+-------+------------+-----------------+
+; Data Port       ; Clock Port ; Rise  ; Fall  ; Clock Edge ; Clock Reference ;
++-----------------+------------+-------+-------+------------+-----------------+
+; pixel_color[*]  ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
+;  pixel_color[0] ; clk        ; 3.677 ; 3.677 ; Rise       ; clk             ;
++-----------------+------------+-------+-------+------------+-----------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 100      ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clk        ; clk      ; 100      ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
 
 
 ---------------
@@ -194,10 +854,10 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 +---------------------------------+-------+------+
 ; Illegal Clocks                  ; 0     ; 0    ;
 ; Unconstrained Clocks            ; 0     ; 0    ;
-; Unconstrained Input Ports       ; 0     ; 0    ;
-; Unconstrained Input Port Paths  ; 0     ; 0    ;
-; Unconstrained Output Ports      ; 0     ; 0    ;
-; Unconstrained Output Port Paths ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 22    ; 22   ;
+; Unconstrained Input Port Paths  ; 217   ; 217  ;
+; Unconstrained Output Ports      ; 1     ; 1    ;
+; Unconstrained Output Port Paths ; 1     ; 1    ;
 +---------------------------------+-------+------+
 
 
@@ -207,7 +867,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit TimeQuest Timing Analyzer
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Mar 23 17:40:32 2025
+    Info: Processing started: Sun Mar 23 22:29:49 2025
 Info: Command: quartus_sta pacman -c pacman
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -215,33 +875,48 @@ Info (21077): Low junction temperature is 0 degrees C
 Info (21077): High junction temperature is 85 degrees C
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'pacman.sdc'. A Synopsys Design Constraints File is required by the TimeQuest Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clk clk
 Info: Found TIMEQUEST_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
-Info (332159): No clocks to report
 Info: Analyzing Slow Model
-Info (332140): No fmax paths to report
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -2.795
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -2.795       -11.024 clk 
+Info (332146): Worst-case hold slack is 0.391
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.391         0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380       -16.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
 Info: Analyzing Fast Model
-Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
-Info (332096): The command derive_clocks did not find any clocks to derive.  No clocks were created or changed.
-Warning (332068): No clocks defined in design.
-Info (332140): No Setup paths to report
-Info (332140): No Hold paths to report
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -0.652
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -0.652        -0.849 clk 
+Info (332146): Worst-case hold slack is 0.215
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):     0.215         0.000 clk 
 Info (332140): No Recovery paths to report
 Info (332140): No Removal paths to report
-Info (332140): No Minimum Pulse Width paths to report
+Info (332146): Worst-case minimum pulse width slack is -1.380
+    Info (332119):     Slack End Point TNS Clock 
+    Info (332119): ========= ============= =====================
+    Info (332119):    -1.380       -16.380 clk 
 Info (332001): The selected device family is not supported by the report_metastability command.
-Info (332101): Design is fully constrained for setup requirements
-Info (332101): Design is fully constrained for hold requirements
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus II 64-Bit TimeQuest Timing Analyzer was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 4536 megabytes
-    Info: Processing ended: Sun Mar 23 17:40:33 2025
+    Info: Processing ended: Sun Mar 23 22:29:50 2025
     Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pacman
-Sun Mar 23 17:40:22 2025
+Sun Mar 23 22:29:32 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -13,9 +13,13 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Elapsed Time Per Partition
- 10. Analysis & Synthesis Messages
+  8. Registers Removed During Synthesis
+  9. Removed Registers Triggering Further Register Optimizations
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Elapsed Time Per Partition
+ 14. Analysis & Synthesis Messages
 
 
 
@@ -41,15 +45,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Mar 23 17:40:22 2025           ;
+; Analysis & Synthesis Status        ; Successful - Sun Mar 23 22:29:32 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; pacman                                          ;
 ; Top-level Entity Name              ; board                                           ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 0                                               ;
-;     Total combinational functions  ; 0                                               ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
+; Total logic elements               ; 53                                              ;
+;     Total combinational functions  ; 52                                              ;
+;     Dedicated logic registers      ; 15                                              ;
+; Total registers                    ; 15                                              ;
 ; Total pins                         ; 26                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -168,23 +172,28 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
+; Estimated Total logic elements              ; 53    ;
 ;                                             ;       ;
-; Total combinational functions               ; 0     ;
+; Total combinational functions               ; 52    ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 0     ;
+;     -- 4 input functions                    ; 29    ;
+;     -- 3 input functions                    ; 10    ;
+;     -- <=2 input functions                  ; 13    ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 0     ;
-;     -- arithmetic mode                      ; 0     ;
+;     -- normal mode                          ; 44    ;
+;     -- arithmetic mode                      ; 8     ;
 ;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
+; Total registers                             ; 15    ;
+;     -- Dedicated logic registers            ; 15    ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 26    ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
+; Maximum fan-out node                        ; clk   ;
+; Maximum fan-out                             ; 15    ;
+; Total fan-out                               ; 231   ;
+; Average fan-out                             ; 2.48  ;
 +---------------------------------------------+-------+
 
 
@@ -193,9 +202,54 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 ; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |board                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 26   ; 0            ; |board              ; work         ;
+; |board                     ; 52 (52)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 26   ; 0            ; |board              ; work         ;
 +----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; pixel_color[2]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; x_position[0,2]                        ; Stuck at GND due to stuck port data_in ;
+; x_position[1,3]                        ; Merged with x_position[4]              ;
+; y_position[1..3]                       ; Merged with y_position[4]              ;
+; cout_pixel_x_boost_orb[4]              ; Merged with cout_pixel_x_block[4]      ;
+; cout_pixel_x_minifood[4]               ; Merged with cout_pixel_x_block[4]      ;
+; cout_pixel_x_boost_orb[3]              ; Merged with cout_pixel_x_block[3]      ;
+; cout_pixel_x_minifood[3]               ; Merged with cout_pixel_x_block[3]      ;
+; cout_pixel_x_boost_orb[2]              ; Merged with cout_pixel_x_block[2]      ;
+; cout_pixel_x_minifood[2]               ; Merged with cout_pixel_x_block[2]      ;
+; cout_pixel_x_boost_orb[1]              ; Merged with cout_pixel_x_block[1]      ;
+; cout_pixel_x_minifood[1]               ; Merged with cout_pixel_x_block[1]      ;
+; cout_pixel_x_boost_orb[0]              ; Merged with cout_pixel_x_block[0]      ;
+; cout_pixel_x_minifood[0]               ; Merged with cout_pixel_x_block[0]      ;
+; cout_pixel_y_boost_orb[4]              ; Merged with cout_pixel_y_block[4]      ;
+; cout_pixel_y_minifood[4]               ; Merged with cout_pixel_y_block[4]      ;
+; cout_pixel_y_boost_orb[3]              ; Merged with cout_pixel_y_block[3]      ;
+; cout_pixel_y_minifood[3]               ; Merged with cout_pixel_y_block[3]      ;
+; cout_pixel_y_boost_orb[2]              ; Merged with cout_pixel_y_block[2]      ;
+; cout_pixel_y_minifood[2]               ; Merged with cout_pixel_y_block[2]      ;
+; cout_pixel_y_boost_orb[1]              ; Merged with cout_pixel_y_block[1]      ;
+; cout_pixel_y_minifood[1]               ; Merged with cout_pixel_y_block[1]      ;
+; cout_pixel_y_boost_orb[0]              ; Merged with cout_pixel_y_block[0]      ;
+; cout_pixel_y_minifood[0]               ; Merged with cout_pixel_y_block[0]      ;
+; y_position[4]                          ; Merged with y_position[0]              ;
+; pixel_color[1]~reg0                    ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 30 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                        ;
++---------------+---------------------------+----------------------------------------+
+; Register name ; Reason for Removal        ; Registers Removed due to This Register ;
++---------------+---------------------------+----------------------------------------+
+; x_position[2] ; Stuck at GND              ; pixel_color[1]~reg0                    ;
+;               ; due to stuck port data_in ;                                        ;
++---------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -203,14 +257,34 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 15    ;
+; Number of registers using Synchronous Clear  ; 10    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Clear ; 13    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 7     ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; out_board_x                            ; 1       ;
+; out_board_y                            ; 1       ;
+; Total number of inverted registers = 2 ;         ;
++----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |board|cout_pixel_y_block[4] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------+
 
 
 +-------------------------------+
@@ -218,7 +292,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -228,7 +302,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Mar 23 17:40:20 2025
+    Info: Processing started: Sun Mar 23 22:29:28 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pacman -c pacman
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file video_controller.vhd
@@ -244,47 +318,25 @@ Info (12021): Found 2 design units, including 1 entities, in source file pacman_
     Info (12022): Found design unit 1: pacman_game-Behavioral
     Info (12023): Found entity 1: pacman_game
 Info (12127): Elaborating entity "board" for the top level hierarchy
-Warning (10541): VHDL Signal Declaration warning at board.vhd(14): used implicit default value for signal "pixel_color" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at board.vhd(104): object "out_board_x" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at board.vhd(104): object "out_board_y" assigned a value but never read
-Warning (10492): VHDL Process Statement warning at board.vhd(139): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10540): VHDL Signal Declaration warning at board.vhd(28): used explicit default value for signal "pacman_board" because signal was never assigned a value
+Warning (10492): VHDL Process Statement warning at board.vhd(187): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at board.vhd(215): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at board.vhd(250): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "pixel_color[0]" is stuck at GND
     Warning (13410): Pin "pixel_color[1]" is stuck at GND
     Warning (13410): Pin "pixel_color[2]" is stuck at GND
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 23 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk"
-    Warning (15610): No output dependent on input pin "reset"
-    Warning (15610): No output dependent on input pin "pixel_x[0]"
-    Warning (15610): No output dependent on input pin "pixel_x[1]"
-    Warning (15610): No output dependent on input pin "pixel_x[2]"
-    Warning (15610): No output dependent on input pin "pixel_x[3]"
-    Warning (15610): No output dependent on input pin "pixel_x[4]"
-    Warning (15610): No output dependent on input pin "pixel_x[5]"
-    Warning (15610): No output dependent on input pin "pixel_x[6]"
-    Warning (15610): No output dependent on input pin "pixel_x[7]"
-    Warning (15610): No output dependent on input pin "pixel_x[8]"
-    Warning (15610): No output dependent on input pin "pixel_x[9]"
-    Warning (15610): No output dependent on input pin "pixel_x[10]"
-    Warning (15610): No output dependent on input pin "pixel_y[0]"
-    Warning (15610): No output dependent on input pin "pixel_y[1]"
-    Warning (15610): No output dependent on input pin "pixel_y[2]"
-    Warning (15610): No output dependent on input pin "pixel_y[3]"
-    Warning (15610): No output dependent on input pin "pixel_y[4]"
-    Warning (15610): No output dependent on input pin "pixel_y[5]"
-    Warning (15610): No output dependent on input pin "pixel_y[6]"
-    Warning (15610): No output dependent on input pin "pixel_y[7]"
-    Warning (15610): No output dependent on input pin "pixel_y[8]"
-    Warning (15610): No output dependent on input pin "pixel_y[9]"
-Info (21057): Implemented 26 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 80 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 23 input pins
     Info (21059): Implemented 3 output pins
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 33 warnings
-    Info: Peak virtual memory: 4625 megabytes
-    Info: Processing ended: Sun Mar 23 17:40:22 2025
-    Info: Elapsed time: 00:00:02
+    Info (21061): Implemented 54 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 4646 megabytes
+    Info: Processing ended: Sun Mar 23 22:29:32 2025
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 
 
