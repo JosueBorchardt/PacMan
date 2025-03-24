@@ -2,17 +2,18 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+library work;
+use work.components.all;
 
 entity video_controller is
    Port (
-      clk       : in  STD_LOGIC;
-      reset     : in  STD_LOGIC;
-      vga_HS    : out STD_LOGIC;
-      vga_VS    : out STD_LOGIC;
-      pixel_x   : out INTEGER range 0 to 1279;
-      pixel_y   : out INTEGER range 0 to 1023
-		  
-      --PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
+      clk      	: in  STD_LOGIC;
+      reset     	: in  STD_LOGIC;
+      vga_HS    	: out STD_LOGIC;
+      vga_VS    	: out STD_LOGIC;
+      pixel_x   	: out INTEGER range 0 to 1279;
+      pixel_y   	: out INTEGER range 0 to 1023;
+      pixel_color	: out INTEGER range 0 to 6
    );
 end video_controller;
 
@@ -58,6 +59,21 @@ architecture Behavioral of video_controller is
 --	signal cell_type        : INTEGER;
 	
 begin
+
+	---------------------------------
+	------- BOARD --------
+	---------------------------------
+	boardd: board
+		port map (
+			clk => clk,
+			reset => reset,
+			pixel_x => signal_pixel_x,
+			pixel_y => signal_pixel_y,
+			pixel_color => pixel_color
+			--vga_R, vga_G, vga_B: out STD_LOGIC_VECTOR(9 downto 0) 
+			--vga_HS    : out STD_LOGIC;
+			--vga_VS    : out STD_LOGIC;
+	);
 
 	HCounter: process (clk, reset) -- Qual pix será modificado na tela
 	begin
