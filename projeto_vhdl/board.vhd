@@ -9,18 +9,7 @@ entity board is
       reset     : in  STD_LOGIC;
 		pixel_x   : in INTEGER range 0 to 1279;
       pixel_y   : in INTEGER range 0 to 1023;
-		
-		
-		
-		--vga_R, vga_G, vga_B: out STD_LOGIC_VECTOR(9 downto 0)
 		pixel_color: out INTEGER range 0 to 6
-      
-
---      vga_HS    : out STD_LOGIC;
---      vga_VS    : out STD_LOGIC;
-
---		  
---      --PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
    );
 end board;
 
@@ -178,69 +167,96 @@ architecture Behavioral of board is
 	
 	signal out_board_x, out_board_y: STD_LOGIC := '1';
 	
+	signal cout_frame_image_x, cout_frame_image_y : INTEGER range 0 to 31;
 	signal cout_pixel_x_block, cout_pixel_y_block : INTEGER range 0 to 31 := 0;
 	signal cout_pixel_x_minifood, cout_pixel_y_minifood : INTEGER range 0 to 31 := 0;
 	signal cout_pixel_x_boost_orb, cout_pixel_y_boost_orb : INTEGER range 0 to 31 := 0;
 	
+	signal sig_pixel_color: INTEGER range 0 to 6;
+	
 begin
+	process(clk, reset)
+	begin
+		if reset = '1' then
+			sig_pixel_color <= 0;
+		elsif rising_edge(clk) then
+--			if (out_board_x or out_board_y) = '1' then
+--				pixel_color <= 0;		
+--				
+--			elsif pacman_board(x_position, y_position) = 1 then
+--				pixel_color <= block_board(cout_pixel_y_block, cout_pixel_x_block);
+--				
+--			elsif pacman_board(x_position, y_position) = 2 then
+--				pixel_color <= mini_food(cout_pixel_x_minifood, cout_pixel_y_minifood);
+--				
+--			elsif pacman_board(x_position, y_position) = 3 then
+--				pixel_color <= boost_orb(cout_pixel_x_boost_orb, cout_pixel_y_boost_orb);
+--			else 
+--				pixel_color <= 1;
+--			end if;	
+
+			case pacman_board(y_position, x_position) is
+				when 1 => sig_pixel_color <= 0;--block_board(cout_frame_image_y, cout_frame_image_x);
+				when 2 => sig_pixel_color <= 1;--mini_food(cout_frame_image_y, cout_frame_image_x);
+				when 3 => sig_pixel_color <= boost_orb(cout_frame_image_y, cout_frame_image_x);
+				when others => sig_pixel_color <= 2;						  
+			end case;
+		end if;
+	end process;
 	
 	process(clk)
 	begin
 		if reset = '1' then
-			pixel_color <= 0;
+			cout_frame_image_x <= 0;
+			cout_frame_image_y <= 0;
 		elsif rising_edge(clk) then
-			if (out_board_x or out_board_y) = '1' then
-				pixel_color <= 0;			
-			elsif pacman_board(x_position, y_position) = 1 then
-				pixel_color <= block_board(cout_pixel_y_block, cout_pixel_x_block);
-			elsif pacman_board(x_position, y_position) = 2 then
-				pixel_color <= mini_food(cout_pixel_x_minifood, cout_pixel_y_minifood);
-			elsif pacman_board(x_position, y_position) = 3 then
-				pixel_color <= boost_orb(cout_pixel_x_boost_orb, cout_pixel_y_boost_orb);
-			else 
-				pixel_color <= 0;
+			if pixel_x = START_X or cout_frame_image_x = 31 then
+				cout_frame_image_x <= 0;
+			else
+				cout_frame_image_x <= cout_frame_image_x + 1;
+			end if;
+			
+			if pixel_y = START_Y or cout_frame_image_y = 31 then
+				cout_frame_image_y <= 0;
+			elsif pixel_x = END_X then		
+				cout_frame_image_y <= 0;
 			end if;
 		end if;
 	end process;
 	
---	0 - vazio
---	1 - azul
---	2 - amarelo
---	3 - branco
---	4 - rosa
---	5 - ciano
---	6 - vermelho
-	block_print_controller: process(clk)
-	begin
-		if reset = '1' then
-			cout_pixel_x_block <= 0;
-			cout_pixel_y_block <= 0;
-			cout_pixel_x_minifood <= 0;
-			cout_pixel_y_minifood <= 0;
-			cout_pixel_x_boost_orb <= 0;
-			cout_pixel_y_boost_orb <= 0;
-		elsif rising_edge(clk) then
-			if pixel_x = START_X then
-				cout_pixel_x_block <= 0;
-				cout_pixel_x_minifood <= 0;
-				cout_pixel_x_boost_orb <= 0;
-			else
-				cout_pixel_x_block <= cout_pixel_x_block + 1;
-				cout_pixel_x_minifood <= cout_pixel_x_minifood + 1;
-				cout_pixel_x_boost_orb <= cout_pixel_x_boost_orb + 1;
-			end if;
-			
-			if pixel_y = START_Y then
-				cout_pixel_y_block <= 0;
-				cout_pixel_y_minifood <= 0;
-				cout_pixel_y_boost_orb <= 0;
-			elsif pixel_x = END_X then
-				cout_pixel_y_block <= cout_pixel_y_block + 1;
-				cout_pixel_y_minifood <= cout_pixel_y_minifood + 1;
-				cout_pixel_y_boost_orb <= cout_pixel_y_boost_orb + 1;
-			end if;
-		end if;
-	end process;
+--	block_print_controller: process(clk)
+--	begin
+--		if reset = '1' then
+--			cout_pixel_x_block <= 0;
+--			cout_pixel_y_block <= 0;
+--			cout_pixel_x_minifood <= 0;
+--			cout_pixel_y_minifood <= 0;
+--			cout_pixel_x_boost_orb <= 0;
+--			cout_pixel_y_boost_orb <= 0;
+--		elsif rising_edge(clk) then
+--			if pixel_x < START_X or cout_pixel_x_block = 31 or pixel_x >= END_X then
+--				cout_pixel_x_block <= 0;
+--				cout_pixel_x_minifood <= 0;
+--				cout_pixel_x_boost_orb <= 0;
+--			else
+--				cout_pixel_x_block <= cout_pixel_x_block + 1;
+--				cout_pixel_x_minifood <= cout_pixel_x_minifood + 1;
+--				cout_pixel_x_boost_orb <= cout_pixel_x_boost_orb + 1;
+--			end if;
+--			
+--			if pixel_y < START_Y or cout_pixel_x_block = 31 or pixel_y >= END_Y then
+--				cout_pixel_y_block <= 0;
+--				cout_pixel_y_minifood <= 0;
+--				cout_pixel_y_boost_orb <= 0;
+--			elsif pixel_x = END_X then
+--				cout_pixel_y_block <= cout_pixel_y_block + 1;
+--				cout_pixel_y_minifood <= cout_pixel_y_minifood + 1;
+--				cout_pixel_y_boost_orb <= cout_pixel_y_boost_orb + 1;
+--			end if;
+--		end if;
+--	end process;
+
+
 
 	positon: process(clk)
 		variable var_x_position, var_y_position: INTEGER range 0 to 30;
@@ -264,7 +280,8 @@ begin
 				var_x_position_std := "00000" & var_aux_x(31 downto 5);
 				var_x_position := conv_integer(unsigned(var_x_position_std));
 				
-				x_position <= var_x_position;
+				--x_position <= var_x_position;
+				x_position <= 1;
 			end if;
 			
 			if pixel_y < START_Y or pixel_y > END_Y then
@@ -273,17 +290,19 @@ begin
 				
 			else 
 				out_board_y <= '0';
-				
 				--var_y_position :=  (y_position - START_Y) srl 5;
 				--start_position_y := y_position - START_Y;
 				var_aux_y := conv_std_logic_vector(y_position - START_Y, 32);
 				var_y_position_std := "00000" & var_aux_y(31 downto 5);
 				var_y_position := conv_integer(unsigned(var_y_position_std));
 				
-				y_position <= var_y_position;
+				--y_position <= var_y_position;
+				y_position <= 3;
 			end if; 
 			
 		end if;
 	end process;
-
+	
+	pixel_color <= sig_pixel_color;
+	
 end Behavioral;

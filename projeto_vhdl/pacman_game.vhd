@@ -18,20 +18,21 @@ entity pacman_game is
 		vga_B			  : out std_LOGIC_VECTOR(9 downto 0);
 		vga_clk		  : out std_LOGIC;
 		vga_sync		  : out std_LOGIC;
+		vga_blank     : out STD_LOGIC;
 		
-      pixel_x  	  : out INTEGER range 0 to 1279; -- ?????
-      pixel_y  	  : out INTEGER range 0 to 1023;  -- ?????
+      --pixel_x  	  : out INTEGER range 0 to 1279; -- ?????
+      --pixel_y  	  : out INTEGER range 0 to 1023;  -- ?????
 		
-		pixel_color	: out INTEGER range 0 to 6
-		
---		  
---      --PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
+		pixel_color	: out INTEGER range 0 to 6		
+		  
+      --PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
    );
 end pacman_game;
 
 architecture Behavioral of pacman_game is
 
 	signal sig_inclk0, sig_c0, sig_locked : std_logic;
+	signal sig_HS, sig_VS: STD_LOGIC; 
 	
 begin
 	---------------------------------
@@ -55,16 +56,22 @@ begin
 		port map (
 			clk => sig_c0,
 			reset => reset,
-			vga_HS => vga_HS,			
-			vga_VS => vga_VS,
-			pixel_x => pixel_x, -- ?????
-			pixel_y => pixel_y,  -- ?????
+			vga_HS => sig_HS,			
+			vga_VS => sig_VS,
+			vga_BL => vga_blank,
+			--pixel_x => pixel_x, 
+			--pixel_y => pixel_y, 
 			vga_R => vga_R,
 			vga_G => vga_G,
 			vga_B => vga_B,
 			pixel_color => pixel_color
 	);	
 	
-
-
+--	vga_R <= "0000000000";
+--	vga_G <= "0000000000";
+--	vga_B <= "1111111111";
+	vga_sync <= '0';
+	vga_HS <= sig_HS;
+	vga_VS <= sig_VS;
+	
 end Behavioral;

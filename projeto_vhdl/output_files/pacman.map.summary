@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Mon Mar 24 10:29:49 2025
+Analysis & Synthesis Status : Successful - Mon Mar 24 15:14:33 2025
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : pacman
 Top-level Entity Name : pacman_game
 Family : Cyclone II
-Total logic elements : 112
-    Total combinational functions : 110
-    Dedicated logic registers : 61
-Total registers : 61
-Total pins : 61
+Total logic elements : 44
+    Total combinational functions : 44
+    Dedicated logic registers : 26
+Total registers : 26
+Total pins : 41
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

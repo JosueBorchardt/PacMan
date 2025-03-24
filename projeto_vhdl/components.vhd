@@ -22,8 +22,9 @@ package components is
 			reset     	: in  STD_LOGIC;
 			vga_HS    	: out STD_LOGIC;
 			vga_VS    	: out STD_LOGIC;
-			pixel_x   	: out INTEGER range 0 to 1279;
-			pixel_y   	: out INTEGER range 0 to 1023;
+			vga_BL      : out STD_LOGIC;
+			--pixel_x   	: out INTEGER range 0 to 1279;
+			--pixel_y   	: out INTEGER range 0 to 1023;
 			vga_R         : out std_LOGIC_VECTOR(9 downto 0);
 			vga_G			  : out std_LOGIC_VECTOR(9 downto 0);
 			vga_B			  : out std_LOGIC_VECTOR(9 downto 0);

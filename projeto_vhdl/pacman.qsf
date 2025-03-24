@@ -97,4 +97,5 @@ set_location_assignment PIN_B7 -to vga_sync
 set_location_assignment PIN_D8 -to vga_VS
 set_location_assignment PIN_D13 -to clk_altera
 set_location_assignment PIN_N25 -to reset
+set_location_assignment PIN_D6 -to vga_blank
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
