@@ -1,5 +1,5 @@
 Analysis & Synthesis report for pacman
-Mon Mar 24 00:22:42 2025
+Mon Mar 24 00:42:19 2025
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,14 +14,16 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis IP Cores Summary
-  9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Parameter Settings for User Entity Instance: pll_108MHz:clk_108MHz|altpll:altpll_component
- 12. altpll Parameter Settings by Entity Instance
- 13. Port Connectivity Checks: "video_controller:videocontroller"
- 14. Port Connectivity Checks: "pll_108MHz:clk_108MHz"
- 15. Elapsed Time Per Partition
- 16. Analysis & Synthesis Messages
+  9. Registers Removed During Synthesis
+ 10. Removed Registers Triggering Further Register Optimizations
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: pll_108MHz:clk_108MHz|altpll:altpll_component
+ 15. altpll Parameter Settings by Entity Instance
+ 16. Port Connectivity Checks: "pll_108MHz:clk_108MHz"
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -47,16 +49,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Mar 24 00:22:42 2025           ;
+; Analysis & Synthesis Status        ; Successful - Mon Mar 24 00:42:19 2025           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; pacman                                          ;
 ; Top-level Entity Name              ; pacman_game                                     ;
 ; Family                             ; Cyclone II                                      ;
-; Total logic elements               ; 64                                              ;
-;     Total combinational functions  ; 64                                              ;
-;     Dedicated logic registers      ; 45                                              ;
-; Total registers                    ; 45                                              ;
-; Total pins                         ; 58                                              ;
+; Total logic elements               ; 111                                             ;
+;     Total combinational functions  ; 110                                             ;
+;     Dedicated logic registers      ; 60                                              ;
+; Total registers                    ; 60                                              ;
+; Total pins                         ; 61                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -183,31 +185,31 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------------------------------------------------+
 ; Resource                                    ; Usage                                               ;
 +---------------------------------------------+-----------------------------------------------------+
-; Estimated Total logic elements              ; 64                                                  ;
+; Estimated Total logic elements              ; 111                                                 ;
 ;                                             ;                                                     ;
-; Total combinational functions               ; 64                                                  ;
+; Total combinational functions               ; 110                                                 ;
 ; Logic element usage by number of LUT inputs ;                                                     ;
-;     -- 4 input functions                    ; 14                                                  ;
-;     -- 3 input functions                    ; 5                                                   ;
-;     -- <=2 input functions                  ; 45                                                  ;
+;     -- 4 input functions                    ; 39                                                  ;
+;     -- 3 input functions                    ; 12                                                  ;
+;     -- <=2 input functions                  ; 59                                                  ;
 ;                                             ;                                                     ;
 ; Logic elements by mode                      ;                                                     ;
-;     -- normal mode                          ; 25                                                  ;
-;     -- arithmetic mode                      ; 39                                                  ;
+;     -- normal mode                          ; 63                                                  ;
+;     -- arithmetic mode                      ; 47                                                  ;
 ;                                             ;                                                     ;
-; Total registers                             ; 45                                                  ;
-;     -- Dedicated logic registers            ; 45                                                  ;
+; Total registers                             ; 60                                                  ;
+;     -- Dedicated logic registers            ; 60                                                  ;
 ;     -- I/O registers                        ; 0                                                   ;
 ;                                             ;                                                     ;
-; I/O pins                                    ; 58                                                  ;
+; I/O pins                                    ; 61                                                  ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                   ;
 ; Total PLLs                                  ; 1                                                   ;
 ;     -- PLLs                                 ; 1                                                   ;
 ;                                             ;                                                     ;
 ; Maximum fan-out node                        ; pll_108MHz:clk_108MHz|altpll:altpll_component|_clk0 ;
-; Maximum fan-out                             ; 46                                                  ;
-; Total fan-out                               ; 372                                                 ;
-; Average fan-out                             ; 2.21                                                ;
+; Maximum fan-out                             ; 61                                                  ;
+; Total fan-out                               ; 580                                                 ;
+; Average fan-out                             ; 2.50                                                ;
 +---------------------------------------------+-----------------------------------------------------+
 
 
@@ -216,10 +218,11 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node            ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                        ; Library Name ;
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
-; |pacman_game                          ; 64 (0)            ; 45 (0)       ; 0           ; 0            ; 0       ; 0         ; 58   ; 0            ; |pacman_game                                               ; work         ;
+; |pacman_game                          ; 110 (0)           ; 60 (0)       ; 0           ; 0            ; 0       ; 0         ; 61   ; 0            ; |pacman_game                                               ; work         ;
 ;    |pll_108MHz:clk_108MHz|            ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|pll_108MHz:clk_108MHz                         ; work         ;
 ;       |altpll:altpll_component|       ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|pll_108MHz:clk_108MHz|altpll:altpll_component ; work         ;
-;    |video_controller:videocontroller| ; 64 (64)           ; 45 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller              ; work         ;
+;    |video_controller:videocontroller| ; 110 (60)          ; 60 (45)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller              ; work         ;
+;       |board:boardd|                  ; 50 (50)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |pacman_game|video_controller:videocontroller|board:boardd ; work         ;
 +---------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -233,30 +236,86 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+------------------------------------+-------------------------------------------------------------+
 
 
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                        ;
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; Register name                                                           ; Reason for Removal                                                              ;
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; video_controller:videocontroller|board:boardd|pixel_color[2]            ; Stuck at GND due to stuck port data_in                                          ;
+; video_controller:videocontroller|board:boardd|x_position[0,2]           ; Stuck at GND due to stuck port data_in                                          ;
+; video_controller:videocontroller|board:boardd|x_position[1,3]           ; Merged with video_controller:videocontroller|board:boardd|x_position[4]         ;
+; video_controller:videocontroller|board:boardd|y_position[1..3]          ; Merged with video_controller:videocontroller|board:boardd|y_position[4]         ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[4] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[4] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_minifood[4]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[4] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[3] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[3] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_minifood[3]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[3] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[2] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[2] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_minifood[2]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[2] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[1] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[1] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_minifood[1]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[1] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_boost_orb[0] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[0] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_x_minifood[0]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_x_block[0] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[4] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[4] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[4]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[4] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[3] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[3] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[3]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[3] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[2] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[2] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[2]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[2] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[1] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[1] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[1]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[1] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_boost_orb[0] ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[0] ;
+; video_controller:videocontroller|board:boardd|cout_pixel_y_minifood[0]  ; Merged with video_controller:videocontroller|board:boardd|cout_pixel_y_block[0] ;
+; video_controller:videocontroller|board:boardd|y_position[4]             ; Merged with video_controller:videocontroller|board:boardd|y_position[0]         ;
+; video_controller:videocontroller|board:boardd|pixel_color[1]            ; Stuck at GND due to stuck port data_in                                          ;
+; Total Number of Removed Registers = 30                                  ;                                                                                 ;
++-------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                            ;
++-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
+; Register name                                               ; Reason for Removal        ; Registers Removed due to This Register                       ;
++-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
+; video_controller:videocontroller|board:boardd|x_position[2] ; Stuck at GND              ; video_controller:videocontroller|board:boardd|pixel_color[1] ;
+;                                                             ; due to stuck port data_in ;                                                              ;
++-------------------------------------------------------------+---------------------------+--------------------------------------------------------------+
+
+
 +------------------------------------------------------+
 ; General Register Statistics                          ;
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 45    ;
-; Number of registers using Synchronous Clear  ; 43    ;
+; Total registers                              ; 60    ;
+; Number of registers using Synchronous Clear  ; 53    ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 24    ;
+; Number of registers using Asynchronous Clear ; 37    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 32    ;
+; Number of registers using Clock Enable       ; 39    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+------------------------------------------------------+
-; Inverted Register Statistics                         ;
-+--------------------------------------------+---------+
-; Inverted Register                          ; Fan out ;
-+--------------------------------------------+---------+
-; video_controller:videocontroller|vga_hsync ; 1       ;
-; video_controller:videocontroller|vga_vsync ; 1       ;
-; Total number of inverted registers = 2     ;         ;
-+--------------------------------------------+---------+
++---------------------------------------------------------------------+
+; Inverted Register Statistics                                        ;
++-----------------------------------------------------------+---------+
+; Inverted Register                                         ; Fan out ;
++-----------------------------------------------------------+---------+
+; video_controller:videocontroller|vga_hsync                ; 1       ;
+; video_controller:videocontroller|vga_vsync                ; 1       ;
+; video_controller:videocontroller|board:boardd|out_board_x ; 1       ;
+; video_controller:videocontroller|board:boardd|out_board_y ; 1       ;
+; Total number of inverted registers = 4                    ;         ;
++-----------------------------------------------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------+
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |pacman_game|video_controller:videocontroller|board:boardd|cout_pixel_y_block[4] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------+
@@ -650,15 +709,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+-----------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "video_controller:videocontroller"                                                                               ;
-+-------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port        ; Type   ; Severity ; Details                                                                                                  ;
-+-------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; pixel_color ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+-------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-
-
 +------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "pll_108MHz:clk_108MHz"                                                                ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
@@ -683,7 +733,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon Mar 24 00:22:41 2025
+    Info: Processing started: Mon Mar 24 00:42:17 2025
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off pacman -c pacman
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file video_controller.vhd
@@ -706,7 +756,7 @@ Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(17): used im
 Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(18): used implicit default value for signal "vga_B" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(19): used implicit default value for signal "vga_clk" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
 Warning (10541): VHDL Signal Declaration warning at pacman_game.vhd(20): used implicit default value for signal "vga_sync" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations.
-Warning (10036): Verilog HDL or VHDL warning at pacman_game.vhd(32): object "sig_locked" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at pacman_game.vhd(34): object "sig_locked" assigned a value but never read
 Info (12128): Elaborating entity "pll_108MHz" for hierarchy "pll_108MHz:clk_108MHz"
 Info (12128): Elaborating entity "altpll" for hierarchy "pll_108MHz:clk_108MHz|altpll:altpll_component"
 Info (12130): Elaborated megafunction instantiation "pll_108MHz:clk_108MHz|altpll:altpll_component"
@@ -771,7 +821,6 @@ Warning (10540): VHDL Signal Declaration warning at board.vhd(28): used explicit
 Warning (10492): VHDL Process Statement warning at board.vhd(187): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at board.vhd(213): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at board.vhd(248): signal "reset" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (13000): Registers with preset signals will power-up high
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
@@ -807,17 +856,19 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "vga_B[9]" is stuck at GND
     Warning (13410): Pin "vga_clk" is stuck at GND
     Warning (13410): Pin "vga_sync" is stuck at GND
+    Warning (13410): Pin "pixel_color[1]" is stuck at GND
+    Warning (13410): Pin "pixel_color[2]" is stuck at GND
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 123 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 175 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 56 output pins
-    Info (21061): Implemented 64 logic cells
+    Info (21059): Implemented 59 output pins
+    Info (21061): Implemented 113 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 45 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 46 warnings
     Info: Peak virtual memory: 4655 megabytes
-    Info: Processing ended: Mon Mar 24 00:22:42 2025
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:01
+    Info: Processing ended: Mon Mar 24 00:42:19 2025
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
 
 

@@ -58,6 +58,9 @@ pixel_y[6] <= video_controller:videocontroller.pixel_y[6]
 pixel_y[7] <= video_controller:videocontroller.pixel_y[7]
 pixel_y[8] <= video_controller:videocontroller.pixel_y[8]
 pixel_y[9] <= video_controller:videocontroller.pixel_y[9]
+pixel_color[0] <= video_controller:videocontroller.pixel_color[0]
+pixel_color[1] <= video_controller:videocontroller.pixel_color[1]
+pixel_color[2] <= video_controller:videocontroller.pixel_color[2]
 
 
 |pacman_game|pll_108MHz:clk_108MHz

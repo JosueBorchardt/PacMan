@@ -20,7 +20,9 @@ entity pacman_game is
 		vga_sync		  : out std_LOGIC;
 		
       pixel_x  	  : out INTEGER range 0 to 1279; -- ?????
-      pixel_y  	  : out INTEGER range 0 to 1023  -- ?????
+      pixel_y  	  : out INTEGER range 0 to 1023;  -- ?????
+		
+		pixel_color	: out INTEGER range 0 to 6
 		
 --		  
 --      --PIXEL_COLOR : out STD_LOGIC_VECTOR(11 downto 0)
@@ -56,7 +58,8 @@ begin
 			vga_HS => vga_HS,			
 			vga_VS => vga_VS,
 			pixel_x => pixel_x, -- ?????
-			pixel_y => pixel_y  -- ?????
+			pixel_y => pixel_y,  -- ?????
+			pixel_color => pixel_color
 	);	
 	
 

@@ -16,7 +16,7 @@
 // PROGRAM "Quartus II 64-Bit"
 // VERSION "Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition"
 
-// DATE "03/24/2025 00:22:51"
+// DATE "03/24/2025 00:42:28"
 
 // 
 // Device: Altera EP2C35F672C6 Package FBGA672
@@ -40,7 +40,8 @@ module pacman_game (
 	vga_clk,
 	vga_sync,
 	pixel_x,
-	pixel_y);
+	pixel_y,
+	pixel_color);
 input 	clk_altera;
 output 	clk_out;
 input 	reset;
@@ -53,6 +54,7 @@ output 	vga_clk;
 output 	vga_sync;
 output 	[10:0] pixel_x;
 output 	[9:0] pixel_y;
+output 	[2:0] pixel_color;
 
 // Design Ports Information
 // clk_out	=>  Location: PIN_E5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
@@ -90,27 +92,30 @@ output 	[9:0] pixel_y;
 // vga_B[9]	=>  Location: PIN_B12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 // vga_clk	=>  Location: PIN_B8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 // vga_sync	=>  Location: PIN_B7,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[0]	=>  Location: PIN_Y15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[1]	=>  Location: PIN_AA14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[2]	=>  Location: PIN_Y14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[3]	=>  Location: PIN_AE15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[4]	=>  Location: PIN_AA13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[5]	=>  Location: PIN_AA16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[6]	=>  Location: PIN_AD12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[7]	=>  Location: PIN_AE12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[8]	=>  Location: PIN_AD15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[9]	=>  Location: PIN_AC14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_x[10]	=>  Location: PIN_Y13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[0]	=>  Location: PIN_B2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[1]	=>  Location: PIN_H8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[2]	=>  Location: PIN_F6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[3]	=>  Location: PIN_B5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[4]	=>  Location: PIN_H10,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[5]	=>  Location: PIN_E8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[6]	=>  Location: PIN_K9,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[7]	=>  Location: PIN_C4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[8]	=>  Location: PIN_D5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
-// pixel_y[9]	=>  Location: PIN_C2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[0]	=>  Location: PIN_B15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[1]	=>  Location: PIN_A14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[2]	=>  Location: PIN_B16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[3]	=>  Location: PIN_C16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[4]	=>  Location: PIN_D14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[5]	=>  Location: PIN_C15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[6]	=>  Location: PIN_B14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[7]	=>  Location: PIN_G13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[8]	=>  Location: PIN_G14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[9]	=>  Location: PIN_F13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_x[10]	=>  Location: PIN_D6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[0]	=>  Location: PIN_Y12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[1]	=>  Location: PIN_V11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[2]	=>  Location: PIN_AD11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[3]	=>  Location: PIN_AA12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[4]	=>  Location: PIN_AE13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[5]	=>  Location: PIN_AE11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[6]	=>  Location: PIN_AD12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[7]	=>  Location: PIN_U12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[8]	=>  Location: PIN_AE12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_y[9]	=>  Location: PIN_V14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_color[0]	=>  Location: PIN_F14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_color[1]	=>  Location: PIN_AC17,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// pixel_color[2]	=>  Location: PIN_Y24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 // reset	=>  Location: PIN_N25,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 // clk_altera	=>  Location: PIN_D13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
 
@@ -128,77 +133,102 @@ tri1 devpor;
 tri1 devoe;
 wire \clk_108MHz|altpll_component|pll~CLK1 ;
 wire \clk_108MHz|altpll_component|pll~CLK2 ;
+wire \videocontroller|H_Count[0]~11_combout ;
+wire \videocontroller|H_Count[1]~13_combout ;
+wire \videocontroller|V_Count[1]~13_combout ;
 wire \videocontroller|V_Count[6]~23_combout ;
-wire \videocontroller|HCounter~3_combout ;
+wire \videocontroller|boardd|cout_pixel_x_block[0]~5_combout ;
+wire \videocontroller|LessThan5~4_combout ;
+wire \videocontroller|LessThan6~0_combout ;
+wire \videocontroller|LessThan1~0_combout ;
+wire \videocontroller|LessThan1~1_combout ;
+wire \videocontroller|boardd|out_board_x~regout ;
+wire \videocontroller|boardd|out_board_y~regout ;
+wire \videocontroller|boardd|pixel_color~0_combout ;
+wire \videocontroller|boardd|Mux6~0_combout ;
+wire \videocontroller|boardd|Mux6~1_combout ;
+wire \videocontroller|boardd|Mux6~2_combout ;
+wire \videocontroller|boardd|Mux6~3_combout ;
+wire \videocontroller|boardd|Mux6~4_combout ;
+wire \videocontroller|boardd|Mux6~5_combout ;
+wire \videocontroller|boardd|Mux6~6_combout ;
+wire \videocontroller|boardd|Mux6~7_combout ;
+wire \videocontroller|boardd|Mux6~8_combout ;
+wire \videocontroller|boardd|Mux6~9_combout ;
+wire \videocontroller|boardd|Mux6~10_combout ;
+wire \videocontroller|boardd|Mux6~11_combout ;
+wire \videocontroller|boardd|Mux6~12_combout ;
+wire \videocontroller|boardd|Mux6~13_combout ;
+wire \videocontroller|boardd|Mux6~14_combout ;
+wire \videocontroller|boardd|Mux6~15_combout ;
 wire \videocontroller|LessThan0~0_combout ;
+wire \videocontroller|boardd|Equal3~0_combout ;
+wire \videocontroller|boardd|Equal5~0_combout ;
+wire \videocontroller|boardd|positon~0_combout ;
+wire \videocontroller|boardd|positon~1_combout ;
+wire \videocontroller|boardd|positon~2_combout ;
+wire \videocontroller|boardd|positon~3_combout ;
+wire \videocontroller|boardd|positon~4_combout ;
+wire \videocontroller|boardd|y_position~0_combout ;
+wire \videocontroller|boardd|Mux6~18_combout ;
 wire \reset~combout ;
 wire \reset~clkctrl_outclk ;
 wire \clk_altera~combout ;
 wire \clk_108MHz|altpll_component|_clk0 ;
 wire \clk_108MHz|altpll_component|_clk0~clkctrl_e_clk_out_outclk ;
 wire \clk_108MHz|altpll_component|_clk0~clkctrl_outclk ;
-wire \videocontroller|H_Count[0]~11_combout ;
+wire \videocontroller|H_Count[0]~12 ;
+wire \videocontroller|H_Count[1]~14 ;
+wire \videocontroller|H_Count[2]~15_combout ;
+wire \videocontroller|H_Count[5]~22 ;
+wire \videocontroller|H_Count[6]~23_combout ;
+wire \videocontroller|H_Count[6]~24 ;
 wire \videocontroller|H_Count[7]~26 ;
 wire \videocontroller|H_Count[8]~27_combout ;
-wire \videocontroller|LessThan5~4_combout ;
 wire \videocontroller|H_Count[8]~28 ;
 wire \videocontroller|H_Count[9]~29_combout ;
 wire \videocontroller|H_Count[9]~30 ;
 wire \videocontroller|H_Count[10]~31_combout ;
 wire \videocontroller|LessThan0~1_combout ;
-wire \videocontroller|H_Count[0]~12 ;
-wire \videocontroller|H_Count[1]~13_combout ;
-wire \videocontroller|H_Count[1]~14 ;
 wire \videocontroller|H_Count[2]~16 ;
-wire \videocontroller|H_Count[3]~17_combout ;
 wire \videocontroller|H_Count[3]~18 ;
+wire \videocontroller|H_Count[4]~19_combout ;
 wire \videocontroller|H_Count[4]~20 ;
-wire \videocontroller|H_Count[5]~22 ;
-wire \videocontroller|H_Count[6]~23_combout ;
-wire \videocontroller|H_Count[6]~24 ;
+wire \videocontroller|H_Count[5]~21_combout ;
 wire \videocontroller|H_Count[7]~25_combout ;
 wire \videocontroller|LessThan5~2_combout ;
-wire \videocontroller|H_Count[2]~15_combout ;
-wire \videocontroller|H_Count[4]~19_combout ;
+wire \videocontroller|H_Count[3]~17_combout ;
 wire \videocontroller|LessThan5~3_combout ;
 wire \videocontroller|LessThan5~5_combout ;
 wire \videocontroller|vga_hsync~regout ;
 wire \videocontroller|V_Count[0]~11_combout ;
-wire \videocontroller|V_Count[5]~21_combout ;
-wire \videocontroller|V_Count[3]~17_combout ;
-wire \videocontroller|LessThan3~2_combout ;
+wire \videocontroller|V_Count[2]~15_combout ;
 wire \videocontroller|LessThan3~1_combout ;
+wire \videocontroller|LessThan3~2_combout ;
+wire \videocontroller|V_Count[9]~30 ;
+wire \videocontroller|V_Count[10]~31_combout ;
 wire \videocontroller|LessThan4~0_combout ;
 wire \videocontroller|V_Count[0]~12 ;
-wire \videocontroller|V_Count[1]~13_combout ;
 wire \videocontroller|V_Count[1]~14 ;
-wire \videocontroller|V_Count[2]~15_combout ;
 wire \videocontroller|V_Count[2]~16 ;
+wire \videocontroller|V_Count[3]~17_combout ;
 wire \videocontroller|V_Count[3]~18 ;
-wire \videocontroller|V_Count[4]~19_combout ;
 wire \videocontroller|V_Count[4]~20 ;
+wire \videocontroller|V_Count[5]~21_combout ;
 wire \videocontroller|V_Count[5]~22 ;
 wire \videocontroller|V_Count[6]~24 ;
 wire \videocontroller|V_Count[7]~25_combout ;
 wire \videocontroller|V_Count[7]~26 ;
 wire \videocontroller|V_Count[8]~28 ;
 wire \videocontroller|V_Count[9]~29_combout ;
-wire \videocontroller|V_Count[9]~30 ;
-wire \videocontroller|V_Count[10]~31_combout ;
-wire \videocontroller|LessThan6~1_combout ;
 wire \videocontroller|V_Count[8]~27_combout ;
 wire \videocontroller|LessThan3~0_combout ;
-wire \videocontroller|LessThan6~0_combout ;
+wire \videocontroller|V_Count[4]~19_combout ;
+wire \videocontroller|LessThan6~1_combout ;
 wire \videocontroller|LessThan6~2_combout ;
 wire \videocontroller|vga_vsync~regout ;
 wire \videocontroller|signal_pixel_x[0]~11_combout ;
-wire \videocontroller|HCounter~4_combout ;
-wire \videocontroller|H_Count[5]~21_combout ;
-wire \videocontroller|HCounter~5_combout ;
-wire \videocontroller|HCounter~1_combout ;
 wire \videocontroller|HCounter~0_combout ;
-wire \videocontroller|HCounter~2_combout ;
-wire \videocontroller|HCounter~6_combout ;
 wire \videocontroller|signal_pixel_x[0]~12 ;
 wire \videocontroller|signal_pixel_x[1]~13_combout ;
 wire \videocontroller|signal_pixel_x[1]~14 ;
@@ -220,7 +250,7 @@ wire \videocontroller|signal_pixel_x[9]~29_combout ;
 wire \videocontroller|signal_pixel_x[9]~30 ;
 wire \videocontroller|signal_pixel_x[10]~31_combout ;
 wire \videocontroller|signal_pixel_y[0]~10_combout ;
-wire \videocontroller|HCounter~7_combout ;
+wire \videocontroller|HCounter~1_combout ;
 wire \videocontroller|signal_pixel_y[0]~11 ;
 wire \videocontroller|signal_pixel_y[1]~12_combout ;
 wire \videocontroller|signal_pixel_y[1]~13 ;
@@ -239,10 +269,46 @@ wire \videocontroller|signal_pixel_y[7]~25 ;
 wire \videocontroller|signal_pixel_y[8]~26_combout ;
 wire \videocontroller|signal_pixel_y[8]~27 ;
 wire \videocontroller|signal_pixel_y[9]~28_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[0]~5_combout ;
+wire \videocontroller|boardd|Equal4~0_combout ;
+wire \videocontroller|boardd|Equal4~1_combout ;
+wire \videocontroller|boardd|Equal4~2_combout ;
+wire \videocontroller|boardd|Equal5~1_combout ;
+wire \videocontroller|boardd|Equal3~1_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[4]~11_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[0]~6 ;
+wire \videocontroller|boardd|cout_pixel_y_block[1]~8 ;
+wire \videocontroller|boardd|cout_pixel_y_block[2]~9_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[2]~10 ;
+wire \videocontroller|boardd|cout_pixel_y_block[3]~12_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[3]~13 ;
+wire \videocontroller|boardd|cout_pixel_y_block[4]~14_combout ;
+wire \videocontroller|boardd|cout_pixel_y_block[1]~7_combout ;
+wire \videocontroller|boardd|Mux6~19_combout ;
+wire \videocontroller|boardd|Mux6~16_combout ;
+wire \videocontroller|boardd|Mux6~17_combout ;
+wire \videocontroller|boardd|cout_pixel_x_block[0]~6 ;
+wire \videocontroller|boardd|cout_pixel_x_block[1]~7_combout ;
+wire \videocontroller|boardd|Equal3~2_combout ;
+wire \videocontroller|boardd|Equal3~3_combout ;
+wire \videocontroller|boardd|cout_pixel_x_block[1]~8 ;
+wire \videocontroller|boardd|cout_pixel_x_block[2]~10 ;
+wire \videocontroller|boardd|cout_pixel_x_block[3]~11_combout ;
+wire \videocontroller|boardd|cout_pixel_x_block[3]~12 ;
+wire \videocontroller|boardd|cout_pixel_x_block[4]~13_combout ;
+wire \videocontroller|boardd|cout_pixel_x_block[2]~9_combout ;
+wire \videocontroller|boardd|pixel_color~1_combout ;
+wire \videocontroller|boardd|pixel_color~2_combout ;
+wire \videocontroller|boardd|pixel_color~3_combout ;
 wire [9:0] \videocontroller|signal_pixel_y ;
 wire [10:0] \videocontroller|signal_pixel_x ;
 wire [10:0] \videocontroller|V_Count ;
 wire [10:0] \videocontroller|H_Count ;
+wire [4:0] \videocontroller|boardd|y_position ;
+wire [4:0] \videocontroller|boardd|x_position ;
+wire [2:0] \videocontroller|boardd|pixel_color ;
+wire [4:0] \videocontroller|boardd|cout_pixel_y_block ;
+wire [4:0] \videocontroller|boardd|cout_pixel_x_block ;
 
 wire [2:0] \clk_108MHz|altpll_component|pll_CLK_bus ;
 
@@ -250,7 +316,7 @@ assign \clk_108MHz|altpll_component|_clk0  = \clk_108MHz|altpll_component|pll_CL
 assign \clk_108MHz|altpll_component|pll~CLK1  = \clk_108MHz|altpll_component|pll_CLK_bus [1];
 assign \clk_108MHz|altpll_component|pll~CLK2  = \clk_108MHz|altpll_component|pll_CLK_bus [2];
 
-// Location: LCFF_X8_Y33_N13
+// Location: LCFF_X29_Y16_N21
 cycloneii_lcell_ff \videocontroller|V_Count[6] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|V_Count[6]~23_combout ),
@@ -263,7 +329,113 @@ cycloneii_lcell_ff \videocontroller|V_Count[6] (
 	.devpor(devpor),
 	.regout(\videocontroller|V_Count [6]));
 
-// Location: LCCOMB_X8_Y33_N12
+// Location: LCFF_X29_Y16_N11
+cycloneii_lcell_ff \videocontroller|V_Count[1] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[1]~13_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [1]));
+
+// Location: LCFF_X29_Y34_N11
+cycloneii_lcell_ff \videocontroller|H_Count[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[0]~11_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [0]));
+
+// Location: LCFF_X29_Y34_N13
+cycloneii_lcell_ff \videocontroller|H_Count[1] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[1]~13_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [1]));
+
+// Location: LCFF_X32_Y17_N21
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_x_block[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_x_block[0]~5_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal3~3_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_x_block [0]));
+
+// Location: LCCOMB_X29_Y34_N10
+cycloneii_lcell_comb \videocontroller|H_Count[0]~11 (
+// Equation(s):
+// \videocontroller|H_Count[0]~11_combout  = \videocontroller|H_Count [0] $ (VCC)
+// \videocontroller|H_Count[0]~12  = CARRY(\videocontroller|H_Count [0])
+
+	.dataa(\videocontroller|H_Count [0]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|H_Count[0]~11_combout ),
+	.cout(\videocontroller|H_Count[0]~12 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[0]~11 .lut_mask = 16'h55AA;
+defparam \videocontroller|H_Count[0]~11 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y34_N12
+cycloneii_lcell_comb \videocontroller|H_Count[1]~13 (
+// Equation(s):
+// \videocontroller|H_Count[1]~13_combout  = (\videocontroller|H_Count [1] & (!\videocontroller|H_Count[0]~12 )) # (!\videocontroller|H_Count [1] & ((\videocontroller|H_Count[0]~12 ) # (GND)))
+// \videocontroller|H_Count[1]~14  = CARRY((!\videocontroller|H_Count[0]~12 ) # (!\videocontroller|H_Count [1]))
+
+	.dataa(\videocontroller|H_Count [1]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[0]~12 ),
+	.combout(\videocontroller|H_Count[1]~13_combout ),
+	.cout(\videocontroller|H_Count[1]~14 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[1]~13 .lut_mask = 16'h5A5F;
+defparam \videocontroller|H_Count[1]~13 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y16_N10
+cycloneii_lcell_comb \videocontroller|V_Count[1]~13 (
+// Equation(s):
+// \videocontroller|V_Count[1]~13_combout  = (\videocontroller|V_Count [1] & (!\videocontroller|V_Count[0]~12 )) # (!\videocontroller|V_Count [1] & ((\videocontroller|V_Count[0]~12 ) # (GND)))
+// \videocontroller|V_Count[1]~14  = CARRY((!\videocontroller|V_Count[0]~12 ) # (!\videocontroller|V_Count [1]))
+
+	.dataa(\videocontroller|V_Count [1]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[0]~12 ),
+	.combout(\videocontroller|V_Count[1]~13_combout ),
+	.cout(\videocontroller|V_Count[1]~14 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[1]~13 .lut_mask = 16'h5A5F;
+defparam \videocontroller|V_Count[1]~13 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y16_N20
 cycloneii_lcell_comb \videocontroller|V_Count[6]~23 (
 // Equation(s):
 // \videocontroller|V_Count[6]~23_combout  = (\videocontroller|V_Count [6] & (\videocontroller|V_Count[5]~22  $ (GND))) # (!\videocontroller|V_Count [6] & (!\videocontroller|V_Count[5]~22  & VCC))
@@ -281,38 +453,613 @@ defparam \videocontroller|V_Count[6]~23 .lut_mask = 16'hA50A;
 defparam \videocontroller|V_Count[6]~23 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCCOMB_X37_Y1_N26
-cycloneii_lcell_comb \videocontroller|HCounter~3 (
+// Location: LCCOMB_X32_Y17_N20
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_x_block[0]~5 (
 // Equation(s):
-// \videocontroller|HCounter~3_combout  = (\videocontroller|H_Count [2] & ((\videocontroller|H_Count [0]) # (\videocontroller|H_Count [1])))
+// \videocontroller|boardd|cout_pixel_x_block[0]~5_combout  = \videocontroller|boardd|cout_pixel_x_block [0] $ (VCC)
+// \videocontroller|boardd|cout_pixel_x_block[0]~6  = CARRY(\videocontroller|boardd|cout_pixel_x_block [0])
 
-	.dataa(vcc),
-	.datab(\videocontroller|H_Count [0]),
-	.datac(\videocontroller|H_Count [1]),
-	.datad(\videocontroller|H_Count [2]),
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [0]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
 	.cin(gnd),
-	.combout(\videocontroller|HCounter~3_combout ),
-	.cout());
+	.combout(\videocontroller|boardd|cout_pixel_x_block[0]~5_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_x_block[0]~6 ));
 // synopsys translate_off
-defparam \videocontroller|HCounter~3 .lut_mask = 16'hFC00;
-defparam \videocontroller|HCounter~3 .sum_lutc_input = "datac";
+defparam \videocontroller|boardd|cout_pixel_x_block[0]~5 .lut_mask = 16'h55AA;
+defparam \videocontroller|boardd|cout_pixel_x_block[0]~5 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X37_Y1_N28
-cycloneii_lcell_comb \videocontroller|LessThan0~0 (
+// Location: LCCOMB_X28_Y34_N2
+cycloneii_lcell_comb \videocontroller|LessThan5~4 (
 // Equation(s):
-// \videocontroller|LessThan0~0_combout  = (!\videocontroller|H_Count [4] & (!\videocontroller|H_Count [8] & (!\videocontroller|H_Count [6] & !\videocontroller|H_Count [5])))
+// \videocontroller|LessThan5~4_combout  = (\videocontroller|H_Count [6] & \videocontroller|H_Count [5])
 
-	.dataa(\videocontroller|H_Count [4]),
-	.datab(\videocontroller|H_Count [8]),
+	.dataa(vcc),
+	.datab(vcc),
 	.datac(\videocontroller|H_Count [6]),
 	.datad(\videocontroller|H_Count [5]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan5~4_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan5~4 .lut_mask = 16'hF000;
+defparam \videocontroller|LessThan5~4 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y16_N2
+cycloneii_lcell_comb \videocontroller|LessThan6~0 (
+// Equation(s):
+// \videocontroller|LessThan6~0_combout  = (!\videocontroller|V_Count [3] & (!\videocontroller|V_Count [2] & ((!\videocontroller|V_Count [0]) # (!\videocontroller|V_Count [1]))))
+
+	.dataa(\videocontroller|V_Count [1]),
+	.datab(\videocontroller|V_Count [0]),
+	.datac(\videocontroller|V_Count [3]),
+	.datad(\videocontroller|V_Count [2]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan6~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan6~0 .lut_mask = 16'h0007;
+defparam \videocontroller|LessThan6~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y34_N4
+cycloneii_lcell_comb \videocontroller|LessThan1~0 (
+// Equation(s):
+// \videocontroller|LessThan1~0_combout  = (!\videocontroller|H_Count [3] & (((!\videocontroller|H_Count [0] & !\videocontroller|H_Count [1])) # (!\videocontroller|H_Count [2])))
+
+	.dataa(\videocontroller|H_Count [0]),
+	.datab(\videocontroller|H_Count [2]),
+	.datac(\videocontroller|H_Count [3]),
+	.datad(\videocontroller|H_Count [1]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan1~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan1~0 .lut_mask = 16'h0307;
+defparam \videocontroller|LessThan1~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X28_Y34_N12
+cycloneii_lcell_comb \videocontroller|LessThan1~1 (
+// Equation(s):
+// \videocontroller|LessThan1~1_combout  = (!\videocontroller|H_Count [7] & (((\videocontroller|LessThan1~0_combout  & !\videocontroller|H_Count [4])) # (!\videocontroller|LessThan5~4_combout )))
+
+	.dataa(\videocontroller|LessThan1~0_combout ),
+	.datab(\videocontroller|LessThan5~4_combout ),
+	.datac(\videocontroller|H_Count [7]),
+	.datad(\videocontroller|H_Count [4]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan1~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan1~1 .lut_mask = 16'h030B;
+defparam \videocontroller|LessThan1~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X30_Y16_N29
+cycloneii_lcell_ff \videocontroller|boardd|out_board_x (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(gnd),
+	.sdata(\videocontroller|boardd|positon~1_combout ),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(gnd),
+	.sload(vcc),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|out_board_x~regout ));
+
+// Location: LCFF_X30_Y16_N31
+cycloneii_lcell_ff \videocontroller|boardd|out_board_y (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|positon~4_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|out_board_y~regout ));
+
+// Location: LCFF_X30_Y16_N25
+cycloneii_lcell_ff \videocontroller|boardd|y_position[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|y_position~0_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(!\reset~combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|y_position [0]));
+
+// Location: LCFF_X30_Y16_N19
+cycloneii_lcell_ff \videocontroller|boardd|x_position[4] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|positon~1_combout ),
+	.sdata(gnd),
+	.aclr(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(!\reset~combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|x_position [4]));
+
+// Location: LCCOMB_X30_Y16_N28
+cycloneii_lcell_comb \videocontroller|boardd|pixel_color~0 (
+// Equation(s):
+// \videocontroller|boardd|pixel_color~0_combout  = (\videocontroller|boardd|out_board_y~regout  & (\videocontroller|boardd|out_board_x~regout  & ((!\videocontroller|boardd|x_position [4]) # (!\videocontroller|boardd|y_position [0]))))
+
+	.dataa(\videocontroller|boardd|y_position [0]),
+	.datab(\videocontroller|boardd|out_board_y~regout ),
+	.datac(\videocontroller|boardd|out_board_x~regout ),
+	.datad(\videocontroller|boardd|x_position [4]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|pixel_color~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|pixel_color~0 .lut_mask = 16'h40C0;
+defparam \videocontroller|boardd|pixel_color~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N12
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~0 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~0_combout  = (\videocontroller|boardd|cout_pixel_x_block [0] & ((\videocontroller|boardd|cout_pixel_x_block [2]) # (\videocontroller|boardd|cout_pixel_x_block [1]))) # (!\videocontroller|boardd|cout_pixel_x_block [0] & 
+// (\videocontroller|boardd|cout_pixel_x_block [2] & \videocontroller|boardd|cout_pixel_x_block [1]))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [0]),
+	.datab(vcc),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~0 .lut_mask = 16'hFAA0;
+defparam \videocontroller|boardd|Mux6~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N30
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~1 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~1_combout  = (\videocontroller|boardd|cout_pixel_x_block [4] & (((!\videocontroller|boardd|Mux6~0_combout  & !\videocontroller|boardd|cout_pixel_x_block [2])) # (!\videocontroller|boardd|cout_pixel_x_block [3]))) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [4] & ((\videocontroller|boardd|cout_pixel_x_block [3]) # ((\videocontroller|boardd|Mux6~0_combout  & \videocontroller|boardd|cout_pixel_x_block [2]))))
+
+	.dataa(\videocontroller|boardd|Mux6~0_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~1 .lut_mask = 16'h37EC;
+defparam \videocontroller|boardd|Mux6~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N10
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~2 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~2_combout  = \videocontroller|boardd|cout_pixel_x_block [3] $ (\videocontroller|boardd|cout_pixel_x_block [4])
+
+	.dataa(vcc),
+	.datab(vcc),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~2 .lut_mask = 16'h0FF0;
+defparam \videocontroller|boardd|Mux6~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N28
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~3 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~3_combout  = (\videocontroller|boardd|cout_pixel_y_block [0] & (!\videocontroller|boardd|cout_pixel_x_block [3])) # (!\videocontroller|boardd|cout_pixel_y_block [0] & ((\videocontroller|boardd|cout_pixel_x_block [4])))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~3 .lut_mask = 16'h3F0C;
+defparam \videocontroller|boardd|Mux6~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N16
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~4 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~4_combout  = (\videocontroller|boardd|cout_pixel_x_block [0] & ((\videocontroller|boardd|cout_pixel_x_block [2]) # ((!\videocontroller|boardd|cout_pixel_x_block [3] & \videocontroller|boardd|cout_pixel_x_block [1])))) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [0] & (\videocontroller|boardd|cout_pixel_x_block [2] & ((\videocontroller|boardd|cout_pixel_x_block [1]) # (!\videocontroller|boardd|cout_pixel_x_block [3]))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [0]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~4_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~4 .lut_mask = 16'hF2B0;
+defparam \videocontroller|boardd|Mux6~4 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N22
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~5 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~5_combout  = (\videocontroller|boardd|cout_pixel_y_block [1] & ((\videocontroller|boardd|Mux6~4_combout  & (!\videocontroller|boardd|cout_pixel_x_block [3] & !\videocontroller|boardd|Mux6~3_combout )) # 
+// (!\videocontroller|boardd|Mux6~4_combout  & (\videocontroller|boardd|cout_pixel_x_block [3] & \videocontroller|boardd|Mux6~3_combout ))))
+
+	.dataa(\videocontroller|boardd|Mux6~4_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|Mux6~3_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~5_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~5 .lut_mask = 16'h4008;
+defparam \videocontroller|boardd|Mux6~5 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N10
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~6 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~6_combout  = (\videocontroller|boardd|cout_pixel_x_block [4] & ((\videocontroller|boardd|cout_pixel_x_block [2] & ((\videocontroller|boardd|cout_pixel_x_block [0]) # (!\videocontroller|boardd|cout_pixel_x_block [3]))) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [2] & ((\videocontroller|boardd|cout_pixel_x_block [3]))))) # (!\videocontroller|boardd|cout_pixel_x_block [4] & ((\videocontroller|boardd|cout_pixel_x_block [2] & ((\videocontroller|boardd|cout_pixel_x_block 
+// [3]))) # (!\videocontroller|boardd|cout_pixel_x_block [2] & (\videocontroller|boardd|cout_pixel_x_block [0] & !\videocontroller|boardd|cout_pixel_x_block [3]))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [0]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~6_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~6 .lut_mask = 16'hBCC2;
+defparam \videocontroller|boardd|Mux6~6 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N8
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~7 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~7_combout  = (!\videocontroller|boardd|cout_pixel_y_block [1] & ((\videocontroller|boardd|cout_pixel_x_block [2] & (!\videocontroller|boardd|Mux6~6_combout  & !\videocontroller|boardd|cout_pixel_x_block [1])) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [2] & (\videocontroller|boardd|Mux6~6_combout  & \videocontroller|boardd|cout_pixel_x_block [1]))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datac(\videocontroller|boardd|Mux6~6_combout ),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~7_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~7 .lut_mask = 16'h1004;
+defparam \videocontroller|boardd|Mux6~7 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N2
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~8 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~8_combout  = (\videocontroller|boardd|cout_pixel_y_block [0] & ((\videocontroller|boardd|cout_pixel_x_block [4] & ((!\videocontroller|boardd|cout_pixel_x_block [2]) # (!\videocontroller|boardd|cout_pixel_x_block [3]))) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [4] & ((\videocontroller|boardd|cout_pixel_x_block [3]) # (\videocontroller|boardd|cout_pixel_x_block [2])))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~8_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~8 .lut_mask = 16'h2AA8;
+defparam \videocontroller|boardd|Mux6~8 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N12
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~9 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~9_combout  = (\videocontroller|boardd|Mux6~7_combout ) # ((\videocontroller|boardd|Mux6~5_combout ) # ((\videocontroller|boardd|cout_pixel_y_block [1] & \videocontroller|boardd|Mux6~8_combout )))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datab(\videocontroller|boardd|Mux6~8_combout ),
+	.datac(\videocontroller|boardd|Mux6~7_combout ),
+	.datad(\videocontroller|boardd|Mux6~5_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~9_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~9 .lut_mask = 16'hFFF8;
+defparam \videocontroller|boardd|Mux6~9 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N30
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~10 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~10_combout  = (\videocontroller|boardd|cout_pixel_y_block [1] & (!\videocontroller|boardd|cout_pixel_x_block [3])) # (!\videocontroller|boardd|cout_pixel_y_block [1] & ((\videocontroller|boardd|cout_pixel_x_block [4])))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~10_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~10 .lut_mask = 16'h3F0C;
+defparam \videocontroller|boardd|Mux6~10 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N0
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~11 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~11_combout  = (\videocontroller|boardd|cout_pixel_y_block [0] & ((\videocontroller|boardd|Mux6~4_combout  & (!\videocontroller|boardd|cout_pixel_x_block [3] & !\videocontroller|boardd|Mux6~10_combout )) # 
+// (!\videocontroller|boardd|Mux6~4_combout  & (\videocontroller|boardd|cout_pixel_x_block [3] & \videocontroller|boardd|Mux6~10_combout ))))
+
+	.dataa(\videocontroller|boardd|Mux6~4_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|Mux6~10_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~11_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~11 .lut_mask = 16'h4008;
+defparam \videocontroller|boardd|Mux6~11 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N18
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~12 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~12_combout  = (\videocontroller|boardd|cout_pixel_y_block [1] & ((\videocontroller|boardd|cout_pixel_x_block [2] & (!\videocontroller|boardd|Mux6~6_combout  & !\videocontroller|boardd|cout_pixel_x_block [1])) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [2] & (\videocontroller|boardd|Mux6~6_combout  & \videocontroller|boardd|cout_pixel_x_block [1]))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datac(\videocontroller|boardd|Mux6~6_combout ),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~12_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~12 .lut_mask = 16'h2008;
+defparam \videocontroller|boardd|Mux6~12 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N4
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~13 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~13_combout  = (!\videocontroller|boardd|cout_pixel_y_block [0] & ((\videocontroller|boardd|cout_pixel_x_block [2] & ((!\videocontroller|boardd|cout_pixel_x_block [3]) # (!\videocontroller|boardd|cout_pixel_x_block [4]))) # 
+// (!\videocontroller|boardd|cout_pixel_x_block [2] & ((\videocontroller|boardd|cout_pixel_x_block [4]) # (\videocontroller|boardd|cout_pixel_x_block [3])))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datad(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~13_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~13 .lut_mask = 16'h007E;
+defparam \videocontroller|boardd|Mux6~13 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N14
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~14 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~14_combout  = (\videocontroller|boardd|Mux6~12_combout ) # ((\videocontroller|boardd|Mux6~11_combout ) # ((!\videocontroller|boardd|cout_pixel_y_block [1] & \videocontroller|boardd|Mux6~13_combout )))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datab(\videocontroller|boardd|Mux6~12_combout ),
+	.datac(\videocontroller|boardd|Mux6~13_combout ),
+	.datad(\videocontroller|boardd|Mux6~11_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~14_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~14 .lut_mask = 16'hFFDC;
+defparam \videocontroller|boardd|Mux6~14 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N16
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~15 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~15_combout  = (\videocontroller|boardd|cout_pixel_y_block [4] & ((\videocontroller|boardd|Mux6~9_combout ))) # (!\videocontroller|boardd|cout_pixel_y_block [4] & (\videocontroller|boardd|Mux6~14_combout ))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|Mux6~14_combout ),
+	.datac(\videocontroller|boardd|cout_pixel_y_block [4]),
+	.datad(\videocontroller|boardd|Mux6~9_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~15_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~15 .lut_mask = 16'hFC0C;
+defparam \videocontroller|boardd|Mux6~15 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y34_N6
+cycloneii_lcell_comb \videocontroller|LessThan0~0 (
+// Equation(s):
+// \videocontroller|LessThan0~0_combout  = ((!\videocontroller|H_Count [5] & (!\videocontroller|H_Count [6] & !\videocontroller|H_Count [4]))) # (!\videocontroller|H_Count [7])
+
+	.dataa(\videocontroller|H_Count [5]),
+	.datab(\videocontroller|H_Count [6]),
+	.datac(\videocontroller|H_Count [7]),
+	.datad(\videocontroller|H_Count [4]),
 	.cin(gnd),
 	.combout(\videocontroller|LessThan0~0_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|LessThan0~0 .lut_mask = 16'h0001;
+defparam \videocontroller|LessThan0~0 .lut_mask = 16'h0F1F;
 defparam \videocontroller|LessThan0~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y34_N24
+cycloneii_lcell_comb \videocontroller|boardd|Equal3~0 (
+// Equation(s):
+// \videocontroller|boardd|Equal3~0_combout  = (!\videocontroller|signal_pixel_x [3] & (!\videocontroller|signal_pixel_x [0] & (!\videocontroller|signal_pixel_x [2] & !\videocontroller|signal_pixel_x [1])))
+
+	.dataa(\videocontroller|signal_pixel_x [3]),
+	.datab(\videocontroller|signal_pixel_x [0]),
+	.datac(\videocontroller|signal_pixel_x [2]),
+	.datad(\videocontroller|signal_pixel_x [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal3~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal3~0 .lut_mask = 16'h0001;
+defparam \videocontroller|boardd|Equal3~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N12
+cycloneii_lcell_comb \videocontroller|boardd|Equal5~0 (
+// Equation(s):
+// \videocontroller|boardd|Equal5~0_combout  = (!\videocontroller|signal_pixel_x [9] & (!\videocontroller|signal_pixel_x [8] & !\videocontroller|signal_pixel_x [7]))
+
+	.dataa(\videocontroller|signal_pixel_x [9]),
+	.datab(\videocontroller|signal_pixel_x [8]),
+	.datac(\videocontroller|signal_pixel_x [7]),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal5~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal5~0 .lut_mask = 16'h0101;
+defparam \videocontroller|boardd|Equal5~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N22
+cycloneii_lcell_comb \videocontroller|boardd|positon~0 (
+// Equation(s):
+// \videocontroller|boardd|positon~0_combout  = (\videocontroller|signal_pixel_x [10] & (((!\videocontroller|boardd|Equal3~1_combout  & \videocontroller|signal_pixel_x [6])) # (!\videocontroller|boardd|Equal5~0_combout )))
+
+	.dataa(\videocontroller|boardd|Equal3~1_combout ),
+	.datab(\videocontroller|signal_pixel_x [6]),
+	.datac(\videocontroller|signal_pixel_x [10]),
+	.datad(\videocontroller|boardd|Equal5~0_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|positon~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|positon~0 .lut_mask = 16'h40F0;
+defparam \videocontroller|boardd|positon~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N18
+cycloneii_lcell_comb \videocontroller|boardd|positon~1 (
+// Equation(s):
+// \videocontroller|boardd|positon~1_combout  = (!\videocontroller|boardd|positon~0_combout  & (((\videocontroller|signal_pixel_x [7] & \videocontroller|signal_pixel_x [6])) # (!\videocontroller|boardd|Equal3~2_combout )))
+
+	.dataa(\videocontroller|signal_pixel_x [7]),
+	.datab(\videocontroller|signal_pixel_x [6]),
+	.datac(\videocontroller|boardd|Equal3~2_combout ),
+	.datad(\videocontroller|boardd|positon~0_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|positon~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|positon~1 .lut_mask = 16'h008F;
+defparam \videocontroller|boardd|positon~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y4_N26
+cycloneii_lcell_comb \videocontroller|boardd|positon~2 (
+// Equation(s):
+// \videocontroller|boardd|positon~2_combout  = (\videocontroller|signal_pixel_y [7] & (\videocontroller|signal_pixel_y [4] & (\videocontroller|signal_pixel_y [5] & \videocontroller|signal_pixel_y [6])))
+
+	.dataa(\videocontroller|signal_pixel_y [7]),
+	.datab(\videocontroller|signal_pixel_y [4]),
+	.datac(\videocontroller|signal_pixel_y [5]),
+	.datad(\videocontroller|signal_pixel_y [6]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|positon~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|positon~2 .lut_mask = 16'h8000;
+defparam \videocontroller|boardd|positon~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y4_N2
+cycloneii_lcell_comb \videocontroller|boardd|positon~3 (
+// Equation(s):
+// \videocontroller|boardd|positon~3_combout  = (\videocontroller|signal_pixel_y [9] & (\videocontroller|boardd|positon~2_combout  & (!\videocontroller|boardd|Equal4~0_combout  & \videocontroller|signal_pixel_y [8])))
+
+	.dataa(\videocontroller|signal_pixel_y [9]),
+	.datab(\videocontroller|boardd|positon~2_combout ),
+	.datac(\videocontroller|boardd|Equal4~0_combout ),
+	.datad(\videocontroller|signal_pixel_y [8]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|positon~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|positon~3 .lut_mask = 16'h0800;
+defparam \videocontroller|boardd|positon~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N30
+cycloneii_lcell_comb \videocontroller|boardd|positon~4 (
+// Equation(s):
+// \videocontroller|boardd|positon~4_combout  = (!\videocontroller|boardd|positon~3_combout  & (((\videocontroller|signal_pixel_y [4]) # (\videocontroller|signal_pixel_y [9])) # (!\videocontroller|boardd|Equal4~1_combout )))
+
+	.dataa(\videocontroller|boardd|positon~3_combout ),
+	.datab(\videocontroller|boardd|Equal4~1_combout ),
+	.datac(\videocontroller|signal_pixel_y [4]),
+	.datad(\videocontroller|signal_pixel_y [9]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|positon~4_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|positon~4 .lut_mask = 16'h5551;
+defparam \videocontroller|boardd|positon~4 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N24
+cycloneii_lcell_comb \videocontroller|boardd|y_position~0 (
+// Equation(s):
+// \videocontroller|boardd|y_position~0_combout  = (\videocontroller|boardd|positon~4_combout  & !\videocontroller|boardd|y_position [0])
+
+	.dataa(\videocontroller|boardd|positon~4_combout ),
+	.datab(vcc),
+	.datac(\videocontroller|boardd|y_position [0]),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|y_position~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|y_position~0 .lut_mask = 16'h0A0A;
+defparam \videocontroller|boardd|y_position~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N20
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~18 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~18_combout  = (\videocontroller|boardd|Mux6~2_combout  & ((\videocontroller|boardd|Mux6~1_combout ) # (\videocontroller|boardd|cout_pixel_y_block [0] $ (\videocontroller|boardd|cout_pixel_y_block [1])))) # 
+// (!\videocontroller|boardd|Mux6~2_combout  & (\videocontroller|boardd|Mux6~1_combout  & (\videocontroller|boardd|cout_pixel_y_block [0] $ (!\videocontroller|boardd|cout_pixel_y_block [1]))))
+
+	.dataa(\videocontroller|boardd|Mux6~2_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.datac(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datad(\videocontroller|boardd|Mux6~1_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~18_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~18 .lut_mask = 16'hEB28;
+defparam \videocontroller|boardd|Mux6~18 .sum_lutc_input = "datac";
 // synopsys translate_on
 
 // Location: PIN_N25,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: Default
@@ -487,280 +1234,25 @@ defparam \clk_108MHz|altpll_component|_clk0~clkctrl .clock_type = "global clock"
 defparam \clk_108MHz|altpll_component|_clk0~clkctrl .ena_register_mode = "none";
 // synopsys translate_on
 
-// Location: LCCOMB_X37_Y1_N2
-cycloneii_lcell_comb \videocontroller|H_Count[0]~11 (
-// Equation(s):
-// \videocontroller|H_Count[0]~11_combout  = \videocontroller|H_Count [0] $ (VCC)
-// \videocontroller|H_Count[0]~12  = CARRY(\videocontroller|H_Count [0])
-
-	.dataa(vcc),
-	.datab(\videocontroller|H_Count [0]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(gnd),
-	.combout(\videocontroller|H_Count[0]~11_combout ),
-	.cout(\videocontroller|H_Count[0]~12 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[0]~11 .lut_mask = 16'h33CC;
-defparam \videocontroller|H_Count[0]~11 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X37_Y1_N16
-cycloneii_lcell_comb \videocontroller|H_Count[7]~25 (
-// Equation(s):
-// \videocontroller|H_Count[7]~25_combout  = (\videocontroller|H_Count [7] & (!\videocontroller|H_Count[6]~24 )) # (!\videocontroller|H_Count [7] & ((\videocontroller|H_Count[6]~24 ) # (GND)))
-// \videocontroller|H_Count[7]~26  = CARRY((!\videocontroller|H_Count[6]~24 ) # (!\videocontroller|H_Count [7]))
-
-	.dataa(\videocontroller|H_Count [7]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[6]~24 ),
-	.combout(\videocontroller|H_Count[7]~25_combout ),
-	.cout(\videocontroller|H_Count[7]~26 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[7]~25 .lut_mask = 16'h5A5F;
-defparam \videocontroller|H_Count[7]~25 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCCOMB_X37_Y1_N18
-cycloneii_lcell_comb \videocontroller|H_Count[8]~27 (
-// Equation(s):
-// \videocontroller|H_Count[8]~27_combout  = (\videocontroller|H_Count [8] & (\videocontroller|H_Count[7]~26  $ (GND))) # (!\videocontroller|H_Count [8] & (!\videocontroller|H_Count[7]~26  & VCC))
-// \videocontroller|H_Count[8]~28  = CARRY((\videocontroller|H_Count [8] & !\videocontroller|H_Count[7]~26 ))
-
-	.dataa(vcc),
-	.datab(\videocontroller|H_Count [8]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[7]~26 ),
-	.combout(\videocontroller|H_Count[8]~27_combout ),
-	.cout(\videocontroller|H_Count[8]~28 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[8]~27 .lut_mask = 16'hC30C;
-defparam \videocontroller|H_Count[8]~27 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N19
-cycloneii_lcell_ff \videocontroller|H_Count[8] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[8]~27_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [8]));
-
-// Location: LCCOMB_X37_Y1_N0
-cycloneii_lcell_comb \videocontroller|LessThan5~4 (
-// Equation(s):
-// \videocontroller|LessThan5~4_combout  = (!\videocontroller|H_Count [7] & !\videocontroller|H_Count [8])
-
-	.dataa(vcc),
-	.datab(vcc),
-	.datac(\videocontroller|H_Count [7]),
-	.datad(\videocontroller|H_Count [8]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan5~4_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan5~4 .lut_mask = 16'h000F;
-defparam \videocontroller|LessThan5~4 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X37_Y1_N20
-cycloneii_lcell_comb \videocontroller|H_Count[9]~29 (
-// Equation(s):
-// \videocontroller|H_Count[9]~29_combout  = (\videocontroller|H_Count [9] & (!\videocontroller|H_Count[8]~28 )) # (!\videocontroller|H_Count [9] & ((\videocontroller|H_Count[8]~28 ) # (GND)))
-// \videocontroller|H_Count[9]~30  = CARRY((!\videocontroller|H_Count[8]~28 ) # (!\videocontroller|H_Count [9]))
-
-	.dataa(\videocontroller|H_Count [9]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[8]~28 ),
-	.combout(\videocontroller|H_Count[9]~29_combout ),
-	.cout(\videocontroller|H_Count[9]~30 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[9]~29 .lut_mask = 16'h5A5F;
-defparam \videocontroller|H_Count[9]~29 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N21
-cycloneii_lcell_ff \videocontroller|H_Count[9] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[9]~29_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [9]));
-
-// Location: LCCOMB_X37_Y1_N22
-cycloneii_lcell_comb \videocontroller|H_Count[10]~31 (
-// Equation(s):
-// \videocontroller|H_Count[10]~31_combout  = \videocontroller|H_Count[9]~30  $ (!\videocontroller|H_Count [10])
-
-	.dataa(vcc),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(\videocontroller|H_Count [10]),
-	.cin(\videocontroller|H_Count[9]~30 ),
-	.combout(\videocontroller|H_Count[10]~31_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|H_Count[10]~31 .lut_mask = 16'hF00F;
-defparam \videocontroller|H_Count[10]~31 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N23
-cycloneii_lcell_ff \videocontroller|H_Count[10] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[10]~31_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [10]));
-
-// Location: LCCOMB_X37_Y1_N30
-cycloneii_lcell_comb \videocontroller|LessThan0~1 (
-// Equation(s):
-// \videocontroller|LessThan0~1_combout  = (!\videocontroller|LessThan0~0_combout  & (!\videocontroller|LessThan5~4_combout  & (\videocontroller|H_Count [9] & \videocontroller|H_Count [10])))
-
-	.dataa(\videocontroller|LessThan0~0_combout ),
-	.datab(\videocontroller|LessThan5~4_combout ),
-	.datac(\videocontroller|H_Count [9]),
-	.datad(\videocontroller|H_Count [10]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan0~1_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan0~1 .lut_mask = 16'h1000;
-defparam \videocontroller|LessThan0~1 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N3
-cycloneii_lcell_ff \videocontroller|H_Count[0] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[0]~11_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [0]));
-
-// Location: LCCOMB_X37_Y1_N4
-cycloneii_lcell_comb \videocontroller|H_Count[1]~13 (
-// Equation(s):
-// \videocontroller|H_Count[1]~13_combout  = (\videocontroller|H_Count [1] & (!\videocontroller|H_Count[0]~12 )) # (!\videocontroller|H_Count [1] & ((\videocontroller|H_Count[0]~12 ) # (GND)))
-// \videocontroller|H_Count[1]~14  = CARRY((!\videocontroller|H_Count[0]~12 ) # (!\videocontroller|H_Count [1]))
-
-	.dataa(vcc),
-	.datab(\videocontroller|H_Count [1]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[0]~12 ),
-	.combout(\videocontroller|H_Count[1]~13_combout ),
-	.cout(\videocontroller|H_Count[1]~14 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[1]~13 .lut_mask = 16'h3C3F;
-defparam \videocontroller|H_Count[1]~13 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N5
-cycloneii_lcell_ff \videocontroller|H_Count[1] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[1]~13_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [1]));
-
-// Location: LCCOMB_X37_Y1_N6
+// Location: LCCOMB_X29_Y34_N14
 cycloneii_lcell_comb \videocontroller|H_Count[2]~15 (
 // Equation(s):
 // \videocontroller|H_Count[2]~15_combout  = (\videocontroller|H_Count [2] & (\videocontroller|H_Count[1]~14  $ (GND))) # (!\videocontroller|H_Count [2] & (!\videocontroller|H_Count[1]~14  & VCC))
 // \videocontroller|H_Count[2]~16  = CARRY((\videocontroller|H_Count [2] & !\videocontroller|H_Count[1]~14 ))
 
-	.dataa(\videocontroller|H_Count [2]),
-	.datab(vcc),
+	.dataa(vcc),
+	.datab(\videocontroller|H_Count [2]),
 	.datac(vcc),
 	.datad(vcc),
 	.cin(\videocontroller|H_Count[1]~14 ),
 	.combout(\videocontroller|H_Count[2]~15_combout ),
 	.cout(\videocontroller|H_Count[2]~16 ));
 // synopsys translate_off
-defparam \videocontroller|H_Count[2]~15 .lut_mask = 16'hA50A;
+defparam \videocontroller|H_Count[2]~15 .lut_mask = 16'hC30C;
 defparam \videocontroller|H_Count[2]~15 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCCOMB_X37_Y1_N8
-cycloneii_lcell_comb \videocontroller|H_Count[3]~17 (
-// Equation(s):
-// \videocontroller|H_Count[3]~17_combout  = (\videocontroller|H_Count [3] & (!\videocontroller|H_Count[2]~16 )) # (!\videocontroller|H_Count [3] & ((\videocontroller|H_Count[2]~16 ) # (GND)))
-// \videocontroller|H_Count[3]~18  = CARRY((!\videocontroller|H_Count[2]~16 ) # (!\videocontroller|H_Count [3]))
-
-	.dataa(vcc),
-	.datab(\videocontroller|H_Count [3]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[2]~16 ),
-	.combout(\videocontroller|H_Count[3]~17_combout ),
-	.cout(\videocontroller|H_Count[3]~18 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[3]~17 .lut_mask = 16'h3C3F;
-defparam \videocontroller|H_Count[3]~17 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N9
-cycloneii_lcell_ff \videocontroller|H_Count[3] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[3]~17_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [3]));
-
-// Location: LCCOMB_X37_Y1_N10
-cycloneii_lcell_comb \videocontroller|H_Count[4]~19 (
-// Equation(s):
-// \videocontroller|H_Count[4]~19_combout  = (\videocontroller|H_Count [4] & (\videocontroller|H_Count[3]~18  $ (GND))) # (!\videocontroller|H_Count [4] & (!\videocontroller|H_Count[3]~18  & VCC))
-// \videocontroller|H_Count[4]~20  = CARRY((\videocontroller|H_Count [4] & !\videocontroller|H_Count[3]~18 ))
-
-	.dataa(\videocontroller|H_Count [4]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|H_Count[3]~18 ),
-	.combout(\videocontroller|H_Count[4]~19_combout ),
-	.cout(\videocontroller|H_Count[4]~20 ));
-// synopsys translate_off
-defparam \videocontroller|H_Count[4]~19 .lut_mask = 16'hA50A;
-defparam \videocontroller|H_Count[4]~19 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCCOMB_X37_Y1_N12
+// Location: LCCOMB_X29_Y34_N20
 cycloneii_lcell_comb \videocontroller|H_Count[5]~21 (
 // Equation(s):
 // \videocontroller|H_Count[5]~21_combout  = (\videocontroller|H_Count [5] & (!\videocontroller|H_Count[4]~20 )) # (!\videocontroller|H_Count [5] & ((\videocontroller|H_Count[4]~20 ) # (GND)))
@@ -778,7 +1270,7 @@ defparam \videocontroller|H_Count[5]~21 .lut_mask = 16'h5A5F;
 defparam \videocontroller|H_Count[5]~21 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCCOMB_X37_Y1_N14
+// Location: LCCOMB_X29_Y34_N22
 cycloneii_lcell_comb \videocontroller|H_Count[6]~23 (
 // Equation(s):
 // \videocontroller|H_Count[6]~23_combout  = (\videocontroller|H_Count [6] & (\videocontroller|H_Count[5]~22  $ (GND))) # (!\videocontroller|H_Count [6] & (!\videocontroller|H_Count[5]~22  & VCC))
@@ -796,7 +1288,7 @@ defparam \videocontroller|H_Count[6]~23 .lut_mask = 16'hC30C;
 defparam \videocontroller|H_Count[6]~23 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X37_Y1_N15
+// Location: LCFF_X29_Y34_N23
 cycloneii_lcell_ff \videocontroller|H_Count[6] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|H_Count[6]~23_combout ),
@@ -809,10 +1301,46 @@ cycloneii_lcell_ff \videocontroller|H_Count[6] (
 	.devpor(devpor),
 	.regout(\videocontroller|H_Count [6]));
 
-// Location: LCFF_X37_Y1_N17
-cycloneii_lcell_ff \videocontroller|H_Count[7] (
+// Location: LCCOMB_X29_Y34_N24
+cycloneii_lcell_comb \videocontroller|H_Count[7]~25 (
+// Equation(s):
+// \videocontroller|H_Count[7]~25_combout  = (\videocontroller|H_Count [7] & (!\videocontroller|H_Count[6]~24 )) # (!\videocontroller|H_Count [7] & ((\videocontroller|H_Count[6]~24 ) # (GND)))
+// \videocontroller|H_Count[7]~26  = CARRY((!\videocontroller|H_Count[6]~24 ) # (!\videocontroller|H_Count [7]))
+
+	.dataa(\videocontroller|H_Count [7]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[6]~24 ),
+	.combout(\videocontroller|H_Count[7]~25_combout ),
+	.cout(\videocontroller|H_Count[7]~26 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[7]~25 .lut_mask = 16'h5A5F;
+defparam \videocontroller|H_Count[7]~25 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y34_N26
+cycloneii_lcell_comb \videocontroller|H_Count[8]~27 (
+// Equation(s):
+// \videocontroller|H_Count[8]~27_combout  = (\videocontroller|H_Count [8] & (\videocontroller|H_Count[7]~26  $ (GND))) # (!\videocontroller|H_Count [8] & (!\videocontroller|H_Count[7]~26  & VCC))
+// \videocontroller|H_Count[8]~28  = CARRY((\videocontroller|H_Count [8] & !\videocontroller|H_Count[7]~26 ))
+
+	.dataa(vcc),
+	.datab(\videocontroller|H_Count [8]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[7]~26 ),
+	.combout(\videocontroller|H_Count[8]~27_combout ),
+	.cout(\videocontroller|H_Count[8]~28 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[8]~27 .lut_mask = 16'hC30C;
+defparam \videocontroller|H_Count[8]~27 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y34_N27
+cycloneii_lcell_ff \videocontroller|H_Count[8] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[7]~25_combout ),
+	.datain(\videocontroller|H_Count[8]~27_combout ),
 	.sdata(gnd),
 	.aclr(\reset~clkctrl_outclk ),
 	.sclr(\videocontroller|LessThan0~1_combout ),
@@ -820,26 +1348,87 @@ cycloneii_lcell_ff \videocontroller|H_Count[7] (
 	.ena(vcc),
 	.devclrn(devclrn),
 	.devpor(devpor),
-	.regout(\videocontroller|H_Count [7]));
+	.regout(\videocontroller|H_Count [8]));
 
-// Location: LCCOMB_X38_Y1_N2
-cycloneii_lcell_comb \videocontroller|LessThan5~2 (
+// Location: LCCOMB_X29_Y34_N28
+cycloneii_lcell_comb \videocontroller|H_Count[9]~29 (
 // Equation(s):
-// \videocontroller|LessThan5~2_combout  = (!\videocontroller|H_Count [10] & (!\videocontroller|H_Count [7] & (!\videocontroller|H_Count [9] & !\videocontroller|H_Count [8])))
+// \videocontroller|H_Count[9]~29_combout  = (\videocontroller|H_Count [9] & (!\videocontroller|H_Count[8]~28 )) # (!\videocontroller|H_Count [9] & ((\videocontroller|H_Count[8]~28 ) # (GND)))
+// \videocontroller|H_Count[9]~30  = CARRY((!\videocontroller|H_Count[8]~28 ) # (!\videocontroller|H_Count [9]))
 
-	.dataa(\videocontroller|H_Count [10]),
-	.datab(\videocontroller|H_Count [7]),
-	.datac(\videocontroller|H_Count [9]),
-	.datad(\videocontroller|H_Count [8]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan5~2_combout ),
-	.cout());
+	.dataa(vcc),
+	.datab(\videocontroller|H_Count [9]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[8]~28 ),
+	.combout(\videocontroller|H_Count[9]~29_combout ),
+	.cout(\videocontroller|H_Count[9]~30 ));
 // synopsys translate_off
-defparam \videocontroller|LessThan5~2 .lut_mask = 16'h0001;
-defparam \videocontroller|LessThan5~2 .sum_lutc_input = "datac";
+defparam \videocontroller|H_Count[9]~29 .lut_mask = 16'h3C3F;
+defparam \videocontroller|H_Count[9]~29 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X37_Y1_N7
+// Location: LCFF_X29_Y34_N29
+cycloneii_lcell_ff \videocontroller|H_Count[9] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[9]~29_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [9]));
+
+// Location: LCCOMB_X29_Y34_N30
+cycloneii_lcell_comb \videocontroller|H_Count[10]~31 (
+// Equation(s):
+// \videocontroller|H_Count[10]~31_combout  = \videocontroller|H_Count[9]~30  $ (!\videocontroller|H_Count [10])
+
+	.dataa(vcc),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\videocontroller|H_Count [10]),
+	.cin(\videocontroller|H_Count[9]~30 ),
+	.combout(\videocontroller|H_Count[10]~31_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|H_Count[10]~31 .lut_mask = 16'hF00F;
+defparam \videocontroller|H_Count[10]~31 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y34_N31
+cycloneii_lcell_ff \videocontroller|H_Count[10] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[10]~31_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [10]));
+
+// Location: LCCOMB_X29_Y34_N8
+cycloneii_lcell_comb \videocontroller|LessThan0~1 (
+// Equation(s):
+// \videocontroller|LessThan0~1_combout  = (\videocontroller|H_Count [9] & (\videocontroller|H_Count [10] & ((\videocontroller|H_Count [8]) # (!\videocontroller|LessThan0~0_combout ))))
+
+	.dataa(\videocontroller|LessThan0~0_combout ),
+	.datab(\videocontroller|H_Count [9]),
+	.datac(\videocontroller|H_Count [10]),
+	.datad(\videocontroller|H_Count [8]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan0~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan0~1 .lut_mask = 16'hC040;
+defparam \videocontroller|LessThan0~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y34_N15
 cycloneii_lcell_ff \videocontroller|H_Count[2] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|H_Count[2]~15_combout ),
@@ -852,7 +1441,43 @@ cycloneii_lcell_ff \videocontroller|H_Count[2] (
 	.devpor(devpor),
 	.regout(\videocontroller|H_Count [2]));
 
-// Location: LCFF_X37_Y1_N11
+// Location: LCCOMB_X29_Y34_N16
+cycloneii_lcell_comb \videocontroller|H_Count[3]~17 (
+// Equation(s):
+// \videocontroller|H_Count[3]~17_combout  = (\videocontroller|H_Count [3] & (!\videocontroller|H_Count[2]~16 )) # (!\videocontroller|H_Count [3] & ((\videocontroller|H_Count[2]~16 ) # (GND)))
+// \videocontroller|H_Count[3]~18  = CARRY((!\videocontroller|H_Count[2]~16 ) # (!\videocontroller|H_Count [3]))
+
+	.dataa(\videocontroller|H_Count [3]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[2]~16 ),
+	.combout(\videocontroller|H_Count[3]~17_combout ),
+	.cout(\videocontroller|H_Count[3]~18 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[3]~17 .lut_mask = 16'h5A5F;
+defparam \videocontroller|H_Count[3]~17 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y34_N18
+cycloneii_lcell_comb \videocontroller|H_Count[4]~19 (
+// Equation(s):
+// \videocontroller|H_Count[4]~19_combout  = (\videocontroller|H_Count [4] & (\videocontroller|H_Count[3]~18  $ (GND))) # (!\videocontroller|H_Count [4] & (!\videocontroller|H_Count[3]~18  & VCC))
+// \videocontroller|H_Count[4]~20  = CARRY((\videocontroller|H_Count [4] & !\videocontroller|H_Count[3]~18 ))
+
+	.dataa(vcc),
+	.datab(\videocontroller|H_Count [4]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|H_Count[3]~18 ),
+	.combout(\videocontroller|H_Count[4]~19_combout ),
+	.cout(\videocontroller|H_Count[4]~20 ));
+// synopsys translate_off
+defparam \videocontroller|H_Count[4]~19 .lut_mask = 16'hC30C;
+defparam \videocontroller|H_Count[4]~19 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y34_N19
 cycloneii_lcell_ff \videocontroller|H_Count[4] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|H_Count[4]~19_combout ),
@@ -865,41 +1490,97 @@ cycloneii_lcell_ff \videocontroller|H_Count[4] (
 	.devpor(devpor),
 	.regout(\videocontroller|H_Count [4]));
 
-// Location: LCCOMB_X38_Y1_N12
+// Location: LCFF_X29_Y34_N21
+cycloneii_lcell_ff \videocontroller|H_Count[5] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[5]~21_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [5]));
+
+// Location: LCFF_X29_Y34_N25
+cycloneii_lcell_ff \videocontroller|H_Count[7] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[7]~25_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [7]));
+
+// Location: LCCOMB_X29_Y34_N0
+cycloneii_lcell_comb \videocontroller|LessThan5~2 (
+// Equation(s):
+// \videocontroller|LessThan5~2_combout  = (!\videocontroller|H_Count [9] & (!\videocontroller|H_Count [10] & (!\videocontroller|H_Count [7] & !\videocontroller|H_Count [8])))
+
+	.dataa(\videocontroller|H_Count [9]),
+	.datab(\videocontroller|H_Count [10]),
+	.datac(\videocontroller|H_Count [7]),
+	.datad(\videocontroller|H_Count [8]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan5~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan5~2 .lut_mask = 16'h0001;
+defparam \videocontroller|LessThan5~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y34_N17
+cycloneii_lcell_ff \videocontroller|H_Count[3] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|H_Count[3]~17_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan0~1_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|H_Count [3]));
+
+// Location: LCCOMB_X29_Y34_N2
 cycloneii_lcell_comb \videocontroller|LessThan5~3 (
 // Equation(s):
-// \videocontroller|LessThan5~3_combout  = (!\videocontroller|H_Count [4] & ((!\videocontroller|H_Count [2]) # (!\videocontroller|H_Count [3])))
+// \videocontroller|LessThan5~3_combout  = (!\videocontroller|H_Count [4] & ((!\videocontroller|H_Count [3]) # (!\videocontroller|H_Count [2])))
 
-	.dataa(\videocontroller|H_Count [3]),
-	.datab(vcc),
-	.datac(\videocontroller|H_Count [2]),
+	.dataa(vcc),
+	.datab(\videocontroller|H_Count [2]),
+	.datac(\videocontroller|H_Count [3]),
 	.datad(\videocontroller|H_Count [4]),
 	.cin(gnd),
 	.combout(\videocontroller|LessThan5~3_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|LessThan5~3 .lut_mask = 16'h005F;
+defparam \videocontroller|LessThan5~3 .lut_mask = 16'h003F;
 defparam \videocontroller|LessThan5~3 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X38_Y1_N16
+// Location: LCCOMB_X28_Y34_N16
 cycloneii_lcell_comb \videocontroller|LessThan5~5 (
 // Equation(s):
-// \videocontroller|LessThan5~5_combout  = ((\videocontroller|H_Count [5] & (\videocontroller|H_Count [6] & !\videocontroller|LessThan5~3_combout ))) # (!\videocontroller|LessThan5~2_combout )
+// \videocontroller|LessThan5~5_combout  = ((\videocontroller|H_Count [6] & (\videocontroller|H_Count [5] & !\videocontroller|LessThan5~3_combout ))) # (!\videocontroller|LessThan5~2_combout )
 
-	.dataa(\videocontroller|H_Count [5]),
-	.datab(\videocontroller|LessThan5~2_combout ),
-	.datac(\videocontroller|H_Count [6]),
+	.dataa(\videocontroller|H_Count [6]),
+	.datab(\videocontroller|H_Count [5]),
+	.datac(\videocontroller|LessThan5~2_combout ),
 	.datad(\videocontroller|LessThan5~3_combout ),
 	.cin(gnd),
 	.combout(\videocontroller|LessThan5~5_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|LessThan5~5 .lut_mask = 16'h33B3;
+defparam \videocontroller|LessThan5~5 .lut_mask = 16'h0F8F;
 defparam \videocontroller|LessThan5~5 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X38_Y1_N17
+// Location: LCFF_X28_Y34_N17
 cycloneii_lcell_ff \videocontroller|vga_hsync (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|LessThan5~5_combout ),
@@ -912,7 +1593,7 @@ cycloneii_lcell_ff \videocontroller|vga_hsync (
 	.devpor(devpor),
 	.regout(\videocontroller|vga_hsync~regout ));
 
-// Location: LCCOMB_X8_Y33_N0
+// Location: LCCOMB_X29_Y16_N8
 cycloneii_lcell_comb \videocontroller|V_Count[0]~11 (
 // Equation(s):
 // \videocontroller|V_Count[0]~11_combout  = \videocontroller|V_Count [0] $ (VCC)
@@ -930,182 +1611,25 @@ defparam \videocontroller|V_Count[0]~11 .lut_mask = 16'h33CC;
 defparam \videocontroller|V_Count[0]~11 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X8_Y33_N10
-cycloneii_lcell_comb \videocontroller|V_Count[5]~21 (
-// Equation(s):
-// \videocontroller|V_Count[5]~21_combout  = (\videocontroller|V_Count [5] & (!\videocontroller|V_Count[4]~20 )) # (!\videocontroller|V_Count [5] & ((\videocontroller|V_Count[4]~20 ) # (GND)))
-// \videocontroller|V_Count[5]~22  = CARRY((!\videocontroller|V_Count[4]~20 ) # (!\videocontroller|V_Count [5]))
-
-	.dataa(\videocontroller|V_Count [5]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[4]~20 ),
-	.combout(\videocontroller|V_Count[5]~21_combout ),
-	.cout(\videocontroller|V_Count[5]~22 ));
-// synopsys translate_off
-defparam \videocontroller|V_Count[5]~21 .lut_mask = 16'h5A5F;
-defparam \videocontroller|V_Count[5]~21 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X8_Y33_N11
-cycloneii_lcell_ff \videocontroller|V_Count[5] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[5]~21_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [5]));
-
-// Location: LCCOMB_X8_Y33_N6
-cycloneii_lcell_comb \videocontroller|V_Count[3]~17 (
-// Equation(s):
-// \videocontroller|V_Count[3]~17_combout  = (\videocontroller|V_Count [3] & (!\videocontroller|V_Count[2]~16 )) # (!\videocontroller|V_Count [3] & ((\videocontroller|V_Count[2]~16 ) # (GND)))
-// \videocontroller|V_Count[3]~18  = CARRY((!\videocontroller|V_Count[2]~16 ) # (!\videocontroller|V_Count [3]))
-
-	.dataa(\videocontroller|V_Count [3]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[2]~16 ),
-	.combout(\videocontroller|V_Count[3]~17_combout ),
-	.cout(\videocontroller|V_Count[3]~18 ));
-// synopsys translate_off
-defparam \videocontroller|V_Count[3]~17 .lut_mask = 16'h5A5F;
-defparam \videocontroller|V_Count[3]~17 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X8_Y33_N7
-cycloneii_lcell_ff \videocontroller|V_Count[3] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[3]~17_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [3]));
-
-// Location: LCCOMB_X7_Y33_N22
-cycloneii_lcell_comb \videocontroller|LessThan3~2 (
-// Equation(s):
-// \videocontroller|LessThan3~2_combout  = ((!\videocontroller|V_Count [4] & !\videocontroller|V_Count [3])) # (!\videocontroller|V_Count [5])
-
-	.dataa(vcc),
-	.datab(\videocontroller|V_Count [5]),
-	.datac(\videocontroller|V_Count [4]),
-	.datad(\videocontroller|V_Count [3]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan3~2_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan3~2 .lut_mask = 16'h333F;
-defparam \videocontroller|LessThan3~2 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X8_Y33_N28
-cycloneii_lcell_comb \videocontroller|LessThan3~1 (
-// Equation(s):
-// \videocontroller|LessThan3~1_combout  = (!\videocontroller|V_Count [4] & (!\videocontroller|V_Count [1] & (!\videocontroller|V_Count [2] & !\videocontroller|V_Count [0])))
-
-	.dataa(\videocontroller|V_Count [4]),
-	.datab(\videocontroller|V_Count [1]),
-	.datac(\videocontroller|V_Count [2]),
-	.datad(\videocontroller|V_Count [0]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan3~1_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan3~1 .lut_mask = 16'h0001;
-defparam \videocontroller|LessThan3~1 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X8_Y33_N30
-cycloneii_lcell_comb \videocontroller|LessThan4~0 (
-// Equation(s):
-// \videocontroller|LessThan4~0_combout  = (\videocontroller|V_Count [10] & (((!\videocontroller|LessThan3~2_combout  & !\videocontroller|LessThan3~1_combout )) # (!\videocontroller|LessThan3~0_combout )))
-
-	.dataa(\videocontroller|LessThan3~0_combout ),
-	.datab(\videocontroller|LessThan3~2_combout ),
-	.datac(\videocontroller|V_Count [10]),
-	.datad(\videocontroller|LessThan3~1_combout ),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan4~0_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan4~0 .lut_mask = 16'h5070;
-defparam \videocontroller|LessThan4~0 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCFF_X8_Y33_N1
-cycloneii_lcell_ff \videocontroller|V_Count[0] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[0]~11_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [0]));
-
-// Location: LCCOMB_X8_Y33_N2
-cycloneii_lcell_comb \videocontroller|V_Count[1]~13 (
-// Equation(s):
-// \videocontroller|V_Count[1]~13_combout  = (\videocontroller|V_Count [1] & (!\videocontroller|V_Count[0]~12 )) # (!\videocontroller|V_Count [1] & ((\videocontroller|V_Count[0]~12 ) # (GND)))
-// \videocontroller|V_Count[1]~14  = CARRY((!\videocontroller|V_Count[0]~12 ) # (!\videocontroller|V_Count [1]))
-
-	.dataa(vcc),
-	.datab(\videocontroller|V_Count [1]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[0]~12 ),
-	.combout(\videocontroller|V_Count[1]~13_combout ),
-	.cout(\videocontroller|V_Count[1]~14 ));
-// synopsys translate_off
-defparam \videocontroller|V_Count[1]~13 .lut_mask = 16'h3C3F;
-defparam \videocontroller|V_Count[1]~13 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCFF_X8_Y33_N3
-cycloneii_lcell_ff \videocontroller|V_Count[1] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[1]~13_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [1]));
-
-// Location: LCCOMB_X8_Y33_N4
+// Location: LCCOMB_X29_Y16_N12
 cycloneii_lcell_comb \videocontroller|V_Count[2]~15 (
 // Equation(s):
 // \videocontroller|V_Count[2]~15_combout  = (\videocontroller|V_Count [2] & (\videocontroller|V_Count[1]~14  $ (GND))) # (!\videocontroller|V_Count [2] & (!\videocontroller|V_Count[1]~14  & VCC))
 // \videocontroller|V_Count[2]~16  = CARRY((\videocontroller|V_Count [2] & !\videocontroller|V_Count[1]~14 ))
 
-	.dataa(vcc),
-	.datab(\videocontroller|V_Count [2]),
+	.dataa(\videocontroller|V_Count [2]),
+	.datab(vcc),
 	.datac(vcc),
 	.datad(vcc),
 	.cin(\videocontroller|V_Count[1]~14 ),
 	.combout(\videocontroller|V_Count[2]~15_combout ),
 	.cout(\videocontroller|V_Count[2]~16 ));
 // synopsys translate_off
-defparam \videocontroller|V_Count[2]~15 .lut_mask = 16'hC30C;
+defparam \videocontroller|V_Count[2]~15 .lut_mask = 16'hA50A;
 defparam \videocontroller|V_Count[2]~15 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N5
+// Location: LCFF_X29_Y16_N13
 cycloneii_lcell_ff \videocontroller|V_Count[2] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|V_Count[2]~15_combout ),
@@ -1118,87 +1642,41 @@ cycloneii_lcell_ff \videocontroller|V_Count[2] (
 	.devpor(devpor),
 	.regout(\videocontroller|V_Count [2]));
 
-// Location: LCCOMB_X8_Y33_N8
-cycloneii_lcell_comb \videocontroller|V_Count[4]~19 (
+// Location: LCCOMB_X29_Y16_N4
+cycloneii_lcell_comb \videocontroller|LessThan3~1 (
 // Equation(s):
-// \videocontroller|V_Count[4]~19_combout  = (\videocontroller|V_Count [4] & (\videocontroller|V_Count[3]~18  $ (GND))) # (!\videocontroller|V_Count [4] & (!\videocontroller|V_Count[3]~18  & VCC))
-// \videocontroller|V_Count[4]~20  = CARRY((\videocontroller|V_Count [4] & !\videocontroller|V_Count[3]~18 ))
+// \videocontroller|LessThan3~1_combout  = ((!\videocontroller|V_Count [1] & (!\videocontroller|V_Count [0] & !\videocontroller|V_Count [2]))) # (!\videocontroller|V_Count [3])
 
-	.dataa(vcc),
-	.datab(\videocontroller|V_Count [4]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[3]~18 ),
-	.combout(\videocontroller|V_Count[4]~19_combout ),
-	.cout(\videocontroller|V_Count[4]~20 ));
+	.dataa(\videocontroller|V_Count [1]),
+	.datab(\videocontroller|V_Count [0]),
+	.datac(\videocontroller|V_Count [3]),
+	.datad(\videocontroller|V_Count [2]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan3~1_combout ),
+	.cout());
 // synopsys translate_off
-defparam \videocontroller|V_Count[4]~19 .lut_mask = 16'hC30C;
-defparam \videocontroller|V_Count[4]~19 .sum_lutc_input = "cin";
+defparam \videocontroller|LessThan3~1 .lut_mask = 16'h0F1F;
+defparam \videocontroller|LessThan3~1 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N9
-cycloneii_lcell_ff \videocontroller|V_Count[4] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[4]~19_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [4]));
-
-// Location: LCCOMB_X8_Y33_N14
-cycloneii_lcell_comb \videocontroller|V_Count[7]~25 (
+// Location: LCCOMB_X29_Y16_N30
+cycloneii_lcell_comb \videocontroller|LessThan3~2 (
 // Equation(s):
-// \videocontroller|V_Count[7]~25_combout  = (\videocontroller|V_Count [7] & (!\videocontroller|V_Count[6]~24 )) # (!\videocontroller|V_Count [7] & ((\videocontroller|V_Count[6]~24 ) # (GND)))
-// \videocontroller|V_Count[7]~26  = CARRY((!\videocontroller|V_Count[6]~24 ) # (!\videocontroller|V_Count [7]))
+// \videocontroller|LessThan3~2_combout  = (\videocontroller|LessThan3~0_combout  & (((!\videocontroller|V_Count [4] & \videocontroller|LessThan3~1_combout )) # (!\videocontroller|V_Count [5])))
 
-	.dataa(vcc),
-	.datab(\videocontroller|V_Count [7]),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[6]~24 ),
-	.combout(\videocontroller|V_Count[7]~25_combout ),
-	.cout(\videocontroller|V_Count[7]~26 ));
+	.dataa(\videocontroller|V_Count [4]),
+	.datab(\videocontroller|LessThan3~0_combout ),
+	.datac(\videocontroller|LessThan3~1_combout ),
+	.datad(\videocontroller|V_Count [5]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan3~2_combout ),
+	.cout());
 // synopsys translate_off
-defparam \videocontroller|V_Count[7]~25 .lut_mask = 16'h3C3F;
-defparam \videocontroller|V_Count[7]~25 .sum_lutc_input = "cin";
+defparam \videocontroller|LessThan3~2 .lut_mask = 16'h40CC;
+defparam \videocontroller|LessThan3~2 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N15
-cycloneii_lcell_ff \videocontroller|V_Count[7] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[7]~25_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [7]));
-
-// Location: LCCOMB_X8_Y33_N16
-cycloneii_lcell_comb \videocontroller|V_Count[8]~27 (
-// Equation(s):
-// \videocontroller|V_Count[8]~27_combout  = (\videocontroller|V_Count [8] & (\videocontroller|V_Count[7]~26  $ (GND))) # (!\videocontroller|V_Count [8] & (!\videocontroller|V_Count[7]~26  & VCC))
-// \videocontroller|V_Count[8]~28  = CARRY((\videocontroller|V_Count [8] & !\videocontroller|V_Count[7]~26 ))
-
-	.dataa(\videocontroller|V_Count [8]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(vcc),
-	.cin(\videocontroller|V_Count[7]~26 ),
-	.combout(\videocontroller|V_Count[8]~27_combout ),
-	.cout(\videocontroller|V_Count[8]~28 ));
-// synopsys translate_off
-defparam \videocontroller|V_Count[8]~27 .lut_mask = 16'hA50A;
-defparam \videocontroller|V_Count[8]~27 .sum_lutc_input = "cin";
-// synopsys translate_on
-
-// Location: LCCOMB_X8_Y33_N18
+// Location: LCCOMB_X29_Y16_N26
 cycloneii_lcell_comb \videocontroller|V_Count[9]~29 (
 // Equation(s):
 // \videocontroller|V_Count[9]~29_combout  = (\videocontroller|V_Count [9] & (!\videocontroller|V_Count[8]~28 )) # (!\videocontroller|V_Count [9] & ((\videocontroller|V_Count[8]~28 ) # (GND)))
@@ -1216,37 +1694,24 @@ defparam \videocontroller|V_Count[9]~29 .lut_mask = 16'h3C3F;
 defparam \videocontroller|V_Count[9]~29 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N19
-cycloneii_lcell_ff \videocontroller|V_Count[9] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|V_Count[9]~29_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan4~0_combout ),
-	.sload(gnd),
-	.ena(\videocontroller|LessThan0~1_combout ),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|V_Count [9]));
-
-// Location: LCCOMB_X8_Y33_N20
+// Location: LCCOMB_X29_Y16_N28
 cycloneii_lcell_comb \videocontroller|V_Count[10]~31 (
 // Equation(s):
-// \videocontroller|V_Count[10]~31_combout  = \videocontroller|V_Count [10] $ (!\videocontroller|V_Count[9]~30 )
+// \videocontroller|V_Count[10]~31_combout  = \videocontroller|V_Count[9]~30  $ (!\videocontroller|V_Count [10])
 
-	.dataa(\videocontroller|V_Count [10]),
+	.dataa(vcc),
 	.datab(vcc),
 	.datac(vcc),
-	.datad(vcc),
+	.datad(\videocontroller|V_Count [10]),
 	.cin(\videocontroller|V_Count[9]~30 ),
 	.combout(\videocontroller|V_Count[10]~31_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|V_Count[10]~31 .lut_mask = 16'hA5A5;
+defparam \videocontroller|V_Count[10]~31 .lut_mask = 16'hF00F;
 defparam \videocontroller|V_Count[10]~31 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N21
+// Location: LCFF_X29_Y16_N29
 cycloneii_lcell_ff \videocontroller|V_Count[10] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|V_Count[10]~31_combout ),
@@ -1259,24 +1724,179 @@ cycloneii_lcell_ff \videocontroller|V_Count[10] (
 	.devpor(devpor),
 	.regout(\videocontroller|V_Count [10]));
 
-// Location: LCCOMB_X7_Y33_N24
-cycloneii_lcell_comb \videocontroller|LessThan6~1 (
+// Location: LCCOMB_X29_Y16_N6
+cycloneii_lcell_comb \videocontroller|LessThan4~0 (
 // Equation(s):
-// \videocontroller|LessThan6~1_combout  = (!\videocontroller|V_Count [10] & (!\videocontroller|V_Count [5] & !\videocontroller|V_Count [3]))
+// \videocontroller|LessThan4~0_combout  = (!\videocontroller|LessThan3~2_combout  & \videocontroller|V_Count [10])
 
 	.dataa(vcc),
-	.datab(\videocontroller|V_Count [10]),
-	.datac(\videocontroller|V_Count [5]),
-	.datad(\videocontroller|V_Count [3]),
+	.datab(\videocontroller|LessThan3~2_combout ),
+	.datac(vcc),
+	.datad(\videocontroller|V_Count [10]),
 	.cin(gnd),
-	.combout(\videocontroller|LessThan6~1_combout ),
+	.combout(\videocontroller|LessThan4~0_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|LessThan6~1 .lut_mask = 16'h0003;
-defparam \videocontroller|LessThan6~1 .sum_lutc_input = "datac";
+defparam \videocontroller|LessThan4~0 .lut_mask = 16'h3300;
+defparam \videocontroller|LessThan4~0 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N17
+// Location: LCFF_X29_Y16_N9
+cycloneii_lcell_ff \videocontroller|V_Count[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[0]~11_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [0]));
+
+// Location: LCCOMB_X29_Y16_N14
+cycloneii_lcell_comb \videocontroller|V_Count[3]~17 (
+// Equation(s):
+// \videocontroller|V_Count[3]~17_combout  = (\videocontroller|V_Count [3] & (!\videocontroller|V_Count[2]~16 )) # (!\videocontroller|V_Count [3] & ((\videocontroller|V_Count[2]~16 ) # (GND)))
+// \videocontroller|V_Count[3]~18  = CARRY((!\videocontroller|V_Count[2]~16 ) # (!\videocontroller|V_Count [3]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|V_Count [3]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[2]~16 ),
+	.combout(\videocontroller|V_Count[3]~17_combout ),
+	.cout(\videocontroller|V_Count[3]~18 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[3]~17 .lut_mask = 16'h3C3F;
+defparam \videocontroller|V_Count[3]~17 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y16_N15
+cycloneii_lcell_ff \videocontroller|V_Count[3] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[3]~17_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [3]));
+
+// Location: LCCOMB_X29_Y16_N16
+cycloneii_lcell_comb \videocontroller|V_Count[4]~19 (
+// Equation(s):
+// \videocontroller|V_Count[4]~19_combout  = (\videocontroller|V_Count [4] & (\videocontroller|V_Count[3]~18  $ (GND))) # (!\videocontroller|V_Count [4] & (!\videocontroller|V_Count[3]~18  & VCC))
+// \videocontroller|V_Count[4]~20  = CARRY((\videocontroller|V_Count [4] & !\videocontroller|V_Count[3]~18 ))
+
+	.dataa(\videocontroller|V_Count [4]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[3]~18 ),
+	.combout(\videocontroller|V_Count[4]~19_combout ),
+	.cout(\videocontroller|V_Count[4]~20 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[4]~19 .lut_mask = 16'hA50A;
+defparam \videocontroller|V_Count[4]~19 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X29_Y16_N18
+cycloneii_lcell_comb \videocontroller|V_Count[5]~21 (
+// Equation(s):
+// \videocontroller|V_Count[5]~21_combout  = (\videocontroller|V_Count [5] & (!\videocontroller|V_Count[4]~20 )) # (!\videocontroller|V_Count [5] & ((\videocontroller|V_Count[4]~20 ) # (GND)))
+// \videocontroller|V_Count[5]~22  = CARRY((!\videocontroller|V_Count[4]~20 ) # (!\videocontroller|V_Count [5]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|V_Count [5]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[4]~20 ),
+	.combout(\videocontroller|V_Count[5]~21_combout ),
+	.cout(\videocontroller|V_Count[5]~22 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[5]~21 .lut_mask = 16'h3C3F;
+defparam \videocontroller|V_Count[5]~21 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y16_N19
+cycloneii_lcell_ff \videocontroller|V_Count[5] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[5]~21_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [5]));
+
+// Location: LCCOMB_X29_Y16_N22
+cycloneii_lcell_comb \videocontroller|V_Count[7]~25 (
+// Equation(s):
+// \videocontroller|V_Count[7]~25_combout  = (\videocontroller|V_Count [7] & (!\videocontroller|V_Count[6]~24 )) # (!\videocontroller|V_Count [7] & ((\videocontroller|V_Count[6]~24 ) # (GND)))
+// \videocontroller|V_Count[7]~26  = CARRY((!\videocontroller|V_Count[6]~24 ) # (!\videocontroller|V_Count [7]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|V_Count [7]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[6]~24 ),
+	.combout(\videocontroller|V_Count[7]~25_combout ),
+	.cout(\videocontroller|V_Count[7]~26 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[7]~25 .lut_mask = 16'h3C3F;
+defparam \videocontroller|V_Count[7]~25 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y16_N23
+cycloneii_lcell_ff \videocontroller|V_Count[7] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[7]~25_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [7]));
+
+// Location: LCCOMB_X29_Y16_N24
+cycloneii_lcell_comb \videocontroller|V_Count[8]~27 (
+// Equation(s):
+// \videocontroller|V_Count[8]~27_combout  = (\videocontroller|V_Count [8] & (\videocontroller|V_Count[7]~26  $ (GND))) # (!\videocontroller|V_Count [8] & (!\videocontroller|V_Count[7]~26  & VCC))
+// \videocontroller|V_Count[8]~28  = CARRY((\videocontroller|V_Count [8] & !\videocontroller|V_Count[7]~26 ))
+
+	.dataa(\videocontroller|V_Count [8]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|V_Count[7]~26 ),
+	.combout(\videocontroller|V_Count[8]~27_combout ),
+	.cout(\videocontroller|V_Count[8]~28 ));
+// synopsys translate_off
+defparam \videocontroller|V_Count[8]~27 .lut_mask = 16'hA50A;
+defparam \videocontroller|V_Count[8]~27 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X29_Y16_N27
+cycloneii_lcell_ff \videocontroller|V_Count[9] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[9]~29_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [9]));
+
+// Location: LCFF_X29_Y16_N25
 cycloneii_lcell_ff \videocontroller|V_Count[8] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|V_Count[8]~27_combout ),
@@ -1289,15 +1909,15 @@ cycloneii_lcell_ff \videocontroller|V_Count[8] (
 	.devpor(devpor),
 	.regout(\videocontroller|V_Count [8]));
 
-// Location: LCCOMB_X8_Y33_N24
+// Location: LCCOMB_X29_Y16_N0
 cycloneii_lcell_comb \videocontroller|LessThan3~0 (
 // Equation(s):
-// \videocontroller|LessThan3~0_combout  = (!\videocontroller|V_Count [6] & (!\videocontroller|V_Count [7] & (!\videocontroller|V_Count [8] & !\videocontroller|V_Count [9])))
+// \videocontroller|LessThan3~0_combout  = (!\videocontroller|V_Count [6] & (!\videocontroller|V_Count [9] & (!\videocontroller|V_Count [8] & !\videocontroller|V_Count [7])))
 
 	.dataa(\videocontroller|V_Count [6]),
-	.datab(\videocontroller|V_Count [7]),
+	.datab(\videocontroller|V_Count [9]),
 	.datac(\videocontroller|V_Count [8]),
-	.datad(\videocontroller|V_Count [9]),
+	.datad(\videocontroller|V_Count [7]),
 	.cin(gnd),
 	.combout(\videocontroller|LessThan3~0_combout ),
 	.cout());
@@ -1306,41 +1926,54 @@ defparam \videocontroller|LessThan3~0 .lut_mask = 16'h0001;
 defparam \videocontroller|LessThan3~0 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X8_Y33_N26
-cycloneii_lcell_comb \videocontroller|LessThan6~0 (
-// Equation(s):
-// \videocontroller|LessThan6~0_combout  = (!\videocontroller|V_Count [4] & (!\videocontroller|V_Count [2] & ((!\videocontroller|V_Count [0]) # (!\videocontroller|V_Count [1]))))
+// Location: LCFF_X29_Y16_N17
+cycloneii_lcell_ff \videocontroller|V_Count[4] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|V_Count[4]~19_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|LessThan4~0_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|LessThan0~1_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|V_Count [4]));
 
-	.dataa(\videocontroller|V_Count [4]),
-	.datab(\videocontroller|V_Count [1]),
-	.datac(\videocontroller|V_Count [2]),
-	.datad(\videocontroller|V_Count [0]),
-	.cin(gnd),
-	.combout(\videocontroller|LessThan6~0_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|LessThan6~0 .lut_mask = 16'h0105;
-defparam \videocontroller|LessThan6~0 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X8_Y33_N22
-cycloneii_lcell_comb \videocontroller|LessThan6~2 (
+// Location: LCCOMB_X30_Y16_N10
+cycloneii_lcell_comb \videocontroller|LessThan6~1 (
 // Equation(s):
-// \videocontroller|LessThan6~2_combout  = ((!\videocontroller|LessThan6~0_combout ) # (!\videocontroller|LessThan3~0_combout )) # (!\videocontroller|LessThan6~1_combout )
+// \videocontroller|LessThan6~1_combout  = (!\videocontroller|V_Count [10] & (!\videocontroller|V_Count [5] & !\videocontroller|V_Count [4]))
 
 	.dataa(vcc),
-	.datab(\videocontroller|LessThan6~1_combout ),
+	.datab(\videocontroller|V_Count [10]),
+	.datac(\videocontroller|V_Count [5]),
+	.datad(\videocontroller|V_Count [4]),
+	.cin(gnd),
+	.combout(\videocontroller|LessThan6~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|LessThan6~1 .lut_mask = 16'h0003;
+defparam \videocontroller|LessThan6~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N8
+cycloneii_lcell_comb \videocontroller|LessThan6~2 (
+// Equation(s):
+// \videocontroller|LessThan6~2_combout  = ((!\videocontroller|LessThan6~1_combout ) # (!\videocontroller|LessThan3~0_combout )) # (!\videocontroller|LessThan6~0_combout )
+
+	.dataa(\videocontroller|LessThan6~0_combout ),
+	.datab(vcc),
 	.datac(\videocontroller|LessThan3~0_combout ),
-	.datad(\videocontroller|LessThan6~0_combout ),
+	.datad(\videocontroller|LessThan6~1_combout ),
 	.cin(gnd),
 	.combout(\videocontroller|LessThan6~2_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|LessThan6~2 .lut_mask = 16'h3FFF;
+defparam \videocontroller|LessThan6~2 .lut_mask = 16'h5FFF;
 defparam \videocontroller|LessThan6~2 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X8_Y33_N23
+// Location: LCFF_X30_Y16_N9
 cycloneii_lcell_ff \videocontroller|vga_vsync (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|LessThan6~2_combout ),
@@ -1353,7 +1986,7 @@ cycloneii_lcell_ff \videocontroller|vga_vsync (
 	.devpor(devpor),
 	.regout(\videocontroller|vga_vsync~regout ));
 
-// Location: LCCOMB_X36_Y1_N0
+// Location: LCCOMB_X30_Y34_N0
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[0]~11 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[0]~11_combout  = \videocontroller|signal_pixel_x [0] $ (VCC)
@@ -1371,136 +2004,38 @@ defparam \videocontroller|signal_pixel_x[0]~11 .lut_mask = 16'h33CC;
 defparam \videocontroller|signal_pixel_x[0]~11 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X36_Y1_N30
-cycloneii_lcell_comb \videocontroller|HCounter~4 (
-// Equation(s):
-// \videocontroller|HCounter~4_combout  = (\videocontroller|H_Count [6] & ((\videocontroller|HCounter~3_combout ) # ((\videocontroller|H_Count [4]) # (\videocontroller|H_Count [3]))))
-
-	.dataa(\videocontroller|HCounter~3_combout ),
-	.datab(\videocontroller|H_Count [6]),
-	.datac(\videocontroller|H_Count [4]),
-	.datad(\videocontroller|H_Count [3]),
-	.cin(gnd),
-	.combout(\videocontroller|HCounter~4_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|HCounter~4 .lut_mask = 16'hCCC8;
-defparam \videocontroller|HCounter~4 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCFF_X37_Y1_N13
-cycloneii_lcell_ff \videocontroller|H_Count[5] (
-	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
-	.datain(\videocontroller|H_Count[5]~21_combout ),
-	.sdata(gnd),
-	.aclr(\reset~clkctrl_outclk ),
-	.sclr(\videocontroller|LessThan0~1_combout ),
-	.sload(gnd),
-	.ena(vcc),
-	.devclrn(devclrn),
-	.devpor(devpor),
-	.regout(\videocontroller|H_Count [5]));
-
-// Location: LCCOMB_X36_Y1_N24
-cycloneii_lcell_comb \videocontroller|HCounter~5 (
-// Equation(s):
-// \videocontroller|HCounter~5_combout  = ((!\videocontroller|H_Count [7] & ((!\videocontroller|H_Count [5]) # (!\videocontroller|HCounter~4_combout )))) # (!\videocontroller|H_Count [8])
-
-	.dataa(\videocontroller|H_Count [7]),
-	.datab(\videocontroller|HCounter~4_combout ),
-	.datac(\videocontroller|H_Count [5]),
-	.datad(\videocontroller|H_Count [8]),
-	.cin(gnd),
-	.combout(\videocontroller|HCounter~5_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|HCounter~5 .lut_mask = 16'h15FF;
-defparam \videocontroller|HCounter~5 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X37_Y1_N24
-cycloneii_lcell_comb \videocontroller|HCounter~1 (
-// Equation(s):
-// \videocontroller|HCounter~1_combout  = (\videocontroller|H_Count [3]) # ((\videocontroller|H_Count [2] & ((\videocontroller|H_Count [1]) # (\videocontroller|H_Count [0]))))
-
-	.dataa(\videocontroller|H_Count [2]),
-	.datab(\videocontroller|H_Count [1]),
-	.datac(\videocontroller|H_Count [3]),
-	.datad(\videocontroller|H_Count [0]),
-	.cin(gnd),
-	.combout(\videocontroller|HCounter~1_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|HCounter~1 .lut_mask = 16'hFAF8;
-defparam \videocontroller|HCounter~1 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X38_Y1_N6
+// Location: LCCOMB_X30_Y34_N30
 cycloneii_lcell_comb \videocontroller|HCounter~0 (
 // Equation(s):
-// \videocontroller|HCounter~0_combout  = (\videocontroller|H_Count [6] & \videocontroller|H_Count [5])
+// \videocontroller|HCounter~0_combout  = (\videocontroller|H_Count [9] & (\videocontroller|H_Count [10] & ((\videocontroller|H_Count [8]) # (!\videocontroller|LessThan1~1_combout )))) # (!\videocontroller|H_Count [9] & (!\videocontroller|H_Count [10] & 
+// ((\videocontroller|LessThan1~1_combout ) # (!\videocontroller|H_Count [8]))))
 
-	.dataa(\videocontroller|H_Count [6]),
-	.datab(vcc),
-	.datac(vcc),
-	.datad(\videocontroller|H_Count [5]),
+	.dataa(\videocontroller|LessThan1~1_combout ),
+	.datab(\videocontroller|H_Count [9]),
+	.datac(\videocontroller|H_Count [10]),
+	.datad(\videocontroller|H_Count [8]),
 	.cin(gnd),
 	.combout(\videocontroller|HCounter~0_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|HCounter~0 .lut_mask = 16'hAA00;
+defparam \videocontroller|HCounter~0 .lut_mask = 16'hC243;
 defparam \videocontroller|HCounter~0 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X38_Y1_N8
-cycloneii_lcell_comb \videocontroller|HCounter~2 (
-// Equation(s):
-// \videocontroller|HCounter~2_combout  = ((\videocontroller|HCounter~0_combout  & ((\videocontroller|H_Count [4]) # (\videocontroller|HCounter~1_combout )))) # (!\videocontroller|LessThan5~4_combout )
-
-	.dataa(\videocontroller|H_Count [4]),
-	.datab(\videocontroller|HCounter~1_combout ),
-	.datac(\videocontroller|LessThan5~4_combout ),
-	.datad(\videocontroller|HCounter~0_combout ),
-	.cin(gnd),
-	.combout(\videocontroller|HCounter~2_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|HCounter~2 .lut_mask = 16'hEF0F;
-defparam \videocontroller|HCounter~2 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCCOMB_X36_Y1_N26
-cycloneii_lcell_comb \videocontroller|HCounter~6 (
-// Equation(s):
-// \videocontroller|HCounter~6_combout  = (\videocontroller|H_Count [9] & (\videocontroller|H_Count [10] & ((\videocontroller|HCounter~2_combout )))) # (!\videocontroller|H_Count [9] & (!\videocontroller|H_Count [10] & (\videocontroller|HCounter~5_combout 
-// )))
-
-	.dataa(\videocontroller|H_Count [9]),
-	.datab(\videocontroller|H_Count [10]),
-	.datac(\videocontroller|HCounter~5_combout ),
-	.datad(\videocontroller|HCounter~2_combout ),
-	.cin(gnd),
-	.combout(\videocontroller|HCounter~6_combout ),
-	.cout());
-// synopsys translate_off
-defparam \videocontroller|HCounter~6 .lut_mask = 16'h9810;
-defparam \videocontroller|HCounter~6 .sum_lutc_input = "datac";
-// synopsys translate_on
-
-// Location: LCFF_X36_Y1_N1
+// Location: LCFF_X30_Y34_N1
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[0] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[0]~11_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [0]));
 
-// Location: LCCOMB_X36_Y1_N2
+// Location: LCCOMB_X30_Y34_N2
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[1]~13 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[1]~13_combout  = (\videocontroller|signal_pixel_x [1] & (!\videocontroller|signal_pixel_x[0]~12 )) # (!\videocontroller|signal_pixel_x [1] & ((\videocontroller|signal_pixel_x[0]~12 ) # (GND)))
@@ -1518,20 +2053,20 @@ defparam \videocontroller|signal_pixel_x[1]~13 .lut_mask = 16'h3C3F;
 defparam \videocontroller|signal_pixel_x[1]~13 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N3
+// Location: LCFF_X30_Y34_N3
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[1] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[1]~13_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [1]));
 
-// Location: LCCOMB_X36_Y1_N4
+// Location: LCCOMB_X30_Y34_N4
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[2]~15 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[2]~15_combout  = (\videocontroller|signal_pixel_x [2] & (\videocontroller|signal_pixel_x[1]~14  $ (GND))) # (!\videocontroller|signal_pixel_x [2] & (!\videocontroller|signal_pixel_x[1]~14  & VCC))
@@ -1549,20 +2084,20 @@ defparam \videocontroller|signal_pixel_x[2]~15 .lut_mask = 16'hC30C;
 defparam \videocontroller|signal_pixel_x[2]~15 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N5
+// Location: LCFF_X30_Y34_N5
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[2] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[2]~15_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [2]));
 
-// Location: LCCOMB_X36_Y1_N6
+// Location: LCCOMB_X30_Y34_N6
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[3]~17 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[3]~17_combout  = (\videocontroller|signal_pixel_x [3] & (!\videocontroller|signal_pixel_x[2]~16 )) # (!\videocontroller|signal_pixel_x [3] & ((\videocontroller|signal_pixel_x[2]~16 ) # (GND)))
@@ -1580,20 +2115,20 @@ defparam \videocontroller|signal_pixel_x[3]~17 .lut_mask = 16'h5A5F;
 defparam \videocontroller|signal_pixel_x[3]~17 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N7
+// Location: LCFF_X30_Y34_N7
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[3] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[3]~17_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [3]));
 
-// Location: LCCOMB_X36_Y1_N8
+// Location: LCCOMB_X30_Y34_N8
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[4]~19 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[4]~19_combout  = (\videocontroller|signal_pixel_x [4] & (\videocontroller|signal_pixel_x[3]~18  $ (GND))) # (!\videocontroller|signal_pixel_x [4] & (!\videocontroller|signal_pixel_x[3]~18  & VCC))
@@ -1611,20 +2146,20 @@ defparam \videocontroller|signal_pixel_x[4]~19 .lut_mask = 16'hC30C;
 defparam \videocontroller|signal_pixel_x[4]~19 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N9
+// Location: LCFF_X30_Y34_N9
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[4] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[4]~19_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [4]));
 
-// Location: LCCOMB_X36_Y1_N10
+// Location: LCCOMB_X30_Y34_N10
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[5]~21 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[5]~21_combout  = (\videocontroller|signal_pixel_x [5] & (!\videocontroller|signal_pixel_x[4]~20 )) # (!\videocontroller|signal_pixel_x [5] & ((\videocontroller|signal_pixel_x[4]~20 ) # (GND)))
@@ -1642,20 +2177,20 @@ defparam \videocontroller|signal_pixel_x[5]~21 .lut_mask = 16'h5A5F;
 defparam \videocontroller|signal_pixel_x[5]~21 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N11
+// Location: LCFF_X30_Y34_N11
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[5] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[5]~21_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [5]));
 
-// Location: LCCOMB_X36_Y1_N12
+// Location: LCCOMB_X30_Y34_N12
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[6]~23 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[6]~23_combout  = (\videocontroller|signal_pixel_x [6] & (\videocontroller|signal_pixel_x[5]~22  $ (GND))) # (!\videocontroller|signal_pixel_x [6] & (!\videocontroller|signal_pixel_x[5]~22  & VCC))
@@ -1673,20 +2208,20 @@ defparam \videocontroller|signal_pixel_x[6]~23 .lut_mask = 16'hA50A;
 defparam \videocontroller|signal_pixel_x[6]~23 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N13
+// Location: LCFF_X30_Y34_N13
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[6] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[6]~23_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [6]));
 
-// Location: LCCOMB_X36_Y1_N14
+// Location: LCCOMB_X30_Y34_N14
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[7]~25 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[7]~25_combout  = (\videocontroller|signal_pixel_x [7] & (!\videocontroller|signal_pixel_x[6]~24 )) # (!\videocontroller|signal_pixel_x [7] & ((\videocontroller|signal_pixel_x[6]~24 ) # (GND)))
@@ -1704,20 +2239,20 @@ defparam \videocontroller|signal_pixel_x[7]~25 .lut_mask = 16'h3C3F;
 defparam \videocontroller|signal_pixel_x[7]~25 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N15
+// Location: LCFF_X30_Y34_N15
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[7] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[7]~25_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [7]));
 
-// Location: LCCOMB_X36_Y1_N16
+// Location: LCCOMB_X30_Y34_N16
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[8]~27 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[8]~27_combout  = (\videocontroller|signal_pixel_x [8] & (\videocontroller|signal_pixel_x[7]~26  $ (GND))) # (!\videocontroller|signal_pixel_x [8] & (!\videocontroller|signal_pixel_x[7]~26  & VCC))
@@ -1735,20 +2270,20 @@ defparam \videocontroller|signal_pixel_x[8]~27 .lut_mask = 16'hA50A;
 defparam \videocontroller|signal_pixel_x[8]~27 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N17
+// Location: LCFF_X30_Y34_N17
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[8] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[8]~27_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [8]));
 
-// Location: LCCOMB_X36_Y1_N18
+// Location: LCCOMB_X30_Y34_N18
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[9]~29 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[9]~29_combout  = (\videocontroller|signal_pixel_x [9] & (!\videocontroller|signal_pixel_x[8]~28 )) # (!\videocontroller|signal_pixel_x [9] & ((\videocontroller|signal_pixel_x[8]~28 ) # (GND)))
@@ -1766,20 +2301,20 @@ defparam \videocontroller|signal_pixel_x[9]~29 .lut_mask = 16'h3C3F;
 defparam \videocontroller|signal_pixel_x[9]~29 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N19
+// Location: LCFF_X30_Y34_N19
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[9] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[9]~29_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [9]));
 
-// Location: LCCOMB_X36_Y1_N20
+// Location: LCCOMB_X30_Y34_N20
 cycloneii_lcell_comb \videocontroller|signal_pixel_x[10]~31 (
 // Equation(s):
 // \videocontroller|signal_pixel_x[10]~31_combout  = \videocontroller|signal_pixel_x [10] $ (!\videocontroller|signal_pixel_x[9]~30 )
@@ -1796,68 +2331,68 @@ defparam \videocontroller|signal_pixel_x[10]~31 .lut_mask = 16'hA5A5;
 defparam \videocontroller|signal_pixel_x[10]~31 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X36_Y1_N21
+// Location: LCFF_X30_Y34_N21
 cycloneii_lcell_ff \videocontroller|signal_pixel_x[10] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_x[10]~31_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~6_combout ),
+	.sclr(\videocontroller|HCounter~0_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_x [10]));
 
-// Location: LCCOMB_X7_Y33_N2
+// Location: LCCOMB_X30_Y4_N6
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[0]~10 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[0]~10_combout  = \videocontroller|signal_pixel_y [0] $ (VCC)
 // \videocontroller|signal_pixel_y[0]~11  = CARRY(\videocontroller|signal_pixel_y [0])
 
-	.dataa(vcc),
-	.datab(\videocontroller|signal_pixel_y [0]),
+	.dataa(\videocontroller|signal_pixel_y [0]),
+	.datab(vcc),
 	.datac(vcc),
 	.datad(vcc),
 	.cin(gnd),
 	.combout(\videocontroller|signal_pixel_y[0]~10_combout ),
 	.cout(\videocontroller|signal_pixel_y[0]~11 ));
 // synopsys translate_off
-defparam \videocontroller|signal_pixel_y[0]~10 .lut_mask = 16'h33CC;
+defparam \videocontroller|signal_pixel_y[0]~10 .lut_mask = 16'h55AA;
 defparam \videocontroller|signal_pixel_y[0]~10 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCCOMB_X7_Y33_N0
-cycloneii_lcell_comb \videocontroller|HCounter~7 (
+// Location: LCCOMB_X30_Y4_N0
+cycloneii_lcell_comb \videocontroller|HCounter~1 (
 // Equation(s):
-// \videocontroller|HCounter~7_combout  = \videocontroller|V_Count [10] $ (((\videocontroller|LessThan3~0_combout  & ((\videocontroller|LessThan3~1_combout ) # (\videocontroller|LessThan3~2_combout )))))
+// \videocontroller|HCounter~1_combout  = \videocontroller|LessThan3~2_combout  $ (\videocontroller|V_Count [10])
 
-	.dataa(\videocontroller|LessThan3~1_combout ),
-	.datab(\videocontroller|LessThan3~0_combout ),
+	.dataa(vcc),
+	.datab(vcc),
 	.datac(\videocontroller|LessThan3~2_combout ),
 	.datad(\videocontroller|V_Count [10]),
 	.cin(gnd),
-	.combout(\videocontroller|HCounter~7_combout ),
+	.combout(\videocontroller|HCounter~1_combout ),
 	.cout());
 // synopsys translate_off
-defparam \videocontroller|HCounter~7 .lut_mask = 16'h37C8;
-defparam \videocontroller|HCounter~7 .sum_lutc_input = "datac";
+defparam \videocontroller|HCounter~1 .lut_mask = 16'h0FF0;
+defparam \videocontroller|HCounter~1 .sum_lutc_input = "datac";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N3
+// Location: LCFF_X30_Y4_N7
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[0] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[0]~10_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [0]));
 
-// Location: LCCOMB_X7_Y33_N4
+// Location: LCCOMB_X30_Y4_N8
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[1]~12 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[1]~12_combout  = (\videocontroller|signal_pixel_y [1] & (!\videocontroller|signal_pixel_y[0]~11 )) # (!\videocontroller|signal_pixel_y [1] & ((\videocontroller|signal_pixel_y[0]~11 ) # (GND)))
@@ -1875,20 +2410,20 @@ defparam \videocontroller|signal_pixel_y[1]~12 .lut_mask = 16'h3C3F;
 defparam \videocontroller|signal_pixel_y[1]~12 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N5
+// Location: LCFF_X30_Y4_N9
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[1] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[1]~12_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [1]));
 
-// Location: LCCOMB_X7_Y33_N6
+// Location: LCCOMB_X30_Y4_N10
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[2]~14 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[2]~14_combout  = (\videocontroller|signal_pixel_y [2] & (\videocontroller|signal_pixel_y[1]~13  $ (GND))) # (!\videocontroller|signal_pixel_y [2] & (!\videocontroller|signal_pixel_y[1]~13  & VCC))
@@ -1906,82 +2441,82 @@ defparam \videocontroller|signal_pixel_y[2]~14 .lut_mask = 16'hA50A;
 defparam \videocontroller|signal_pixel_y[2]~14 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N7
+// Location: LCFF_X30_Y4_N11
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[2] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[2]~14_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [2]));
 
-// Location: LCCOMB_X7_Y33_N8
+// Location: LCCOMB_X30_Y4_N12
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[3]~16 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[3]~16_combout  = (\videocontroller|signal_pixel_y [3] & (!\videocontroller|signal_pixel_y[2]~15 )) # (!\videocontroller|signal_pixel_y [3] & ((\videocontroller|signal_pixel_y[2]~15 ) # (GND)))
 // \videocontroller|signal_pixel_y[3]~17  = CARRY((!\videocontroller|signal_pixel_y[2]~15 ) # (!\videocontroller|signal_pixel_y [3]))
 
-	.dataa(vcc),
-	.datab(\videocontroller|signal_pixel_y [3]),
+	.dataa(\videocontroller|signal_pixel_y [3]),
+	.datab(vcc),
 	.datac(vcc),
 	.datad(vcc),
 	.cin(\videocontroller|signal_pixel_y[2]~15 ),
 	.combout(\videocontroller|signal_pixel_y[3]~16_combout ),
 	.cout(\videocontroller|signal_pixel_y[3]~17 ));
 // synopsys translate_off
-defparam \videocontroller|signal_pixel_y[3]~16 .lut_mask = 16'h3C3F;
+defparam \videocontroller|signal_pixel_y[3]~16 .lut_mask = 16'h5A5F;
 defparam \videocontroller|signal_pixel_y[3]~16 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N9
+// Location: LCFF_X30_Y4_N13
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[3] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[3]~16_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [3]));
 
-// Location: LCCOMB_X7_Y33_N10
+// Location: LCCOMB_X30_Y4_N14
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[4]~18 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[4]~18_combout  = (\videocontroller|signal_pixel_y [4] & (\videocontroller|signal_pixel_y[3]~17  $ (GND))) # (!\videocontroller|signal_pixel_y [4] & (!\videocontroller|signal_pixel_y[3]~17  & VCC))
 // \videocontroller|signal_pixel_y[4]~19  = CARRY((\videocontroller|signal_pixel_y [4] & !\videocontroller|signal_pixel_y[3]~17 ))
 
-	.dataa(\videocontroller|signal_pixel_y [4]),
-	.datab(vcc),
+	.dataa(vcc),
+	.datab(\videocontroller|signal_pixel_y [4]),
 	.datac(vcc),
 	.datad(vcc),
 	.cin(\videocontroller|signal_pixel_y[3]~17 ),
 	.combout(\videocontroller|signal_pixel_y[4]~18_combout ),
 	.cout(\videocontroller|signal_pixel_y[4]~19 ));
 // synopsys translate_off
-defparam \videocontroller|signal_pixel_y[4]~18 .lut_mask = 16'hA50A;
+defparam \videocontroller|signal_pixel_y[4]~18 .lut_mask = 16'hC30C;
 defparam \videocontroller|signal_pixel_y[4]~18 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N11
+// Location: LCFF_X30_Y4_N15
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[4] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[4]~18_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [4]));
 
-// Location: LCCOMB_X7_Y33_N12
+// Location: LCCOMB_X30_Y4_N16
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[5]~20 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[5]~20_combout  = (\videocontroller|signal_pixel_y [5] & (!\videocontroller|signal_pixel_y[4]~19 )) # (!\videocontroller|signal_pixel_y [5] & ((\videocontroller|signal_pixel_y[4]~19 ) # (GND)))
@@ -1999,20 +2534,20 @@ defparam \videocontroller|signal_pixel_y[5]~20 .lut_mask = 16'h5A5F;
 defparam \videocontroller|signal_pixel_y[5]~20 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N13
+// Location: LCFF_X30_Y4_N17
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[5] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[5]~20_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [5]));
 
-// Location: LCCOMB_X7_Y33_N14
+// Location: LCCOMB_X30_Y4_N18
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[6]~22 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[6]~22_combout  = (\videocontroller|signal_pixel_y [6] & (\videocontroller|signal_pixel_y[5]~21  $ (GND))) # (!\videocontroller|signal_pixel_y [6] & (!\videocontroller|signal_pixel_y[5]~21  & VCC))
@@ -2030,20 +2565,20 @@ defparam \videocontroller|signal_pixel_y[6]~22 .lut_mask = 16'hC30C;
 defparam \videocontroller|signal_pixel_y[6]~22 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N15
+// Location: LCFF_X30_Y4_N19
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[6] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[6]~22_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [6]));
 
-// Location: LCCOMB_X7_Y33_N16
+// Location: LCCOMB_X30_Y4_N20
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[7]~24 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[7]~24_combout  = (\videocontroller|signal_pixel_y [7] & (!\videocontroller|signal_pixel_y[6]~23 )) # (!\videocontroller|signal_pixel_y [7] & ((\videocontroller|signal_pixel_y[6]~23 ) # (GND)))
@@ -2061,20 +2596,20 @@ defparam \videocontroller|signal_pixel_y[7]~24 .lut_mask = 16'h5A5F;
 defparam \videocontroller|signal_pixel_y[7]~24 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N17
+// Location: LCFF_X30_Y4_N21
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[7] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[7]~24_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [7]));
 
-// Location: LCCOMB_X7_Y33_N18
+// Location: LCCOMB_X30_Y4_N22
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[8]~26 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[8]~26_combout  = (\videocontroller|signal_pixel_y [8] & (\videocontroller|signal_pixel_y[7]~25  $ (GND))) # (!\videocontroller|signal_pixel_y [8] & (!\videocontroller|signal_pixel_y[7]~25  & VCC))
@@ -2092,20 +2627,20 @@ defparam \videocontroller|signal_pixel_y[8]~26 .lut_mask = 16'hC30C;
 defparam \videocontroller|signal_pixel_y[8]~26 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N19
+// Location: LCFF_X30_Y4_N23
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[8] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[8]~26_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [8]));
 
-// Location: LCCOMB_X7_Y33_N20
+// Location: LCCOMB_X30_Y4_N24
 cycloneii_lcell_comb \videocontroller|signal_pixel_y[9]~28 (
 // Equation(s):
 // \videocontroller|signal_pixel_y[9]~28_combout  = \videocontroller|signal_pixel_y [9] $ (\videocontroller|signal_pixel_y[8]~27 )
@@ -2122,18 +2657,555 @@ defparam \videocontroller|signal_pixel_y[9]~28 .lut_mask = 16'h5A5A;
 defparam \videocontroller|signal_pixel_y[9]~28 .sum_lutc_input = "cin";
 // synopsys translate_on
 
-// Location: LCFF_X7_Y33_N21
+// Location: LCFF_X30_Y4_N25
 cycloneii_lcell_ff \videocontroller|signal_pixel_y[9] (
 	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
 	.datain(\videocontroller|signal_pixel_y[9]~28_combout ),
 	.sdata(gnd),
 	.aclr(gnd),
-	.sclr(\videocontroller|HCounter~7_combout ),
+	.sclr(\videocontroller|HCounter~1_combout ),
 	.sload(gnd),
 	.ena(!\reset~combout ),
 	.devclrn(devclrn),
 	.devpor(devpor),
 	.regout(\videocontroller|signal_pixel_y [9]));
+
+// Location: LCCOMB_X30_Y17_N22
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[0]~5 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[0]~5_combout  = \videocontroller|boardd|cout_pixel_y_block [0] $ (VCC)
+// \videocontroller|boardd|cout_pixel_y_block[0]~6  = CARRY(\videocontroller|boardd|cout_pixel_y_block [0])
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [0]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[0]~5_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_y_block[0]~6 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[0]~5 .lut_mask = 16'h33CC;
+defparam \videocontroller|boardd|cout_pixel_y_block[0]~5 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y4_N4
+cycloneii_lcell_comb \videocontroller|boardd|Equal4~0 (
+// Equation(s):
+// \videocontroller|boardd|Equal4~0_combout  = (!\videocontroller|signal_pixel_y [2] & (!\videocontroller|signal_pixel_y [3] & (!\videocontroller|signal_pixel_y [1] & !\videocontroller|signal_pixel_y [0])))
+
+	.dataa(\videocontroller|signal_pixel_y [2]),
+	.datab(\videocontroller|signal_pixel_y [3]),
+	.datac(\videocontroller|signal_pixel_y [1]),
+	.datad(\videocontroller|signal_pixel_y [0]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal4~0_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal4~0 .lut_mask = 16'h0001;
+defparam \videocontroller|boardd|Equal4~0 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y4_N28
+cycloneii_lcell_comb \videocontroller|boardd|Equal4~1 (
+// Equation(s):
+// \videocontroller|boardd|Equal4~1_combout  = (!\videocontroller|signal_pixel_y [7] & (!\videocontroller|signal_pixel_y [6] & (!\videocontroller|signal_pixel_y [5] & !\videocontroller|signal_pixel_y [8])))
+
+	.dataa(\videocontroller|signal_pixel_y [7]),
+	.datab(\videocontroller|signal_pixel_y [6]),
+	.datac(\videocontroller|signal_pixel_y [5]),
+	.datad(\videocontroller|signal_pixel_y [8]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal4~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal4~1 .lut_mask = 16'h0001;
+defparam \videocontroller|boardd|Equal4~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y4_N30
+cycloneii_lcell_comb \videocontroller|boardd|Equal4~2 (
+// Equation(s):
+// \videocontroller|boardd|Equal4~2_combout  = (!\videocontroller|signal_pixel_y [9] & (\videocontroller|boardd|Equal4~0_combout  & (\videocontroller|signal_pixel_y [4] & \videocontroller|boardd|Equal4~1_combout )))
+
+	.dataa(\videocontroller|signal_pixel_y [9]),
+	.datab(\videocontroller|boardd|Equal4~0_combout ),
+	.datac(\videocontroller|signal_pixel_y [4]),
+	.datad(\videocontroller|boardd|Equal4~1_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal4~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal4~2 .lut_mask = 16'h4000;
+defparam \videocontroller|boardd|Equal4~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N20
+cycloneii_lcell_comb \videocontroller|boardd|Equal5~1 (
+// Equation(s):
+// \videocontroller|boardd|Equal5~1_combout  = (\videocontroller|signal_pixel_x [7]) # (((\videocontroller|signal_pixel_x [9]) # (\videocontroller|signal_pixel_x [8])) # (!\videocontroller|signal_pixel_x [6]))
+
+	.dataa(\videocontroller|signal_pixel_x [7]),
+	.datab(\videocontroller|signal_pixel_x [6]),
+	.datac(\videocontroller|signal_pixel_x [9]),
+	.datad(\videocontroller|signal_pixel_x [8]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal5~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal5~1 .lut_mask = 16'hFFFB;
+defparam \videocontroller|boardd|Equal5~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y34_N26
+cycloneii_lcell_comb \videocontroller|boardd|Equal3~1 (
+// Equation(s):
+// \videocontroller|boardd|Equal3~1_combout  = (\videocontroller|boardd|Equal3~0_combout  & (!\videocontroller|signal_pixel_x [4] & !\videocontroller|signal_pixel_x [5]))
+
+	.dataa(\videocontroller|boardd|Equal3~0_combout ),
+	.datab(vcc),
+	.datac(\videocontroller|signal_pixel_x [4]),
+	.datad(\videocontroller|signal_pixel_x [5]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal3~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal3~1 .lut_mask = 16'h000A;
+defparam \videocontroller|boardd|Equal3~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y17_N2
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[4]~11 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[4]~11_combout  = (\videocontroller|boardd|Equal4~2_combout ) # ((!\videocontroller|boardd|Equal5~1_combout  & (\videocontroller|signal_pixel_x [10] & \videocontroller|boardd|Equal3~1_combout )))
+
+	.dataa(\videocontroller|boardd|Equal4~2_combout ),
+	.datab(\videocontroller|boardd|Equal5~1_combout ),
+	.datac(\videocontroller|signal_pixel_x [10]),
+	.datad(\videocontroller|boardd|Equal3~1_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[4]~11 .lut_mask = 16'hBAAA;
+defparam \videocontroller|boardd|cout_pixel_y_block[4]~11 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X30_Y17_N23
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_y_block[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_y_block[0]~5_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal4~2_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_y_block [0]));
+
+// Location: LCCOMB_X30_Y17_N24
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[1]~7 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[1]~7_combout  = (\videocontroller|boardd|cout_pixel_y_block [1] & (!\videocontroller|boardd|cout_pixel_y_block[0]~6 )) # (!\videocontroller|boardd|cout_pixel_y_block [1] & 
+// ((\videocontroller|boardd|cout_pixel_y_block[0]~6 ) # (GND)))
+// \videocontroller|boardd|cout_pixel_y_block[1]~8  = CARRY((!\videocontroller|boardd|cout_pixel_y_block[0]~6 ) # (!\videocontroller|boardd|cout_pixel_y_block [1]))
+
+	.dataa(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_y_block[0]~6 ),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[1]~7_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_y_block[1]~8 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[1]~7 .lut_mask = 16'h5A5F;
+defparam \videocontroller|boardd|cout_pixel_y_block[1]~7 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y17_N26
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[2]~9 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[2]~9_combout  = (\videocontroller|boardd|cout_pixel_y_block [2] & (\videocontroller|boardd|cout_pixel_y_block[1]~8  $ (GND))) # (!\videocontroller|boardd|cout_pixel_y_block [2] & 
+// (!\videocontroller|boardd|cout_pixel_y_block[1]~8  & VCC))
+// \videocontroller|boardd|cout_pixel_y_block[2]~10  = CARRY((\videocontroller|boardd|cout_pixel_y_block [2] & !\videocontroller|boardd|cout_pixel_y_block[1]~8 ))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [2]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_y_block[1]~8 ),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[2]~9_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_y_block[2]~10 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[2]~9 .lut_mask = 16'hC30C;
+defparam \videocontroller|boardd|cout_pixel_y_block[2]~9 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X30_Y17_N27
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_y_block[2] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_y_block[2]~9_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal4~2_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_y_block [2]));
+
+// Location: LCCOMB_X30_Y17_N28
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[3]~12 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[3]~12_combout  = (\videocontroller|boardd|cout_pixel_y_block [3] & (!\videocontroller|boardd|cout_pixel_y_block[2]~10 )) # (!\videocontroller|boardd|cout_pixel_y_block [3] & 
+// ((\videocontroller|boardd|cout_pixel_y_block[2]~10 ) # (GND)))
+// \videocontroller|boardd|cout_pixel_y_block[3]~13  = CARRY((!\videocontroller|boardd|cout_pixel_y_block[2]~10 ) # (!\videocontroller|boardd|cout_pixel_y_block [3]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [3]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_y_block[2]~10 ),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[3]~12_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_y_block[3]~13 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[3]~12 .lut_mask = 16'h3C3F;
+defparam \videocontroller|boardd|cout_pixel_y_block[3]~12 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X30_Y17_N29
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_y_block[3] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_y_block[3]~12_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal4~2_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_y_block [3]));
+
+// Location: LCCOMB_X30_Y17_N30
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_y_block[4]~14 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_y_block[4]~14_combout  = \videocontroller|boardd|cout_pixel_y_block[3]~13  $ (!\videocontroller|boardd|cout_pixel_y_block [4])
+
+	.dataa(vcc),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\videocontroller|boardd|cout_pixel_y_block [4]),
+	.cin(\videocontroller|boardd|cout_pixel_y_block[3]~13 ),
+	.combout(\videocontroller|boardd|cout_pixel_y_block[4]~14_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_y_block[4]~14 .lut_mask = 16'hF00F;
+defparam \videocontroller|boardd|cout_pixel_y_block[4]~14 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X30_Y17_N31
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_y_block[4] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_y_block[4]~14_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal4~2_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_y_block [4]));
+
+// Location: LCFF_X30_Y17_N25
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_y_block[1] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_y_block[1]~7_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal4~2_combout ),
+	.sload(gnd),
+	.ena(\videocontroller|boardd|cout_pixel_y_block[4]~11_combout ),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_y_block [1]));
+
+// Location: LCCOMB_X31_Y17_N6
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~19 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~19_combout  = (\videocontroller|boardd|Mux6~18_combout  & (\videocontroller|boardd|cout_pixel_y_block [1] $ (\videocontroller|boardd|cout_pixel_y_block [4])))
+
+	.dataa(\videocontroller|boardd|Mux6~18_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [1]),
+	.datac(\videocontroller|boardd|cout_pixel_y_block [4]),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~19_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~19 .lut_mask = 16'h2828;
+defparam \videocontroller|boardd|Mux6~19 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N26
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~16 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~16_combout  = (\videocontroller|boardd|Mux6~15_combout  & ((\videocontroller|boardd|Mux6~19_combout ) # (\videocontroller|boardd|cout_pixel_y_block [2] $ (\videocontroller|boardd|cout_pixel_y_block [4])))) # 
+// (!\videocontroller|boardd|Mux6~15_combout  & (\videocontroller|boardd|Mux6~19_combout  & (\videocontroller|boardd|cout_pixel_y_block [2] $ (!\videocontroller|boardd|cout_pixel_y_block [4]))))
+
+	.dataa(\videocontroller|boardd|Mux6~15_combout ),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [2]),
+	.datac(\videocontroller|boardd|cout_pixel_y_block [4]),
+	.datad(\videocontroller|boardd|Mux6~19_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~16_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~16 .lut_mask = 16'hEB28;
+defparam \videocontroller|boardd|Mux6~16 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y17_N16
+cycloneii_lcell_comb \videocontroller|boardd|Mux6~17 (
+// Equation(s):
+// \videocontroller|boardd|Mux6~17_combout  = \videocontroller|boardd|cout_pixel_y_block [3] $ (\videocontroller|boardd|cout_pixel_y_block [4])
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_y_block [3]),
+	.datac(vcc),
+	.datad(\videocontroller|boardd|cout_pixel_y_block [4]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Mux6~17_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Mux6~17 .lut_mask = 16'h33CC;
+defparam \videocontroller|boardd|Mux6~17 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N22
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_x_block[1]~7 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_x_block[1]~7_combout  = (\videocontroller|boardd|cout_pixel_x_block [1] & (!\videocontroller|boardd|cout_pixel_x_block[0]~6 )) # (!\videocontroller|boardd|cout_pixel_x_block [1] & 
+// ((\videocontroller|boardd|cout_pixel_x_block[0]~6 ) # (GND)))
+// \videocontroller|boardd|cout_pixel_x_block[1]~8  = CARRY((!\videocontroller|boardd|cout_pixel_x_block[0]~6 ) # (!\videocontroller|boardd|cout_pixel_x_block [1]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_x_block[0]~6 ),
+	.combout(\videocontroller|boardd|cout_pixel_x_block[1]~7_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_x_block[1]~8 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_x_block[1]~7 .lut_mask = 16'h3C3F;
+defparam \videocontroller|boardd|cout_pixel_x_block[1]~7 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N16
+cycloneii_lcell_comb \videocontroller|boardd|Equal3~2 (
+// Equation(s):
+// \videocontroller|boardd|Equal3~2_combout  = (!\videocontroller|signal_pixel_x [9] & (!\videocontroller|signal_pixel_x [8] & !\videocontroller|signal_pixel_x [10]))
+
+	.dataa(\videocontroller|signal_pixel_x [9]),
+	.datab(\videocontroller|signal_pixel_x [8]),
+	.datac(\videocontroller|signal_pixel_x [10]),
+	.datad(vcc),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal3~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal3~2 .lut_mask = 16'h0101;
+defparam \videocontroller|boardd|Equal3~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X30_Y16_N26
+cycloneii_lcell_comb \videocontroller|boardd|Equal3~3 (
+// Equation(s):
+// \videocontroller|boardd|Equal3~3_combout  = (\videocontroller|signal_pixel_x [7] & (\videocontroller|signal_pixel_x [6] & (\videocontroller|boardd|Equal3~2_combout  & \videocontroller|boardd|Equal3~1_combout )))
+
+	.dataa(\videocontroller|signal_pixel_x [7]),
+	.datab(\videocontroller|signal_pixel_x [6]),
+	.datac(\videocontroller|boardd|Equal3~2_combout ),
+	.datad(\videocontroller|boardd|Equal3~1_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|Equal3~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|Equal3~3 .lut_mask = 16'h8000;
+defparam \videocontroller|boardd|Equal3~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X32_Y17_N23
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_x_block[1] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_x_block[1]~7_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal3~3_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_x_block [1]));
+
+// Location: LCCOMB_X32_Y17_N24
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_x_block[2]~9 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_x_block[2]~9_combout  = (\videocontroller|boardd|cout_pixel_x_block [2] & (\videocontroller|boardd|cout_pixel_x_block[1]~8  $ (GND))) # (!\videocontroller|boardd|cout_pixel_x_block [2] & 
+// (!\videocontroller|boardd|cout_pixel_x_block[1]~8  & VCC))
+// \videocontroller|boardd|cout_pixel_x_block[2]~10  = CARRY((\videocontroller|boardd|cout_pixel_x_block [2] & !\videocontroller|boardd|cout_pixel_x_block[1]~8 ))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_x_block[1]~8 ),
+	.combout(\videocontroller|boardd|cout_pixel_x_block[2]~9_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_x_block[2]~10 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_x_block[2]~9 .lut_mask = 16'hA50A;
+defparam \videocontroller|boardd|cout_pixel_x_block[2]~9 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N26
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_x_block[3]~11 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_x_block[3]~11_combout  = (\videocontroller|boardd|cout_pixel_x_block [3] & (!\videocontroller|boardd|cout_pixel_x_block[2]~10 )) # (!\videocontroller|boardd|cout_pixel_x_block [3] & 
+// ((\videocontroller|boardd|cout_pixel_x_block[2]~10 ) # (GND)))
+// \videocontroller|boardd|cout_pixel_x_block[3]~12  = CARRY((!\videocontroller|boardd|cout_pixel_x_block[2]~10 ) # (!\videocontroller|boardd|cout_pixel_x_block [3]))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.datac(vcc),
+	.datad(vcc),
+	.cin(\videocontroller|boardd|cout_pixel_x_block[2]~10 ),
+	.combout(\videocontroller|boardd|cout_pixel_x_block[3]~11_combout ),
+	.cout(\videocontroller|boardd|cout_pixel_x_block[3]~12 ));
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_x_block[3]~11 .lut_mask = 16'h3C3F;
+defparam \videocontroller|boardd|cout_pixel_x_block[3]~11 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X32_Y17_N27
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_x_block[3] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_x_block[3]~11_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal3~3_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_x_block [3]));
+
+// Location: LCCOMB_X32_Y17_N28
+cycloneii_lcell_comb \videocontroller|boardd|cout_pixel_x_block[4]~13 (
+// Equation(s):
+// \videocontroller|boardd|cout_pixel_x_block[4]~13_combout  = \videocontroller|boardd|cout_pixel_x_block[3]~12  $ (!\videocontroller|boardd|cout_pixel_x_block [4])
+
+	.dataa(vcc),
+	.datab(vcc),
+	.datac(vcc),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.cin(\videocontroller|boardd|cout_pixel_x_block[3]~12 ),
+	.combout(\videocontroller|boardd|cout_pixel_x_block[4]~13_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|cout_pixel_x_block[4]~13 .lut_mask = 16'hF00F;
+defparam \videocontroller|boardd|cout_pixel_x_block[4]~13 .sum_lutc_input = "cin";
+// synopsys translate_on
+
+// Location: LCFF_X32_Y17_N29
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_x_block[4] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_x_block[4]~13_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal3~3_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_x_block [4]));
+
+// Location: LCFF_X32_Y17_N25
+cycloneii_lcell_ff \videocontroller|boardd|cout_pixel_x_block[2] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|cout_pixel_x_block[2]~9_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(\videocontroller|boardd|Equal3~3_combout ),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|cout_pixel_x_block [2]));
+
+// Location: LCCOMB_X32_Y17_N0
+cycloneii_lcell_comb \videocontroller|boardd|pixel_color~1 (
+// Equation(s):
+// \videocontroller|boardd|pixel_color~1_combout  = (\videocontroller|boardd|cout_pixel_x_block [4] & (((!\videocontroller|boardd|cout_pixel_x_block [0] & !\videocontroller|boardd|cout_pixel_x_block [2])) # (!\videocontroller|boardd|cout_pixel_x_block [3]))) 
+// # (!\videocontroller|boardd|cout_pixel_x_block [4] & ((\videocontroller|boardd|cout_pixel_x_block [3]) # ((\videocontroller|boardd|cout_pixel_x_block [0] & \videocontroller|boardd|cout_pixel_x_block [2]))))
+
+	.dataa(\videocontroller|boardd|cout_pixel_x_block [0]),
+	.datab(\videocontroller|boardd|cout_pixel_x_block [4]),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [3]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|pixel_color~1_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|pixel_color~1 .lut_mask = 16'h37EC;
+defparam \videocontroller|boardd|pixel_color~1 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X32_Y17_N18
+cycloneii_lcell_comb \videocontroller|boardd|pixel_color~2 (
+// Equation(s):
+// \videocontroller|boardd|pixel_color~2_combout  = (!\videocontroller|boardd|pixel_color~1_combout  & (\videocontroller|boardd|cout_pixel_x_block [2] $ (\videocontroller|boardd|cout_pixel_x_block [1])))
+
+	.dataa(vcc),
+	.datab(\videocontroller|boardd|pixel_color~1_combout ),
+	.datac(\videocontroller|boardd|cout_pixel_x_block [2]),
+	.datad(\videocontroller|boardd|cout_pixel_x_block [1]),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|pixel_color~2_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|pixel_color~2 .lut_mask = 16'h0330;
+defparam \videocontroller|boardd|pixel_color~2 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCCOMB_X31_Y17_N24
+cycloneii_lcell_comb \videocontroller|boardd|pixel_color~3 (
+// Equation(s):
+// \videocontroller|boardd|pixel_color~3_combout  = (\videocontroller|boardd|pixel_color~0_combout  & ((\videocontroller|boardd|Mux6~17_combout  & ((\videocontroller|boardd|pixel_color~2_combout ))) # (!\videocontroller|boardd|Mux6~17_combout  & 
+// (\videocontroller|boardd|Mux6~16_combout ))))
+
+	.dataa(\videocontroller|boardd|pixel_color~0_combout ),
+	.datab(\videocontroller|boardd|Mux6~16_combout ),
+	.datac(\videocontroller|boardd|Mux6~17_combout ),
+	.datad(\videocontroller|boardd|pixel_color~2_combout ),
+	.cin(gnd),
+	.combout(\videocontroller|boardd|pixel_color~3_combout ),
+	.cout());
+// synopsys translate_off
+defparam \videocontroller|boardd|pixel_color~3 .lut_mask = 16'hA808;
+defparam \videocontroller|boardd|pixel_color~3 .sum_lutc_input = "datac";
+// synopsys translate_on
+
+// Location: LCFF_X31_Y17_N25
+cycloneii_lcell_ff \videocontroller|boardd|pixel_color[0] (
+	.clk(\clk_108MHz|altpll_component|_clk0~clkctrl_outclk ),
+	.datain(\videocontroller|boardd|pixel_color~3_combout ),
+	.sdata(gnd),
+	.aclr(\reset~clkctrl_outclk ),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.regout(\videocontroller|boardd|pixel_color [0]));
 
 // Location: PIN_E5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \clk_out~I (
@@ -3395,7 +4467,7 @@ defparam \vga_sync~I .output_register_mode = "none";
 defparam \vga_sync~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_Y15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_B15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[0]~I (
 	.datain(\videocontroller|signal_pixel_x [0]),
 	.oe(vcc),
@@ -3431,7 +4503,7 @@ defparam \pixel_x[0]~I .output_register_mode = "none";
 defparam \pixel_x[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AA14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_A14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[1]~I (
 	.datain(\videocontroller|signal_pixel_x [1]),
 	.oe(vcc),
@@ -3467,7 +4539,7 @@ defparam \pixel_x[1]~I .output_register_mode = "none";
 defparam \pixel_x[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_Y14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_B16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[2]~I (
 	.datain(\videocontroller|signal_pixel_x [2]),
 	.oe(vcc),
@@ -3503,7 +4575,7 @@ defparam \pixel_x[2]~I .output_register_mode = "none";
 defparam \pixel_x[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AE15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_C16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[3]~I (
 	.datain(\videocontroller|signal_pixel_x [3]),
 	.oe(vcc),
@@ -3539,7 +4611,7 @@ defparam \pixel_x[3]~I .output_register_mode = "none";
 defparam \pixel_x[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AA13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_D14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[4]~I (
 	.datain(\videocontroller|signal_pixel_x [4]),
 	.oe(vcc),
@@ -3575,7 +4647,7 @@ defparam \pixel_x[4]~I .output_register_mode = "none";
 defparam \pixel_x[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AA16,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_C15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[5]~I (
 	.datain(\videocontroller|signal_pixel_x [5]),
 	.oe(vcc),
@@ -3611,7 +4683,7 @@ defparam \pixel_x[5]~I .output_register_mode = "none";
 defparam \pixel_x[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AD12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_B14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[6]~I (
 	.datain(\videocontroller|signal_pixel_x [6]),
 	.oe(vcc),
@@ -3647,7 +4719,7 @@ defparam \pixel_x[6]~I .output_register_mode = "none";
 defparam \pixel_x[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AE12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_G13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[7]~I (
 	.datain(\videocontroller|signal_pixel_x [7]),
 	.oe(vcc),
@@ -3683,7 +4755,7 @@ defparam \pixel_x[7]~I .output_register_mode = "none";
 defparam \pixel_x[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AD15,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_G14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[8]~I (
 	.datain(\videocontroller|signal_pixel_x [8]),
 	.oe(vcc),
@@ -3719,7 +4791,7 @@ defparam \pixel_x[8]~I .output_register_mode = "none";
 defparam \pixel_x[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_AC14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_F13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[9]~I (
 	.datain(\videocontroller|signal_pixel_x [9]),
 	.oe(vcc),
@@ -3755,7 +4827,7 @@ defparam \pixel_x[9]~I .output_register_mode = "none";
 defparam \pixel_x[9]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_Y13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_D6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_x[10]~I (
 	.datain(\videocontroller|signal_pixel_x [10]),
 	.oe(vcc),
@@ -3791,7 +4863,7 @@ defparam \pixel_x[10]~I .output_register_mode = "none";
 defparam \pixel_x[10]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_B2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_Y12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[0]~I (
 	.datain(\videocontroller|signal_pixel_y [0]),
 	.oe(vcc),
@@ -3827,7 +4899,7 @@ defparam \pixel_y[0]~I .output_register_mode = "none";
 defparam \pixel_y[0]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_H8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_V11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[1]~I (
 	.datain(\videocontroller|signal_pixel_y [1]),
 	.oe(vcc),
@@ -3863,7 +4935,7 @@ defparam \pixel_y[1]~I .output_register_mode = "none";
 defparam \pixel_y[1]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_F6,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AD11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[2]~I (
 	.datain(\videocontroller|signal_pixel_y [2]),
 	.oe(vcc),
@@ -3899,7 +4971,7 @@ defparam \pixel_y[2]~I .output_register_mode = "none";
 defparam \pixel_y[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_B5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AA12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[3]~I (
 	.datain(\videocontroller|signal_pixel_y [3]),
 	.oe(vcc),
@@ -3935,7 +5007,7 @@ defparam \pixel_y[3]~I .output_register_mode = "none";
 defparam \pixel_y[3]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_H10,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AE13,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[4]~I (
 	.datain(\videocontroller|signal_pixel_y [4]),
 	.oe(vcc),
@@ -3971,7 +5043,7 @@ defparam \pixel_y[4]~I .output_register_mode = "none";
 defparam \pixel_y[4]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_E8,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AE11,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[5]~I (
 	.datain(\videocontroller|signal_pixel_y [5]),
 	.oe(vcc),
@@ -4007,7 +5079,7 @@ defparam \pixel_y[5]~I .output_register_mode = "none";
 defparam \pixel_y[5]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_K9,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AD12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[6]~I (
 	.datain(\videocontroller|signal_pixel_y [6]),
 	.oe(vcc),
@@ -4043,7 +5115,7 @@ defparam \pixel_y[6]~I .output_register_mode = "none";
 defparam \pixel_y[6]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_C4,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_U12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[7]~I (
 	.datain(\videocontroller|signal_pixel_y [7]),
 	.oe(vcc),
@@ -4079,7 +5151,7 @@ defparam \pixel_y[7]~I .output_register_mode = "none";
 defparam \pixel_y[7]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_D5,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_AE12,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[8]~I (
 	.datain(\videocontroller|signal_pixel_y [8]),
 	.oe(vcc),
@@ -4115,7 +5187,7 @@ defparam \pixel_y[8]~I .output_register_mode = "none";
 defparam \pixel_y[8]~I .output_sync_reset = "none";
 // synopsys translate_on
 
-// Location: PIN_C2,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+// Location: PIN_V14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
 cycloneii_io \pixel_y[9]~I (
 	.datain(\videocontroller|signal_pixel_y [9]),
 	.oe(vcc),
@@ -4149,6 +5221,114 @@ defparam \pixel_y[9]~I .output_async_reset = "none";
 defparam \pixel_y[9]~I .output_power_up = "low";
 defparam \pixel_y[9]~I .output_register_mode = "none";
 defparam \pixel_y[9]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+// Location: PIN_F14,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+cycloneii_io \pixel_color[0]~I (
+	.datain(\videocontroller|boardd|pixel_color [0]),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(pixel_color[0]));
+// synopsys translate_off
+defparam \pixel_color[0]~I .input_async_reset = "none";
+defparam \pixel_color[0]~I .input_power_up = "low";
+defparam \pixel_color[0]~I .input_register_mode = "none";
+defparam \pixel_color[0]~I .input_sync_reset = "none";
+defparam \pixel_color[0]~I .oe_async_reset = "none";
+defparam \pixel_color[0]~I .oe_power_up = "low";
+defparam \pixel_color[0]~I .oe_register_mode = "none";
+defparam \pixel_color[0]~I .oe_sync_reset = "none";
+defparam \pixel_color[0]~I .operation_mode = "output";
+defparam \pixel_color[0]~I .output_async_reset = "none";
+defparam \pixel_color[0]~I .output_power_up = "low";
+defparam \pixel_color[0]~I .output_register_mode = "none";
+defparam \pixel_color[0]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+// Location: PIN_AC17,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+cycloneii_io \pixel_color[1]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(pixel_color[1]));
+// synopsys translate_off
+defparam \pixel_color[1]~I .input_async_reset = "none";
+defparam \pixel_color[1]~I .input_power_up = "low";
+defparam \pixel_color[1]~I .input_register_mode = "none";
+defparam \pixel_color[1]~I .input_sync_reset = "none";
+defparam \pixel_color[1]~I .oe_async_reset = "none";
+defparam \pixel_color[1]~I .oe_power_up = "low";
+defparam \pixel_color[1]~I .oe_register_mode = "none";
+defparam \pixel_color[1]~I .oe_sync_reset = "none";
+defparam \pixel_color[1]~I .operation_mode = "output";
+defparam \pixel_color[1]~I .output_async_reset = "none";
+defparam \pixel_color[1]~I .output_power_up = "low";
+defparam \pixel_color[1]~I .output_register_mode = "none";
+defparam \pixel_color[1]~I .output_sync_reset = "none";
+// synopsys translate_on
+
+// Location: PIN_Y24,	 I/O Standard: 3.3-V LVTTL,	 Current Strength: 24mA
+cycloneii_io \pixel_color[2]~I (
+	.datain(gnd),
+	.oe(vcc),
+	.outclk(gnd),
+	.outclkena(vcc),
+	.inclk(gnd),
+	.inclkena(vcc),
+	.areset(gnd),
+	.sreset(gnd),
+	.differentialin(gnd),
+	.linkin(gnd),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.devoe(devoe),
+	.combout(),
+	.regout(),
+	.differentialout(),
+	.linkout(),
+	.padio(pixel_color[2]));
+// synopsys translate_off
+defparam \pixel_color[2]~I .input_async_reset = "none";
+defparam \pixel_color[2]~I .input_power_up = "low";
+defparam \pixel_color[2]~I .input_register_mode = "none";
+defparam \pixel_color[2]~I .input_sync_reset = "none";
+defparam \pixel_color[2]~I .oe_async_reset = "none";
+defparam \pixel_color[2]~I .oe_power_up = "low";
+defparam \pixel_color[2]~I .oe_register_mode = "none";
+defparam \pixel_color[2]~I .oe_sync_reset = "none";
+defparam \pixel_color[2]~I .operation_mode = "output";
+defparam \pixel_color[2]~I .output_async_reset = "none";
+defparam \pixel_color[2]~I .output_power_up = "low";
+defparam \pixel_color[2]~I .output_register_mode = "none";
+defparam \pixel_color[2]~I .output_sync_reset = "none";
 // synopsys translate_on
 
 endmodule
